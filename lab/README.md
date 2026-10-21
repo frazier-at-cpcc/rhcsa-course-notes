@@ -75,6 +75,9 @@ sudo lab/run.sh                  # starts the run; the VM will reboot
 
 Preflight picks the spare disks and NIC automatically. To choose them
 yourself: `sudo LAB_DISKS="/dev/vdb /dev/vdc" LAB_NIC=enp7s0 lab/run.sh`.
+Disks and a NIC you name get the same checks: two different blank whole
+disks other than the system disk, and an Ethernet device that is not the
+main NIC and has no active connection.
 
 After each reboot, a systemd timer resumes the run about a minute after boot.
 Reconnect and watch progress:
@@ -110,6 +113,7 @@ Do not edit the result files; the notes are written from them as captured.
 | `results/SUMMARY.md` | Check counts, failed checks, non-zero exits |
 | `results/checks.tsv` | Every PASS/FAIL check |
 | `results/commands.tsv` | Every command with its exit status |
+| `results/phases.tsv` | Any topic phase or cleanup that exited non-zero |
 | `results/environment.txt` | OS release, kernel, package versions, disks, NICs |
 | `results/setup.log` | Output of the hidden setup steps |
 | `results/run.log` | Timeline of the run, including reboots |

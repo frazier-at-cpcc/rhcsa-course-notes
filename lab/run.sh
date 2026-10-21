@@ -50,34 +50,53 @@ preflight() {
   [ "$(getenforce)" = Enforcing ] || { echo "  SELinux must be Enforcing (found $(getenforce))"; ok=0; }
 
   # Spare disks: whole disks with no partitions, holders, or file systems.
-  local root_disk spare=()
+  # The same test applies to disks named in LAB_DISKS, so a typo cannot hand
+  # the system disk to the partitioning topics.
+  local root_disk spare=() d name why
   root_disk=$(lsblk -no PKNAME "$(findmnt -no SOURCE /)" 2>/dev/null | head -1)
+  [ -n "$root_disk" ] || root_disk=$(basename "$(findmnt -no SOURCE /)")   # / on a whole disk
+  blank_disk() {   # /dev/NAME -> 0 if it is a blank whole disk other than the root disk
+    local n="${1#/dev/}"
+    [ -b "$1" ] || { echo "not a block device"; return 1; }
+    [ "$(lsblk -dno TYPE "$1" 2>/dev/null)" = disk ] || { echo "not a whole disk"; return 1; }
+    [ "$n" != "$root_disk" ] || { echo "holds the root file system"; return 1; }
+    [ "$(lsblk -no NAME "$1" | wc -l)" = 1 ] || { echo "has partitions or holders"; return 1; }
+    [ -z "$(blkid -p "$1" 2>/dev/null)" ] || { echo "has a file system or signature"; return 1; }
+  }
   if [ -n "${LAB_DISKS:-}" ]; then
     read -r -a spare <<<"$LAB_DISKS"
+    if [ "${#spare[@]}" -ne 2 ] || [ "$(printf '%s\n' "${spare[@]}" | sort -u | wc -l)" -ne 2 ]; then
+      echo "  LAB_DISKS must name two different disks (got: ${spare[*]})"; ok=0
+    fi
+    for d in "${spare[@]}"; do
+      why=$(blank_disk "$d") || { echo "  LAB_DISKS: $d $why"; ok=0; }
+    done
   else
-    while read -r name type; do
-      [ "$type" = disk ] || continue
-      [ "$name" = "$root_disk" ] && continue
-      [ "$(lsblk -no NAME "/dev/$name" | wc -l)" = 1 ] || continue
-      [ -z "$(blkid -p "/dev/$name" 2>/dev/null)" ] || continue
-      spare+=("/dev/$name")
-    done < <(lsblk -dno NAME,TYPE | grep -v '^sr\|^loop\|^zram')
+    while read -r name _; do
+      blank_disk "/dev/$name" >/dev/null && spare+=("/dev/$name")
+    done < <(lsblk -dno NAME,TYPE | awk '$2=="disk" && $1 !~ /^zram/')
   fi
-  if [ "${#spare[@]}" -lt 2 ]; then
+  if [ -z "${LAB_DISKS:-}" ] && [ "${#spare[@]}" -lt 2 ]; then
     echo "  needs two blank spare disks (found: ${spare[*]:-none}); set LAB_DISKS=\"/dev/vdb /dev/vdc\" to choose"
     ok=0
   fi
 
-  # Spare NIC: an Ethernet device with no active connection.
-  local nic="${LAB_NIC:-}"
-  if [ -z "$nic" ]; then
-    nic=$(nmcli -t -f DEVICE,TYPE,STATE device | awk -F: '$2=="ethernet" && $3!="connected" {print $1; exit}')
-  fi
-  [ -n "$nic" ] || { echo "  needs a second, unconfigured Ethernet NIC; set LAB_NIC=<device> to choose"; ok=0; }
-
-  local main_nic main_ip
+  # Spare NIC: an Ethernet device with no active connection, never the one
+  # carrying the default route. prepare() deletes every profile on it.
+  local main_nic main_ip nic="${LAB_NIC:-}" nic_state
   main_nic=$(ip -o route get 1.1.1.1 2>/dev/null | awk '{for(i=1;i<NF;i++) if($i=="dev") print $(i+1)}')
   main_ip=$(ip -o -4 addr show dev "$main_nic" 2>/dev/null | awk '{print $4}' | cut -d/ -f1 | head -1)
+  if [ -z "$nic" ]; then
+    nic=$(nmcli -t -f DEVICE,TYPE,STATE device | awk -F: -v m="$main_nic" '$2=="ethernet" && $3!="connected" && $1!=m {print $1; exit}')
+    [ -n "$nic" ] || { echo "  needs a second, unconfigured Ethernet NIC; set LAB_NIC=<device> to choose"; ok=0; }
+  else
+    nic_state=$(nmcli -t -f DEVICE,TYPE,STATE device | awk -F: -v n="$nic" '$1==n {print $2":"$3}')
+    if [ -z "$nic_state" ]; then echo "  LAB_NIC: no device named $nic"; ok=0
+    elif [ "$nic" = "$main_nic" ]; then echo "  LAB_NIC: $nic carries the default route; choose the spare NIC"; ok=0
+    elif [ "${nic_state%%:*}" != ethernet ]; then echo "  LAB_NIC: $nic is not an Ethernet device"; ok=0
+    elif [ "${nic_state#*:}" = connected ]; then echo "  LAB_NIC: $nic has an active connection; use an unconfigured NIC"; ok=0
+    fi
+  fi
   dnf -q repolist >/dev/null 2>&1 || { echo "  dnf cannot reach its repositories"; ok=0; }
 
   [ "$ok" = 1 ] || die "preflight failed; fix the items above"
@@ -179,9 +198,22 @@ run_phase() {   # file phase
     else
       printf '\n<!-- after reboot: %s -->\n\n' "$(date -Is)" >>"$OUT"
     fi
-    "$phase"
+    "$phase"; rc=$?
     _close_block
+    exit "$rc"
   )
+}
+
+# Record a phase that exited non-zero. A capture phase that fails is a failed
+# check (the capture may be incomplete); a cleanup that ends on an item that
+# is already gone exits non-zero harmlessly, so it is only listed for review.
+phase_status() {   # file phase rc
+  [ "$3" = 0 ] && return 0
+  log "${1%.sh}: $2 exited $3"
+  printf '%s\t%s\t%s\n' "${1%.sh}" "$2" "$3" >>"$RESULTS/phases.tsv"
+  case "$2" in
+    phase1|phase2) printf 'FAIL\t%s\t%s exited %s; the capture may be incomplete\n' "${1%.sh}" "$2" "$3" >>"$RESULTS/checks.tsv" ;;
+  esac
 }
 
 has_phase2() {
@@ -194,11 +226,11 @@ process_queue() {
     file=$(head -1 "$STATE/queue")
     if [ -f "$STATE/pending" ] && [ "$(cat "$STATE/pending")" = "$file" ]; then
       log "$file: phase2 (after reboot)"
-      run_phase "$file" phase2
+      run_phase "$file" phase2; phase_status "$file" phase2 $?
       rm -f "$STATE/pending"
     else
       log "$file: phase1"
-      run_phase "$file" phase1
+      run_phase "$file" phase1; phase_status "$file" phase1 $?
       if has_phase2 "$file"; then
         echo "$file" >"$STATE/pending"
         log "$file: rebooting to check persistence"
@@ -208,7 +240,7 @@ process_queue() {
       fi
     fi
     log "$file: cleanup"
-    run_phase "$file" cleanup
+    run_phase "$file" cleanup; phase_status "$file" cleanup $?
     sed -i '1d' "$STATE/queue"
   done
   finish
@@ -235,6 +267,14 @@ finish() {
     echo "Some are expected (the notes show errors on purpose); review each."
     echo
     awk -F'\t' '$2!=0 {printf "- %s: exit %s: `%s`\n", $1, $2, $3}' "$RESULTS/commands.tsv" 2>/dev/null
+    echo
+    echo "## Phases that exited non-zero"
+    echo
+    echo "A phase1 or phase2 entry is also a failed check above. A cleanup entry is"
+    echo "usually harmless (it removed something already gone); confirm the topic"
+    echo "left nothing behind."
+    echo
+    awk -F'\t' '{printf "- %s: %s exited %s\n", $1, $2, $3}' "$RESULTS/phases.tsv" 2>/dev/null
   } >"$RESULTS/SUMMARY.md"
   tar -C "$LAB_DIR" -czf "$LAB_DIR/results.tar.gz" results
   echo done >"$STATE/status"
