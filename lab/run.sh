@@ -102,6 +102,13 @@ prepare() {
   echo "$LAB_USER:redhat" | chpasswd
   echo "$LAB_USER ALL=(ALL) NOPASSWD: ALL" >/etc/sudoers.d/90-rhcsa-lab
   chmod 440 /etc/sudoers.d/90-rhcsa-lab
+  # A key the harness uses to log in as the student over SSH (see lib.sh).
+  [ -f "$STATE/id_ed25519" ] || ssh-keygen -q -t ed25519 -N "" -C rhcsa-lab-harness -f "$STATE/id_ed25519"
+  install -d -m 700 -o "$LAB_USER" -g "$LAB_USER" "/home/$LAB_USER/.ssh"
+  grep -qf "$STATE/id_ed25519.pub" "/home/$LAB_USER/.ssh/authorized_keys" 2>/dev/null \
+    || cat "$STATE/id_ed25519.pub" >>"/home/$LAB_USER/.ssh/authorized_keys"
+  chown "$LAB_USER:" "/home/$LAB_USER/.ssh/authorized_keys"; chmod 600 "/home/$LAB_USER/.ssh/authorized_keys"
+  restorecon -R "/home/$LAB_USER/.ssh"
   hostnamectl hostname servera.lab.example.com
   grep -q 'servera.lab.example.com' /etc/hosts \
     || echo "$MAIN_IP servera.lab.example.com servera" >>/etc/hosts

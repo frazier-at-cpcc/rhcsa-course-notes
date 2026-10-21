@@ -2,7 +2,7 @@
 # files between systems.
 
 phase1() {
-  setup "runuser -l $LAB_USER -c 'rm -rf ~/.ssh; ssh-keygen -q -t ed25519 -N \"\" -f ~/.ssh/id_ed25519; cat ~/.ssh/id_ed25519.pub >> ~/.ssh/authorized_keys; chmod 600 ~/.ssh/authorized_keys; ssh-keyscan -t ed25519 servera.lab.example.com servera localhost 2>/dev/null >> ~/.ssh/known_hosts'"
+  setup "runuser -l $LAB_USER -c 'rm -f ~/.ssh/id_ed25519 ~/.ssh/id_ed25519.pub ~/.ssh/known_hosts; ssh-keygen -q -t ed25519 -N \"\" -f ~/.ssh/id_ed25519; cat ~/.ssh/id_ed25519.pub >> ~/.ssh/authorized_keys; chmod 600 ~/.ssh/authorized_keys; ssh-keyscan -t ed25519 servera.lab.example.com servera localhost 2>/dev/null >> ~/.ssh/known_hosts'"
   setup "useradd bob 2>/dev/null; install -d -o bob -g bob -m 700 /home/bob/.ssh; cp /home/$LAB_USER/.ssh/id_ed25519.pub /home/bob/.ssh/authorized_keys; chown bob: /home/bob/.ssh/authorized_keys; chmod 600 /home/bob/.ssh/authorized_keys"
 
   section "Network services with systemctl"

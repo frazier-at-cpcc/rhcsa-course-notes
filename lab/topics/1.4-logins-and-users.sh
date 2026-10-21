@@ -4,7 +4,7 @@
 
 phase1() {
   setup "useradd -m operator1 2>/dev/null; echo operator1:redhat | chpasswd"
-  setup "runuser -l $LAB_USER -c 'rm -rf ~/.ssh; ssh-keygen -q -t ed25519 -N \"\" -f ~/.ssh/id_ed25519; ssh-keyscan -t ed25519 servera 2>/dev/null >> ~/.ssh/known_hosts'; install -d -o operator1 -g operator1 -m 700 /home/operator1/.ssh; cp /home/$LAB_USER/.ssh/id_ed25519.pub /home/operator1/.ssh/authorized_keys; chown operator1: /home/operator1/.ssh/authorized_keys; chmod 600 /home/operator1/.ssh/authorized_keys"
+  setup "runuser -l $LAB_USER -c 'rm -f ~/.ssh/id_ed25519 ~/.ssh/id_ed25519.pub ~/.ssh/known_hosts; ssh-keygen -q -t ed25519 -N \"\" -f ~/.ssh/id_ed25519; ssh-keyscan -t ed25519 servera 2>/dev/null >> ~/.ssh/known_hosts'; install -d -o operator1 -g operator1 -m 700 /home/operator1/.ssh; cp /home/$LAB_USER/.ssh/id_ed25519.pub /home/operator1/.ssh/authorized_keys; chown operator1: /home/operator1/.ssh/authorized_keys; chmod 600 /home/operator1/.ssh/authorized_keys"
 
   section "Who is logged in, and on what"
   run "systemctl get-default"
@@ -31,5 +31,5 @@ phase1() {
 
 cleanup() {
   userdel -r operator1 2>/dev/null
-  rm -rf "/home/$LAB_USER/.ssh"
+  rm -f "/home/$LAB_USER/.ssh/id_ed25519" "/home/$LAB_USER/.ssh/id_ed25519.pub" "/home/$LAB_USER/.ssh/known_hosts"
 }

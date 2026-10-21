@@ -31,8 +31,12 @@ section() { _close_block; printf '### %s\n\n' "$1" >>"$OUT"; }
 note() { _close_block; printf '%s\n\n' "$*" >>"$OUT"; }
 block() { _close_block; printf '```console label="%s"\n' "${1:-Terminal}" >>"$OUT"; _open=1; }
 
+# Commands go through SSH to localhost so each one is a real login with the
+# login SELinux context (unconfined_t). runuser from the resume service would
+# inherit the service's initrc_t context and change what SELinux allows.
 _run_as_student() {   # dir command
-  runuser -l "$LAB_USER" -c "cd $(printf '%q' "$1") && $2" 2>&1
+  ssh -q -T -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+    -i "$STATE/id_ed25519" "$LAB_USER@localhost" "cd $(printf '%q' "$1") && $2" 2>&1
 }
 
 run_in() {
