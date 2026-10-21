@@ -13,14 +13,25 @@ with a cover, contents, group dividers, figures, and PDF bookmarks.
 
 ## Status
 
-Work in progress on the `build/1.0-notes` branch.
+Version 1.0.0 covers every EX200 objective for RHEL 10: ten objective groups
+in 40 topics, about 120 pages. The build produces the complete book and four
+part PDFs:
+
+| File | Contents |
+|---|---|
+| `rhcsa-course-notes.pdf` | All ten objective groups |
+| `rhcsa-course-notes-part-1.pdf` | 1.0 Essential Tools, 2.0 Software, 3.0 Shell Scripts |
+| `rhcsa-course-notes-part-2.pdf` | 4.0 Running Systems, 7.0 Deploy, Configure, and Maintain |
+| `rhcsa-course-notes-part-3.pdf` | 5.0 Local Storage, 6.0 File Systems |
+| `rhcsa-course-notes-part-4.pdf` | 8.0 Networking, 9.0 Users and Groups, 10.0 Security |
 
 See [AUTHORING.md](AUTHORING.md) for how topics are written and tested.
 
 ## Every command was run
 
-Each command and output shown in the notes comes from a real run on RHEL 10
-or its rebuild AlmaLinux 10. Two kits produce that output:
+Each command and output shown in the notes comes from a real run on a RHEL 10
+rebuild: AlmaLinux 10.2 containers for the userland topics and a Rocky Linux
+10.2 VM for the full-system topics. Two kits produce that output:
 
 - `tests/` holds a script per container-friendly topic (shell, text,
   archives, permissions, users, scripting, dnf). Each starts an AlmaLinux 10
