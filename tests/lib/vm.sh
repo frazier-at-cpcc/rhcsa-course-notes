@@ -118,7 +118,7 @@ EOF
   # Serve the cloud-init seed over HTTP (10.0.2.2 is the host as the VM sees
   # it) instead of attaching a seed disk, so the saved machine has exactly
   # the devices every later boot has.
-  python3 -m http.server 22998 --bind 127.0.0.1 --directory "$seed" >/dev/null 2>&1 &
+  python3 -m http.server 22998 --bind 127.0.0.1 --directory "$seed" >/dev/null 2>&1 8>&- &
   local http=$!
   local mon="$VM_CACHE/build.mon"; rm -f "$mon"
   # shellcheck disable=SC2046
