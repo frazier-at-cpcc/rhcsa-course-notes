@@ -1,0 +1,48 @@
+<svg viewBox="0 0 760 214" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Left: a command with stdin from the keyboard, stdout redirected to ok.txt and stderr to err.txt. Right: a pipe carries stdout of the first command to stdin of the second, while stderr still goes to the terminal.">
+<defs><marker id="st" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#1a1209"/></marker></defs>
+<text x="8" y="18" font-size="11" font-weight="800" fill="#6d28d9">REDIRECTION</text>
+<text x="8" y="36" font-size="11" font-weight="600" fill="#1a1209" class="mono">find /etc &gt; ok.txt 2&gt; err.txt</text>
+<text x="400" y="18" font-size="11" font-weight="800" fill="#6d28d9">PIPE</text>
+<text x="400" y="36" font-size="11" font-weight="600" fill="#1a1209" class="mono">cut -d: -f7 /etc/passwd | sort</text>
+<line x1="382" y1="10" x2="382" y2="206" stroke="#d8d2c8" stroke-width="1.5"/>
+<g text-anchor="middle">
+<rect x="10.5" y="86.5" width="76" height="36" rx="7" fill="#1a1209"/><rect x="8" y="84" width="76" height="36" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+<text x="46" y="106" font-size="11" font-weight="700" fill="#1a1209">keyboard</text>
+<rect x="140.5" y="64.5" width="94" height="76" rx="7" fill="#1a1209"/><rect x="138" y="62" width="94" height="76" rx="7" fill="#6d28d9" stroke="#1a1209" stroke-width="2"/>
+<text x="185" y="98" font-size="13" font-weight="800" fill="#fff" class="mono">find</text>
+<text x="185" y="114" font-size="9" font-weight="600" fill="#efe6ff">process</text>
+<rect x="302.5" y="56.5" width="70" height="32" rx="7" fill="#1a1209"/><rect x="300" y="54" width="70" height="32" rx="7" fill="#fffae0" stroke="#1a1209" stroke-width="2"/>
+<text x="335" y="74" font-size="10.5" font-weight="700" fill="#1a1209" class="mono">ok.txt</text>
+<rect x="302.5" y="118.5" width="70" height="32" rx="7" fill="#1a1209"/><rect x="300" y="116" width="70" height="32" rx="7" fill="#fffae0" stroke="#1a1209" stroke-width="2"/>
+<text x="335" y="136" font-size="10.5" font-weight="700" fill="#1a1209" class="mono">err.txt</text>
+<rect x="402.5" y="64.5" width="94" height="66" rx="7" fill="#1a1209"/><rect x="400" y="62" width="94" height="66" rx="7" fill="#6d28d9" stroke="#1a1209" stroke-width="2"/>
+<text x="447" y="99" font-size="13" font-weight="800" fill="#fff" class="mono">cut</text>
+<rect x="608.5" y="64.5" width="94" height="66" rx="7" fill="#1a1209"/><rect x="606" y="62" width="94" height="66" rx="7" fill="#6d28d9" stroke="#1a1209" stroke-width="2"/>
+<text x="653" y="99" font-size="13" font-weight="800" fill="#fff" class="mono">sort</text>
+<rect x="531" y="82" width="46" height="18" rx="9" fill="#ffd60a" stroke="#1a1209" stroke-width="1.5"/>
+<text x="554" y="95" font-size="9.5" font-weight="800" fill="#1a1209">pipe</text>
+<rect x="402.5" y="176.5" width="350" height="28" rx="7" fill="#1a1209"/><rect x="400" y="174" width="350" height="28" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+<text x="575" y="192.5" font-size="11" font-weight="700" fill="#1a1209">terminal</text>
+</g>
+<path d="M496 91H531" stroke="#1a1209" stroke-width="2"/>
+<g stroke="#1a1209" stroke-width="2" fill="none" marker-end="url(#st)">
+<path d="M86 102H135"/>
+<path d="M234 82L297 70"/>
+<path d="M234 118L297 132"/>
+<path d="M577 91H603"/>
+<path d="M447 130V171"/>
+<path d="M653 130V171"/>
+</g>
+<g font-size="10" font-weight="700" fill="#1a1209">
+<text x="92" y="96">0 stdin</text>
+<text x="244" y="68">1 stdout</text>
+<text x="244" y="144" fill="#9a3412">2 stderr</text>
+<text x="500" y="84">1</text>
+<text x="590" y="84">0</text>
+<text x="455" y="156" fill="#9a3412">2 stderr</text>
+<text x="661" y="156">1 stdout</text>
+</g>
+<text x="8" y="176" font-size="9.5" font-weight="600" fill="#5c4a30">The shell opens both files before <tspan class="mono">find</tspan> starts.</text>
+<text x="8" y="190" font-size="9.5" font-weight="600" fill="#5c4a30"><tspan class="mono">&gt;</tspan> truncates the file first; <tspan class="mono">&gt;&gt;</tspan> appends to it.</text>
+<text x="550" y="116" text-anchor="middle" font-size="9" font-weight="600" fill="#5c4a30">stdout only</text>
+</svg>
