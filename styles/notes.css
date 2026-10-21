@@ -242,7 +242,7 @@ strong { font-weight: 700; }
   background: var(--accent-deep); color: var(--page); padding: 1in 0.8in;
 }
 .divider .circle { position: absolute; border-radius: 50%; }
-.divider .circle.yellow { width: 4in; height: 4in; background: var(--highlight); right: -1.4in; bottom: -1.2in; }
+.divider .circle.yellow { width: 3.4in; height: 3.4in; background: var(--highlight); right: -1.3in; bottom: -1.5in; }
 .divider .circle.purple { width: 2.4in; height: 2.4in; background: var(--accent); left: -0.9in; top: 2.2in; }
 .divider .pill { background: var(--page); color: var(--ink); border-color: var(--page); position: relative; }
 .divider h1 {

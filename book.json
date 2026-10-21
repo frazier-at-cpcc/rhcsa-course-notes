@@ -16,7 +16,7 @@
     "groupLabel": "Objective Group",
     "repo": "https://github.com/frazier-at-cpcc/rhcsa-course-notes",
     "coverLine": "Shell skills, software, storage, services, networking, users, and SELinux on Red Hat Enterprise Linux 10, one exam objective at a time.",
-    "trademarks": "Red Hat, Red Hat Enterprise Linux, RHEL, and RHCSA are trademarks or registered trademarks of Red Hat, Inc. AlmaLinux is a trademark of the AlmaLinux OS Foundation.",
+    "trademarks": "Red Hat, Red Hat Enterprise Linux, RHEL, and RHCSA are trademarks or registered trademarks of Red Hat, Inc. AlmaLinux is a trademark of the AlmaLinux OS Foundation. Rocky Linux is a trademark of the Rocky Enterprise Software Foundation.",
     "objectivesNote": "The objective groups and wording referenced throughout follow the published Red Hat EX200 exam objectives for RHEL 10. Red Hat does not number the objectives; the group and topic numbers in these notes are the author's, added for cross-reference. Check the official objectives page before your exam; it is the final word on what the exam covers.",
     "introText": "EX200 is a hands-on exam: you get live systems and a list of tasks, and the grader checks the end state of those systems, including after a reboot. There are no multiple-choice questions. These notes follow Red Hat's ten objective groups in order, and every topic carries a group and topic number so you can line it up against the official objectives, your course modules, and your lab work.",
     "tryLine": "Do them on a RHEL 10, AlmaLinux 10, or Rocky Linux 10 lab machine. The exam grades what you can configure from memory under a clock, and reading about a command is not the same as running it.",
@@ -37,7 +37,8 @@
         "value": "10",
         "label": "RHEL version"
       }
-    ]
+    ],
+    "provenance": "The source repository keeps the scripts that produced them: container tests for the shell, scripting, software, and user topics, and a lab kit that runs the storage, boot, networking, and SELinux topics on a full RHEL 10 rebuild, rebooting to prove each change persists. Both can be run again whenever a new RHEL release changes a command."
   },
   "domains": [
     {

@@ -221,7 +221,7 @@ function intro() {
   <p><b>On the exam</b> boxes describe how a topic tends to show up in a question: the scenario wording, the distractor answers, and the distinction being tested.</p>
   <p><b>Try it</b> boxes are short exercises you can run on your own machine or in a lab VM with the tools the box names. ${esc(X.tryLine)}</p>
   <h3>Every command was run</h3>
-  <p>The commands, code samples, and terminal output in these notes come from real runs, not from memory. The source repository keeps a test script for each topic that runs them again, so they can be rechecked whenever a tool releases a new version.</p>
+  <p>The commands, code samples, and terminal output in these notes come from real runs, not from memory. ${X.provenance || 'The source repository keeps a test script for each topic that runs them again, so they can be rechecked whenever a tool releases a new version.'}</p>
 </section>`;
 }
 
