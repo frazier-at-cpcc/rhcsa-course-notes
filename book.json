@@ -340,6 +340,16 @@
         "9.0",
         "10.0"
       ]
+    },
+    "preview-rh-92": {
+      "file": "preview-rh-92",
+      "topics": [
+        "domain-9/9.1-users-and-aging.md",
+        "domain-9/9.2-groups.md",
+        "domain-9/9.3-sudo.md",
+        "domain-10/10.2-umask-and-special.md",
+        "domain-10/10.3-ssh-keys.md"
+      ]
     }
   }
 }

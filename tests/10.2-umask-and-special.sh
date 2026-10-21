@@ -9,7 +9,7 @@ set -euo pipefail
 HERE=$(cd "$(dirname "$0")" && pwd)
 source "$HERE/lib/container.sh"
 WORK=$(mktemp -d)
-NAME=rh9-102
+NAME=rh92-102
 trap 'ct_down "$NAME"; rm -rf "$WORK"' EXIT
 
 say() { printf '\n== %s\n' "$*"; }
@@ -102,13 +102,12 @@ hasx 'HOME_MODE	0700'
 has 'drwx------ 2 dave dave'
 
 say "setuid and setgid programs"
-show 'ls -l /usr/bin/passwd /usr/bin/write'
-has '-rwsr-xr-x 1 root root'
-has '-rwxr-sr-x 1 root tty'
+show "stat -c '%A %G %n' /usr/bin/{passwd,write} /tmp"
+hasx '-rwsr-xr-x root /usr/bin/passwd'
+hasx '-rwxr-sr-x tty /usr/bin/write'
+hasx 'drwxrwxrwt root /tmp'
 
 say "sticky bit"
-show 'ls -ld /tmp'
-has 'drwxrwxrwt'
 login alice 'echo hi > /tmp/alice.txt; chmod 666 /tmp/alice.txt'
 login bob 'rm -f /tmp/alice.txt'
 hasx "rm: cannot remove '/tmp/alice.txt': Operation not permitted"
@@ -116,10 +115,11 @@ hasx "rm: cannot remove '/tmp/alice.txt': Operation not permitted"
 say "shared group directory with setgid"
 show 'sudo mkdir -p /srv/devops /srv/plain'
 show 'sudo chgrp devops /srv/devops /srv/plain'
-show 'sudo chmod 770 /srv/plain; sudo chmod 2770 /srv/devops'
-show 'ls -ld /srv/plain /srv/devops'
-has 'drwxrwx--- 2 root devops'
-has 'drwxrws--- 2 root devops'
+show 'sudo chmod 770 /srv/plain'
+show 'sudo chmod 2770 /srv/devops'
+show "stat -c '%a %A %G %n' /srv/plain /srv/devops"
+hasx '770 drwxrwx--- devops /srv/plain'
+hasx '2770 drwxrws--- devops /srv/devops'
 login bob 'touch /srv/plain/a.txt /srv/devops/b.txt; mkdir /srv/devops/sub'
 show 'sudo ls -l /srv/plain /srv/devops'
 has '-rw-r--r-- 1 bob bob 0'
@@ -127,8 +127,9 @@ has '-rw-r--r-- 1 bob devops    0'
 has 'drwxr-sr-x 2 bob devops'
 
 say "sticky on the shared directory"
-show 'sudo chmod 3770 /srv/devops; ls -ld /srv/devops'
-has 'drwxrws--T 3 root devops'
+show 'sudo chmod 3770 /srv/devops'
+show "stat -c '%a %A' /srv/devops"
+hasx '3770 drwxrws--T'
 login alice 'rm -f /srv/devops/b.txt'
 hasx "rm: cannot remove '/srv/devops/b.txt': Operation not permitted"
 show 'sudo chmod g-s,o-t /srv/devops; ls -ld /srv/devops'
@@ -144,9 +145,12 @@ has '-rwSr--r-- 1 student student'
 
 say "default ACL: the group can edit, whatever the umask"
 show 'sudo setfacl -m d:g::rwx,d:o::- /srv/devops'
-login bob 'umask; touch /srv/devops/c.txt; ls -l /srv/devops/c.txt'
+login bob 'cd /srv/devops; umask; touch c.txt; ls -l c.txt'
 hasx '0022'
 has '-rw-rw---- 1 bob devops 0'
+show 'getfacl -cp /srv/devops'
+hasx 'default:group::rwx'
+hasx 'default:other::---'
 
 say "a named-user ACL entry"
 show 'sudo setfacl -m u:carol:rx /srv/devops'

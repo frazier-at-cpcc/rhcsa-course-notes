@@ -9,7 +9,7 @@ set -euo pipefail
 HERE=$(cd "$(dirname "$0")" && pwd)
 source "$HERE/lib/container.sh"
 WORK=$(mktemp -d)
-NAME=rh9-91
+NAME=rh92-91
 trap 'ct_down "$NAME"; rm -rf "$WORK"' EXIT
 
 say() { printf '\n== %s\n' "$*"; }
@@ -48,6 +48,9 @@ uid=$(sed -n 's/^uid=\([0-9]*\)(webapp).*/\1/p' "$WORK/out")
 [ "$uid" -lt 1000 ]
 
 say "passwords"
+show 'rpm -qf /usr/bin/passwd; rpm -q passwd'
+has 'shadow-utils-'
+has 'package passwd is not installed'
 show 'echo "Rh10-exam!" | sudo passwd --stdin alice'
 [ ! -s "$WORK/out" ]   # shadow-utils passwd on RHEL 10 prints nothing here
 show 'sudo grep alice /etc/shadow | cut -c1-30'
@@ -71,9 +74,11 @@ has 'Minimum number of days between password change		: 7'
 has 'Maximum number of days between password change		: 90'
 has 'Number of days of warning before password expires	: 14'
 has 'Account expires						: Dec 31, 2026'
-show 'sudo grep alice /etc/shadow | cut -d: -f3-'
+show 'sudo getent shadow alice | cut -d: -f3-'
 has ':7:90:14::20818:'
 show 'sudo chage -d 0 alice'
+show 'sudo getent shadow alice | cut -d: -f3-'
+hasx '0:7:90:14::20818:'
 show 'sudo chage -l alice | head -2'
 hasx 'Last password change					: password must be changed'
 hasx 'Password expires					: password must be changed'
@@ -91,6 +96,9 @@ show 'sudo chage -l bob | grep Maximum'
 hasx 'Maximum number of days between password change		: 90'
 show 'sudo chage -l student | grep Maximum'
 hasx 'Maximum number of days between password change		: 99999'
+show 'sudo passwd -S bob; sudo passwd -S student'
+grep -Eq '^bob L [0-9-]+ 0 90 7 -1$' "$WORK/out"
+grep -Eq '^student L [0-9-]+ 0 99999 7 -1$' "$WORK/out"
 
 say "usermod"
 show 'sudo usermod -c "Bob Builder" -s /bin/sh bob'

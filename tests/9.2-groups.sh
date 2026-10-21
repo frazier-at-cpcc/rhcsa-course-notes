@@ -8,7 +8,7 @@ set -euo pipefail
 HERE=$(cd "$(dirname "$0")" && pwd)
 source "$HERE/lib/container.sh"
 WORK=$(mktemp -d)
-NAME=rh9-92
+NAME=rh92-92
 trap 'ct_down "$NAME"; rm -rf "$WORK"' EXIT
 
 say() { printf '\n== %s\n' "$*"; }
@@ -40,22 +40,26 @@ gid=$(awk -F: '/^backup:/{print $3}' "$WORK/out"); [ "$gid" -lt 1000 ]
 say "primary vs supplementary"
 show 'id alice'
 hasx 'uid=2001(alice) gid=2001(alice) groups=2001(alice)'
-show 'sudo usermod -aG devops alice; id alice'
+show 'sudo usermod -aG devops alice'
+show 'id -Gn alice'
+hasx 'alice devops'
+show 'id alice'
 hasx 'uid=2001(alice) gid=2001(alice) groups=2001(alice),3000(devops)'
 show 'grep ^devops: /etc/group'
 hasx 'devops:x:3000:alice'
 
 say "usermod -G without -a replaces the list"
-show 'sudo usermod -G dbadmin alice; id alice'
-hasx 'uid=2001(alice) gid=2001(alice) groups=2001(alice),3001(dbadmin)'
+show 'sudo usermod -G dbadmin alice; id -Gn alice'
+hasx 'alice dbadmin'
 show 'sudo usermod -aG devops,dbadmin alice'
 show 'id -Gn alice'
 hasx 'alice devops dbadmin'
 show 'groups alice'
 hasx 'alice : alice devops dbadmin'
 show 'sudo useradd -G devops -g dbadmin dave'
-show 'id dave'
-hasx 'uid=2004(dave) gid=3001(dbadmin) groups=3001(dbadmin),3000(devops)'
+show 'id -gn dave; id -Gn dave'
+hasx 'dbadmin'
+hasx 'dbadmin devops'
 show 'sudo usermod -g devops bob; id bob'
 hasx 'uid=2002(bob) gid=3000(devops) groups=3000(devops)'
 

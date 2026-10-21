@@ -20,7 +20,7 @@ set -euo pipefail
 HERE=$(cd "$(dirname "$0")" && pwd)
 source "$HERE/lib/container.sh"
 WORK=$(mktemp -d)
-A=rh9-103a; B=rh9-103b
+A=rh92-103a; B=rh92-103b
 trap 'ct_down "$A"; ct_down "$B"; rm -rf "$WORK"' EXIT
 
 say() { printf '\n== %s\n' "$*"; }
@@ -78,10 +78,12 @@ has '-rw------- 1 root root'
 show "$B" student 'sudo ls /etc/ssh/sshd_config.d/'
 hasx '40-redhat-crypto-policies.conf'
 hasx '50-redhat.conf'
-show "$B" student "sudo sshd -T | grep -E '^(permitrootlogin|passwordauth|pubkeyauth)'"
+show "$B" student "sudo sshd -T | grep -E 'rootlogin|passwordauth'"
 hasx 'permitrootlogin without-password'
-hasx 'pubkeyauthentication yes'
 hasx 'passwordauthentication yes'
+on "$B" '/usr/sbin/sshd -T' > "$WORK/out"
+hasx 'pubkeyauthentication yes'
+hasx 'strictmodes yes'
 
 say "ssh-keygen with a passphrase"
 tty "$A" alice 'ssh-keygen -t ed25519' '' 'Secret-pass1' 'Secret-pass1'
@@ -131,21 +133,32 @@ say "bad permissions on authorized_keys"
 show "$B" alice 'chmod 664 ~/.ssh/authorized_keys'
 tty "$A" alice 'eval $(ssh-agent) >/dev/null; ssh-add 2>/dev/null; ssh alice@serverb whoami' 'Secret-pass1' 'Rh10-exam!'
 has "alice@serverb's password:"
-on "$B" 'grep -c "Authentication refused: bad ownership or modes for file /home/alice/.ssh/authorized_keys" /var/log/sshd.log'
+# sshd logs why it skipped the key (journalctl -u sshd on a real host)
+show "$B" student 'sudo grep -o "Authentication refused.*" /var/log/sshd.log'
+hasx 'Authentication refused: bad ownership or modes for file /home/alice/.ssh/authorized_keys'
 show "$B" alice 'chmod 600 ~/.ssh/authorized_keys'
+
+say "a private key others can read is ignored"
+tty "$A" alice 'chmod 644 ~/.ssh/id_ed25519; ssh alice@serverb whoami' 'Rh10-exam!'
+has 'WARNING: UNPROTECTED PRIVATE KEY FILE!'
+has "Permissions 0644 for '/home/alice/.ssh/id_ed25519' are too open."
+has "alice@serverb's password:"
+hasx 'alice'
+show "$A" alice 'chmod 600 ~/.ssh/id_ed25519'
 
 say "root keeps key access under the default"
 on "$A" 'ssh-keygen -q -t ed25519 -N "" -f /root/.ssh/id_ed25519'
 on "$B" "mkdir -p -m 700 /root/.ssh"
 on "$A" 'cat /root/.ssh/id_ed25519.pub' | on "$B" 'cat > /root/.ssh/authorized_keys; chmod 600 /root/.ssh/authorized_keys'
-on "$A" 'ssh -o BatchMode=yes root@serverb whoami' > "$WORK/out"
+printf '[%s root] $ %s\n' "$A" 'ssh root@serverb whoami'
+on "$A" 'ssh root@serverb whoami' 2>&1 | tee "$WORK/out"
 hasx 'root'
 
 say "a drop-in that disables password and root login"
 show "$B" student 'printf "PasswordAuthentication no\nPermitRootLogin no\n" | sudo tee /etc/ssh/sshd_config.d/10-hardening.conf'
 show "$B" student 'sudo sshd -t; echo "exit $?"'
 hasx 'exit 0'
-show "$B" student "sudo sshd -T | grep -E '^(permitrootlogin|passwordauth)'"
+show "$B" student "sudo sshd -T | grep -E 'rootlogin|passwordauth'"
 hasx 'permitrootlogin no'
 hasx 'passwordauthentication no'
 sshd_restart

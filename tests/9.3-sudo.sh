@@ -10,7 +10,7 @@ set -euo pipefail
 HERE=$(cd "$(dirname "$0")" && pwd)
 source "$HERE/lib/container.sh"
 WORK=$(mktemp -d)
-NAME=rh9-93
+NAME=rh92-93
 trap 'ct_down "$NAME"; rm -rf "$WORK"' EXIT
 
 say() { printf '\n== %s\n' "$*"; }
