@@ -340,6 +340,15 @@
         "9.0",
         "10.0"
       ]
+    },
+    "preview-rh-4": {
+      "file": "preview-rh-4",
+      "topics": [
+        "domain-4/4.1-boot-and-targets.md",
+        "domain-4/4.2-processes-and-tuning.md",
+        "domain-4/4.3-logs-and-journal.md",
+        "domain-4/4.4-services-and-transfer.md"
+      ]
     }
   }
 }
