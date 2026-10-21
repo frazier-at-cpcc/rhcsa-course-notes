@@ -83,4 +83,4 @@ lab_env() { . "$STATE/env"; }
 part() { case "$1" in *[0-9]) echo "${1}p$2" ;; *) echo "$1$2" ;; esac; }
 
 # wipe DISK: remove every signature and partition table (cleanup helper)
-wipe() { wipefs -a "$1"* >/dev/null 2>&1; wipefs -a "$1" >/dev/null 2>&1; partprobe "$1" 2>/dev/null; udevadm settle; }
+wipe() { local d; for d in "$1"?*; do [ -b "$d" ] && lvmdevices -y --deldev "$d" >/dev/null 2>&1; done; wipefs -a "$1"* >/dev/null 2>&1; wipefs -a "$1" >/dev/null 2>&1; partprobe "$1" 2>/dev/null; udevadm settle; }

@@ -1,0 +1,105 @@
+2026-10-21 18:45:01 OS: Rocky Linux 10.2 (Red Quartz), kernel 6.12.0-211.67.1.el10_2.x86_64
+2026-10-21 18:45:02 spare disks /dev/vdb /dev/vdc, spare NIC ens19, main NIC ens18 (172.18.8.117)
+2026-10-21 18:45:02 preparing the machine
+2026-10-21 18:45:04 running 24 topics
+2026-10-21 18:45:05 1.4-logins-and-users.sh: phase1
+2026-10-21 18:45:08 1.4-logins-and-users.sh: cleanup
+2026-10-21 18:45:08 2.2-flatpak.sh: phase1
+2026-10-21 18:45:40 2.2-flatpak.sh: cleanup
+2026-10-21 18:45:40 4.1-boot-and-targets.sh: phase1
+2026-10-21 18:45:43 4.1-boot-and-targets.sh: rebooting to check persistence
+2026-10-21 18:47:02 4.1-boot-and-targets.sh: phase2 (after reboot)
+2026-10-21 18:47:03 4.1-boot-and-targets.sh: cleanup
+2026-10-21 18:47:03 4.2-processes-and-tuning.sh: phase1
+2026-10-21 18:52:25 4.2-processes-and-tuning.sh: cleanup
+2026-10-21 18:52:26 4.3-logs-and-journal.sh: phase1
+2026-10-21 18:52:29 4.3-logs-and-journal.sh: rebooting to check persistence
+2026-10-21 18:54:19 4.3-logs-and-journal.sh: phase2 (after reboot)
+2026-10-21 18:54:20 4.3-logs-and-journal.sh: cleanup
+2026-10-21 18:54:21 4.4-services-and-transfer.sh: phase1
+2026-10-21 18:54:25 4.4-services-and-transfer.sh: cleanup
+2026-10-21 18:54:25 5.1-gpt-partitions.sh: phase1
+2026-10-21 18:54:29 5.1-gpt-partitions.sh: cleanup
+2026-10-21 18:54:29 5.2-lvm.sh: phase1
+2026-10-21 18:54:34 5.2-lvm.sh: cleanup
+2026-10-21 18:54:35 5.3-persistent-mounts-and-swap.sh: phase1
+2026-10-21 18:54:42 5.3-persistent-mounts-and-swap.sh: rebooting to check persistence
+2026-10-21 18:56:32 5.3-persistent-mounts-and-swap.sh: phase2 (after reboot)
+2026-10-21 18:56:34 5.3-persistent-mounts-and-swap.sh: cleanup
+2026-10-21 18:56:35 6.1-local-file-systems.sh: phase1
+2026-10-21 18:56:39 6.1-local-file-systems.sh: cleanup
+2026-10-21 18:56:40 6.2-nfs-and-autofs.sh: phase1
+2026-10-21 18:56:48 6.2-nfs-and-autofs.sh: rebooting to check persistence
+2026-10-21 18:58:04 6.2-nfs-and-autofs.sh: phase2 (after reboot)
+2026-10-21 18:58:05 6.2-nfs-and-autofs.sh: cleanup
+2026-10-21 18:58:08 6.3-extend-lvs.sh: phase1
+2026-10-21 18:58:12 6.3-extend-lvs.sh: cleanup
+2026-10-21 18:58:13 6.4-permission-problems.sh: phase1
+2026-10-21 18:58:16 6.4-permission-problems.sh: cleanup
+2026-10-21 18:58:16 7.1-scheduling.sh: phase1
+2026-10-21 19:00:40 7.1-scheduling.sh: cleanup
+2026-10-21 19:00:41 7.2-services-and-targets.sh: phase1
+2026-10-21 19:00:49 7.2-services-and-targets.sh: rebooting to check persistence
+2026-10-21 19:01:59 7.2-services-and-targets.sh: phase2 (after reboot)
+2026-10-21 19:02:00 7.2-services-and-targets.sh: cleanup
+2026-10-21 19:02:03 7.3-time-sync.sh: phase1
+2026-10-21 15:02:28 7.3-time-sync.sh: cleanup
+2026-10-21 19:02:28 7.4-software-sources.sh: phase1
+2026-10-21 19:02:44 7.4-software-sources.sh: cleanup
+2026-10-21 19:02:45 7.5-bootloader.sh: phase1
+2026-10-21 19:02:47 7.5-bootloader.sh: rebooting to check persistence
+2026-10-21 19:04:21 7.5-bootloader.sh: phase2 (after reboot)
+2026-10-21 19:04:22 7.5-bootloader.sh: cleanup
+2026-10-21 19:04:23 8.1-ip-configuration.sh: phase1
+2026-10-21 19:04:36 8.1-ip-configuration.sh: rebooting to check persistence
+2026-10-21 19:05:52 8.1-ip-configuration.sh: phase2 (after reboot)
+2026-10-21 19:05:53 8.1-ip-configuration.sh: cleanup
+2026-10-21 19:05:53 8.2-name-resolution.sh: phase1
+2026-10-21 19:05:56 8.2-name-resolution.sh: cleanup
+2026-10-21 19:05:56 8.3-firewalld-basics.sh: phase1
+2026-10-21 19:06:11 8.3-firewalld-basics.sh: cleanup
+2026-10-21 19:06:13 10.1-firewall-settings.sh: phase1
+2026-10-21 19:06:27 10.1-firewall-settings.sh: rebooting to check persistence
+2026-10-21 19:07:55 10.1-firewall-settings.sh: phase2 (after reboot)
+2026-10-21 19:07:58 10.1-firewall-settings.sh: cleanup
+2026-10-21 19:08:01 10.4-selinux-modes-contexts.sh: phase1
+2026-10-21 19:08:04 10.4-selinux-modes-contexts.sh: rebooting to check persistence
+2026-10-21 19:09:15 10.4-selinux-modes-contexts.sh: phase2 (after reboot)
+2026-10-21 19:09:16 10.4-selinux-modes-contexts.sh: cleanup
+2026-10-21 19:09:16 10.5-selinux-troubleshooting.sh: phase1
+2026-10-21 19:09:47 10.5-selinux-troubleshooting.sh: rebooting to check persistence
+2026-10-21 19:10:55 10.5-selinux-troubleshooting.sh: phase2 (after reboot)
+2026-10-21 19:10:58 10.5-selinux-troubleshooting.sh: cleanup
+2026-10-21 19:11:06 finished: 106 checks passed, 11 failed; see /home/rocky/rhcsa-course-notes/lab/results/SUMMARY.md and /home/rocky/rhcsa-course-notes/lab/results.tar.gz
+2026-10-21 19:12:20 OS: Rocky Linux 10.2 (Red Quartz), kernel 6.12.0-211.67.1.el10_2.x86_64
+2026-10-21 19:12:21 spare disks /dev/vdb /dev/vdc, spare NIC ens19, main NIC ens18 (172.18.8.117)
+2026-10-21 19:12:21 preparing the machine
+2026-10-21 19:12:23 running 5 topics
+2026-10-21 19:12:24 5.1-gpt-partitions.sh: phase1
+2026-10-21 19:12:27 5.1-gpt-partitions.sh: cleanup
+2026-10-21 19:12:27 5.2-lvm.sh: phase1
+2026-10-21 19:12:32 5.2-lvm.sh: cleanup
+2026-10-21 19:12:32 5.3-persistent-mounts-and-swap.sh: phase1
+2026-10-21 19:12:39 5.3-persistent-mounts-and-swap.sh: rebooting to check persistence
+2026-10-21 19:13:52 5.3-persistent-mounts-and-swap.sh: phase2 (after reboot)
+2026-10-21 19:13:53 5.3-persistent-mounts-and-swap.sh: cleanup
+2026-10-21 19:13:55 6.1-local-file-systems.sh: phase1
+2026-10-21 19:13:58 6.1-local-file-systems.sh: cleanup
+2026-10-21 19:13:59 6.3-extend-lvs.sh: phase1
+2026-10-21 19:14:02 6.3-extend-lvs.sh: cleanup
+2026-10-21 19:14:04 finished: 108 checks passed, 9 failed; see /home/rocky/rhcsa-course-notes/lab/results/SUMMARY.md and /home/rocky/rhcsa-course-notes/lab/results.tar.gz
+2026-10-21 19:14:28 OS: Rocky Linux 10.2 (Red Quartz), kernel 6.12.0-211.67.1.el10_2.x86_64
+2026-10-21 19:14:29 spare disks /dev/vdb /dev/vdc, spare NIC ens19, main NIC ens18 (172.18.8.117)
+2026-10-21 19:14:29 preparing the machine
+2026-10-21 19:14:30 running 1 topics
+2026-10-21 19:14:32 10.5-selinux-troubleshooting.sh: phase1
+2026-10-21 19:15:22 10.5-selinux-troubleshooting.sh: rebooting to check persistence
+2026-10-21 19:16:51 10.5-selinux-troubleshooting.sh: phase2 (after reboot)
+2026-10-21 19:16:53 10.5-selinux-troubleshooting.sh: cleanup
+2026-10-21 19:17:01 finished: 110 checks passed, 7 failed; see /home/rocky/rhcsa-course-notes/lab/results/SUMMARY.md and /home/rocky/rhcsa-course-notes/lab/results.tar.gz
+2026-10-21 19:17:58 OS: Rocky Linux 10.2 (Red Quartz), kernel 6.12.0-211.67.1.el10_2.x86_64
+2026-10-21 19:17:59 spare disks /dev/vdb /dev/vdc, spare NIC ens19, main NIC ens18 (172.18.8.117)
+2026-10-21 19:17:59 preparing the machine
+2026-10-21 19:18:00 running 1 topics
+2026-10-21 19:18:02 6.4-permission-problems.sh: phase1
+2026-10-21 19:18:04 6.4-permission-problems.sh: cleanup

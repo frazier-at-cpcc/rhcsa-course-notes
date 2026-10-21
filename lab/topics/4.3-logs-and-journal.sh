@@ -7,7 +7,7 @@ phase1() {
   run "sudo tail -3 /var/log/messages"
   run "sudo grep -c 'session opened' /var/log/secure"
   run "logger -p user.warning 'RHCSA lab: disk space check'"
-  run "sudo tail -1 /var/log/messages"
+  run "sudo grep 'RHCSA lab' /var/log/messages | tail -1"
   expect 'RHCSA lab'
   run "grep -v '^#' /etc/rsyslog.conf | grep -E 'messages|secure|cron'"
 

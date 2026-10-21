@@ -3,7 +3,7 @@
 phase1() {
   local a1 b1; a1=$(part "$DISK1" 1); b1=$(part "$DISK2" 1)
   setup "parted -s $DISK1 mklabel gpt mkpart lvm 1MiB 1025MiB set 1 lvm on && parted -s $DISK2 mklabel gpt mkpart lvm 1MiB 1025MiB set 1 lvm on && udevadm settle"
-  setup "vgcreate -q vg_app $a1 && lvcreate -q -y -n lv_web -L 400M vg_app && lvcreate -q -y -n lv_logs -L 300M vg_app && mkfs.xfs -q /dev/vg_app/lv_web && mkfs.ext4 -q /dev/vg_app/lv_logs && mkdir -p /srv/web /srv/logs && mount /dev/vg_app/lv_web /srv/web && mount /dev/vg_app/lv_logs /srv/logs"
+  setup "vgcreate -q vg_app $a1 && lvcreate -q -y -n lv_web -L 300M vg_app && lvcreate -q -y -n lv_logs -L 200M vg_app && mkfs.xfs -q /dev/vg_app/lv_web && mkfs.ext4 -q /dev/vg_app/lv_logs && mkdir -p /srv/web /srv/logs && mount /dev/vg_app/lv_web /srv/web && mount /dev/vg_app/lv_logs /srv/logs"
 
   section "Where the space is"
   run "df -h /srv/web /srv/logs"
@@ -15,7 +15,7 @@ phase1() {
   run "df -h /srv/web"
 
   section "Growing an ext4 logical volume in two steps"
-  run "sudo lvextend -L 450M /dev/vg_app/lv_logs"
+  run "sudo lvextend -L 350M /dev/vg_app/lv_logs"
   run "df -h /srv/logs"
   run "sudo resize2fs /dev/vg_app/lv_logs"
   expect 'is now'

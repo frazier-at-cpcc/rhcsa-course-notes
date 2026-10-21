@@ -1,0 +1,54 @@
+date: 2026-10-21T19:18:00+00:00
+NAME="Rocky Linux"
+VERSION="10.2 (Red Quartz)"
+RELEASE_TYPE="stable"
+ID="rocky"
+ID_LIKE="rhel centos fedora"
+VERSION_ID="10.2"
+PLATFORM_ID="platform:el10"
+PRETTY_NAME="Rocky Linux 10.2 (Red Quartz)"
+ANSI_COLOR="0;32"
+LOGO="fedora-logo-icon"
+CPE_NAME="cpe:/o:rocky:rocky:10::baseos"
+HOME_URL="https://rockylinux.org/"
+VENDOR_NAME="RESF"
+VENDOR_URL="https://resf.org/"
+BUG_REPORT_URL="https://bugs.rockylinux.org/"
+SUPPORT_END="2035-05-31"
+ROCKY_SUPPORT_PRODUCT="Rocky-Linux-10"
+ROCKY_SUPPORT_PRODUCT_VERSION="10.2"
+REDHAT_SUPPORT_PRODUCT="Rocky Linux"
+REDHAT_SUPPORT_PRODUCT_VERSION="10.2"
+kernel: 6.12.0-211.67.1.el10_2.x86_64
+selinux: Enforcing
+systemd-257-23.el10_2.2.rocky.0.1.x86_64
+dnf-4.20.0-22.el10_2.rocky.0.1.noarch
+NetworkManager-1.56.0-2.el10_2.x86_64
+firewalld-2.4.3-4.el10_2.noarch
+lvm2-2.03.36-2.el10.x86_64
+xfsprogs-6.16.0-1.el10.x86_64
+chrony-4.8-2.el10.x86_64
+tuned-2.27.0-2.el10_2.noarch
+autofs-5.1.9-13.el10.x86_64
+nfs-utils-2.8.3-5.el10.x86_64
+flatpak-1.16.0-9.el10_2.4.x86_64
+policycoreutils-3.10-2.el10_2.x86_64
+grub2-tools-2.12-46.el10_2.rocky.0.1.x86_64
+NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+sr0     11:0    1    4M  0 rom  
+vda    252:0    0   20G  0 disk 
+├─vda1 252:1    0    2M  0 part 
+├─vda2 252:2    0  200M  0 part /boot/efi
+├─vda3 252:3    0 1000M  0 part /boot
+└─vda4 252:4    0 18.8G  0 part /
+vdb    252:16   0    5G  0 disk 
+vdc    252:32   0    5G  0 disk 
+DEVICE  TYPE      STATE                   CONNECTION      
+ens18   ethernet  connected               cloud-init eth0 
+lo      loopback  connected (externally)  lo              
+ens19   ethernet  disconnected            --              
+DISK1=/dev/vdb
+DISK2=/dev/vdc
+NIC=ens19
+MAIN_NIC=ens18
+MAIN_IP=172.18.8.117

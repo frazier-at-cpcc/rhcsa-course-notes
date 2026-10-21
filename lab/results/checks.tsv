@@ -1,0 +1,117 @@
+PASS	1.4-logins-and-users	expect operator1
+FAIL	1.4-logins-and-users	expect Permission denied
+PASS	2.2-flatpak	expect flathub
+PASS	2.2-flatpak	expect org.gnome.Calculator
+PASS	4.1-boot-and-targets	expect target
+PASS	4.1-boot-and-targets	expect multi-user.target
+PASS	4.1-boot-and-targets	expect AllowIsolate=yes
+PASS	4.1-boot-and-targets	expect run-level
+PASS	4.1-boot-and-targets	expect args=
+PASS	4.1-boot-and-targets	expect shadow_t
+PASS	4.1-boot-and-targets	expect reboot
+PASS	4.2-processes-and-tuning	expect sha(256|1)sum
+PASS	4.2-processes-and-tuning	expect python3
+PASS	4.2-processes-and-tuning	expect sha256sum
+PASS	4.2-processes-and-tuning	expect new priority 10
+PASS	4.2-processes-and-tuning	expect 15
+PASS	4.2-processes-and-tuning	expect throughput-performance
+FAIL	4.3-logs-and-journal	expect RHCSA lab
+PASS	4.3-logs-and-journal	expect journal
+PASS	4.3-logs-and-journal	expect ^ *-1 
+PASS	4.4-services-and-transfer	expect active \(running\)
+PASS	4.4-services-and-transfer	expect ^active
+PASS	4.4-services-and-transfer	expect q3.txt
+FAIL	4.4-services-and-transfer	expect sent
+PASS	6.2-nfs-and-autofs	expect /exports/projects
+PASS	6.2-nfs-and-autofs	expect nfs
+PASS	6.2-nfs-and-autofs	expect servera:/exports/projects
+PASS	6.2-nfs-and-autofs	expect plan.txt
+PASS	6.2-nfs-and-autofs	expect alice notes
+PASS	6.2-nfs-and-autofs	expect nfs
+PASS	6.2-nfs-and-autofs	expect alice notes
+PASS	7.1-scheduling	expect job [0-9]+ at
+PASS	7.1-scheduling	expect 20[0-9][0-9]
+PASS	7.1-scheduling	expect df -h
+PASS	7.1-scheduling	expect no crontab
+PASS	7.1-scheduling	expect Created symlink
+PASS	7.1-scheduling	expect Filesystem|/
+PASS	7.2-services-and-targets	expect Created symlink
+PASS	7.2-services-and-targets	expect masked
+PASS	7.2-services-and-targets	expect multi-user.target
+PASS	7.2-services-and-targets	expect multi-user.target
+PASS	7.2-services-and-targets	expect ^active
+PASS	7.3-time-sync	expect NTP service
+PASS	7.3-time-sync	expect America/New_York
+PASS	7.3-time-sync	expect cloudflare|\^
+PASS	7.4-software-sources	expect ^tree-
+PASS	7.4-software-sources	expect localrepo
+PASS	7.5-bootloader	expect audit_backlog_limit=8192
+PASS	7.5-bootloader	expect audit_backlog_limit=8192
+PASS	8.1-ip-configuration	expect successfully added
+PASS	8.1-ip-configuration	expect 192.0.2.10/24
+PASS	8.1-ip-configuration	expect 2001:db8::10/64
+PASS	8.1-ip-configuration	expect 192.0.2.11/24
+PASS	8.1-ip-configuration	expect lab-static
+PASS	8.1-ip-configuration	expect 192.0.2.10/24
+PASS	8.2-name-resolution	expect serverx
+PASS	8.2-name-resolution	expect 192.0.2.20
+PASS	8.2-name-resolution	expect 192.0.2.53
+PASS	8.3-firewalld-basics	expect services:
+PASS	8.3-firewalld-basics	expect http
+PASS	8.3-firewalld-basics	expect http
+PASS	8.3-firewalld-basics	expect 8080/tcp
+PASS	10.1-firewall-settings	expect internal
+PASS	10.1-firewall-settings	expect 192.0.2.0/24
+PASS	10.1-firewall-settings	expect 198.51.100.0/24
+PASS	10.1-firewall-settings	expect toport=80
+PASS	10.1-firewall-settings	expect 9090/tcp
+PASS	10.1-firewall-settings	expect 9090/tcp
+PASS	10.4-selinux-modes-contexts	expect Enforcing
+PASS	10.4-selinux-modes-contexts	expect Permissive
+PASS	10.4-selinux-modes-contexts	expect httpd_sys_content_t
+PASS	10.4-selinux-modes-contexts	expect user_home_t
+PASS	10.4-selinux-modes-contexts	expect httpd_t
+PASS	10.4-selinux-modes-contexts	expect Permissive
+PASS	10.4-selinux-modes-contexts	expect Enforcing
+PASS	5.1-gpt-partitions	expect unrecognised disk label|unrecognized disk label
+PASS	5.1-gpt-partitions	expect Partition Table: gpt
+PASS	5.1-gpt-partitions	expect vdb2
+PASS	5.1-gpt-partitions	expect vdb1
+PASS	5.2-lvm	expect successfully created
+PASS	5.2-lvm	expect successfully created
+PASS	5.2-lvm	expect created
+FAIL	5.2-lvm	expect Insufficient free space
+PASS	5.3-persistent-mounts-and-swap	expect LABEL="archive"
+PASS	5.3-persistent-mounts-and-swap	expect /scratch
+PASS	5.3-persistent-mounts-and-swap	expect not found|0000-bad
+PASS	5.3-persistent-mounts-and-swap	expect lv_swap|dm-
+PASS	5.3-persistent-mounts-and-swap	expect /archive
+PASS	5.3-persistent-mounts-and-swap	expect vdb3
+PASS	6.1-local-file-systems	expect Writing superblocks
+PASS	6.1-local-file-systems	expect meta-data=
+PASS	6.1-local-file-systems	expect existing|appears to contain
+PASS	6.1-local-file-systems	expect vfat
+PASS	6.1-local-file-systems	expect busy
+PASS	6.3-extend-lvs	expect resized|data blocks changed
+FAIL	6.3-extend-lvs	expect is now
+PASS	6.3-extend-lvs	expect Insufficient free space
+PASS	6.3-extend-lvs	expect [Ss]hrink|not supported|XFS|xfs
+PASS	10.5-selinux-troubleshooting	expect 403
+PASS	10.5-selinux-troubleshooting	expect default_t
+PASS	10.5-selinux-troubleshooting	expect /web
+PASS	10.5-selinux-troubleshooting	expect httpd_sys_content_t
+PASS	10.5-selinux-troubleshooting	expect lab site
+PASS	10.5-selinux-troubleshooting	expect failed|Job for httpd
+PASS	10.5-selinux-troubleshooting	expect 82
+PASS	10.5-selinux-troubleshooting	expect ^active
+PASS	10.5-selinux-troubleshooting	expect lab site
+PASS	10.5-selinux-troubleshooting	expect httpd_enable_homedirs
+PASS	10.5-selinux-troubleshooting	expect --> on
+PASS	6.4-permission-problems	expect Permission denied
+PASS	6.4-permission-problems	expect drwxr-x---
+PASS	6.4-permission-problems	expect devops
+PASS	6.4-permission-problems	expect v1
+PASS	6.4-permission-problems	expect Permission denied
+PASS	6.4-permission-problems	expect \+
+PASS	6.4-permission-problems	expect effective
+PASS	6.4-permission-problems	expect Operation not permitted

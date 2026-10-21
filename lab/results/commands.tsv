@@ -1,0 +1,539 @@
+1.4-logins-and-users	0	systemctl get-default
+1.4-logins-and-users	0	who
+1.4-logins-and-users	0	w -h | head -3
+1.4-logins-and-users	0	loginctl list-sessions --no-pager
+1.4-logins-and-users	1	tty
+1.4-logins-and-users	0	ssh -o StrictHostKeyChecking=accept-new operator1@servera.lab.example.com 'hostname; whoami'
+1.4-logins-and-users	0	tail -1 ~/.ssh/known_hosts | cut -c1-60
+1.4-logins-and-users	255	ssh operator1@servera 'id; pwd'
+1.4-logins-and-users	255	ssh -o BatchMode=yes nobody@servera true
+1.4-logins-and-users	0	sudo su - operator1 -c 'whoami; pwd; echo $HOME'
+1.4-logins-and-users	0	sudo su operator1 -c 'whoami; pwd; echo $HOME'
+1.4-logins-and-users	0	sudo -i -u operator1 whoami
+1.4-logins-and-users	0	sudo -i whoami
+1.4-logins-and-users	0	sudo grep -E '^(root|student|operator1):' /etc/passwd
+2.2-flatpak	0	rpm -q flatpak
+2.2-flatpak	0	flatpak --version
+2.2-flatpak	0	flatpak remotes --show-details
+2.2-flatpak	0	sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+2.2-flatpak	0	flatpak remotes
+2.2-flatpak	0	flatpak remote-ls flathub --app --columns=application | grep -E '^org\.gnome\.(Calculator|TextEditor)$'
+2.2-flatpak	0	flatpak search --columns=application,remotes calculator | head -4
+2.2-flatpak	0	sudo flatpak install -y --noninteractive flathub org.gnome.Calculator 2>&1 | tail -4
+2.2-flatpak	0	flatpak list --app
+2.2-flatpak	0	flatpak list --runtime --columns=application,branch | head -4
+2.2-flatpak	0	flatpak info org.gnome.Calculator | head -10
+2.2-flatpak	0	flatpak run --command=sh org.gnome.Calculator -c 'echo running inside the sandbox; cat /etc/os-release | head -1'
+2.2-flatpak	0	flatpak install --user -y --noninteractive flathub org.gnome.Calculator 2>&1 | tail -2
+2.2-flatpak	0	flatpak remotes --user; flatpak list --app --user
+2.2-flatpak	0	sudo flatpak update -y --noninteractive 2>&1 | tail -2
+2.2-flatpak	0	sudo flatpak uninstall -y --noninteractive org.gnome.Calculator 2>&1 | tail -2
+2.2-flatpak	0	sudo flatpak uninstall -y --noninteractive --unused 2>&1 | tail -2
+2.2-flatpak	0	flatpak list
+2.2-flatpak	0	sudo flatpak remote-delete flathub; flatpak remotes
+4.1-boot-and-targets	0	systemctl get-default
+4.1-boot-and-targets	0	systemctl list-units --type=target --state=active --no-pager
+4.1-boot-and-targets	0	systemctl list-unit-files --type=target --no-pager | grep -E 'rescue|emergency|multi-user|graphical'
+4.1-boot-and-targets	0	systemctl cat rescue.target --no-pager | grep -E '^(Requires|After|AllowIsolate)'
+4.1-boot-and-targets	0	who -r
+4.1-boot-and-targets	0	sudo shutdown -r +15 'Maintenance reboot'
+4.1-boot-and-targets	0	sudo shutdown -c
+4.1-boot-and-targets	0	systemctl is-system-running
+4.1-boot-and-targets	0	last -x reboot shutdown | head -4
+4.1-boot-and-targets	0	sudo grubby --info=DEFAULT | grep -E '^(kernel|args)'
+4.1-boot-and-targets	0	ls -lZ /etc/shadow
+4.1-boot-and-targets	2	ls /.autorelabel 2>&1
+4.1-boot-and-targets	0	cat /proc/cmdline
+4.1-boot-and-targets	0	sudo journalctl -b -o short-precise --no-pager | grep -m1 -E 'Reached target.*Multi-User|Reached target multi-user'
+4.1-boot-and-targets	0	uptime
+4.1-boot-and-targets	0	last -x reboot | head -3
+4.1-boot-and-targets	0	journalctl --list-boots --no-pager | tail -3
+4.1-boot-and-targets	0	systemctl is-system-running
+4.2-processes-and-tuning	0	ps aux --sort=-%cpu | head -5
+4.2-processes-and-tuning	0	ps -eo pid,user,%cpu,%mem,rss,comm --sort=-%mem | head -5
+4.2-processes-and-tuning	0	top -b -n 1 -o %CPU | head -12
+4.2-processes-and-tuning	0	pgrep -l sum
+4.2-processes-and-tuning	0	uptime
+4.2-processes-and-tuning	0	free -h
+4.2-processes-and-tuning	0	ps -o pid,ni,pri,%cpu,comm -C sha256sum,sha1sum
+4.2-processes-and-tuning	0	renice -n 10 -p $(pgrep sha256sum)
+4.2-processes-and-tuning	1	renice -n 5 -p $(pgrep sha256sum)
+4.2-processes-and-tuning	0	sudo renice -n -5 -p $(pgrep sha1sum)
+4.2-processes-and-tuning	0	ps -o pid,ni,pri,%cpu,comm -C sha256sum,sha1sum
+4.2-processes-and-tuning	0	nice -n 15 sleep 300 & ps -o pid,ni,comm -C sleep
+4.2-processes-and-tuning	0	nice -n -5 sleep 1
+4.2-processes-and-tuning	0	kill -l | head -3
+4.2-processes-and-tuning	0	kill $(pgrep sha1sum)
+4.2-processes-and-tuning	1	sudo kill $(pgrep sha1sum)
+4.2-processes-and-tuning	0	pgrep -l sum
+4.2-processes-and-tuning	0	kill -SIGTERM $(pgrep sha256sum); sleep 1; pgrep -l sum || echo 'no sum processes left'
+4.2-processes-and-tuning	143	pkill -f bytearray; sleep 1; pgrep -af bytearray || echo gone
+4.2-processes-and-tuning	0	pkill sleep; killall -v sleep 2>&1 | head -2
+4.2-processes-and-tuning	1	kill -9 999999
+4.2-processes-and-tuning	0	systemctl is-active tuned
+4.2-processes-and-tuning	0	tuned-adm list | head -20
+4.2-processes-and-tuning	0	tuned-adm active
+4.2-processes-and-tuning	0	tuned-adm recommend
+4.2-processes-and-tuning	0	sudo tuned-adm profile throughput-performance
+4.2-processes-and-tuning	0	tuned-adm active
+4.2-processes-and-tuning	1	tuned-adm verify
+4.2-processes-and-tuning	0	sudo tuned-adm profile $(tuned-adm recommend)
+4.2-processes-and-tuning	0	tuned-adm active
+4.2-processes-and-tuning	1	sudo tuned-adm off; tuned-adm active
+4.2-processes-and-tuning	0	sudo tuned-adm auto_profile; tuned-adm profile_mode
+4.3-logs-and-journal	0	sudo ls /var/log
+4.3-logs-and-journal	0	sudo tail -3 /var/log/messages
+4.3-logs-and-journal	0	sudo grep -c 'session opened' /var/log/secure
+4.3-logs-and-journal	0	logger -p user.warning 'RHCSA lab: disk space check'
+4.3-logs-and-journal	0	sudo tail -1 /var/log/messages
+4.3-logs-and-journal	0	grep -v '^#' /etc/rsyslog.conf | grep -E 'messages|secure|cron'
+4.3-logs-and-journal	0	journalctl -n 3 --no-pager
+4.3-logs-and-journal	0	sudo journalctl -u sshd -n 3 --no-pager
+4.3-logs-and-journal	0	sudo journalctl -p err -b --no-pager | tail -3
+4.3-logs-and-journal	0	sudo journalctl --since '10 min ago' -t student --no-pager || sudo journalctl --since '10 min ago' --no-pager | grep 'RHCSA lab'
+4.3-logs-and-journal	0	sudo journalctl _COMM=sshd -o verbose -n 1 --no-pager | head -12
+4.3-logs-and-journal	0	sudo journalctl -b -o short-iso -n 2 --no-pager
+4.3-logs-and-journal	0	journalctl --disk-usage
+4.3-logs-and-journal	2	grep -E '^#?Storage' /etc/systemd/journald.conf
+4.3-logs-and-journal	0	ls -ld /var/log/journal /run/log/journal 2>&1
+4.3-logs-and-journal	0	journalctl --list-boots --no-pager
+4.3-logs-and-journal	0	sudo mkdir -p /etc/systemd/journald.conf.d
+4.3-logs-and-journal	0	printf '[Journal]\nStorage=persistent\n' | sudo tee /etc/systemd/journald.conf.d/persistent.conf
+4.3-logs-and-journal	0	sudo systemctl restart systemd-journald
+4.3-logs-and-journal	0	ls -ld /var/log/journal
+4.3-logs-and-journal	0	sudo ls /var/log/journal/
+4.3-logs-and-journal	0	sudo journalctl --flush; journalctl --disk-usage
+4.3-logs-and-journal	0	journalctl --list-boots --no-pager
+4.3-logs-and-journal	0	sudo journalctl -b -1 -n 3 --no-pager
+4.3-logs-and-journal	0	sudo journalctl -b -1 --no-pager | grep -c 'RHCSA lab'
+4.4-services-and-transfer	0	systemctl status sshd --no-pager | head -6
+4.4-services-and-transfer	3	systemctl is-active httpd
+4.4-services-and-transfer	0	sudo systemctl start httpd
+4.4-services-and-transfer	0	systemctl is-active httpd
+4.4-services-and-transfer	0	sudo ss -tlnp | grep -E ':(22|80) '
+4.4-services-and-transfer	0	curl -sI http://localhost/ | head -1
+4.4-services-and-transfer	0	sudo systemctl stop httpd
+4.4-services-and-transfer	0	systemctl status httpd --no-pager | head -3
+4.4-services-and-transfer	0	sudo systemctl restart sshd; systemctl is-active sshd
+4.4-services-and-transfer	0	sudo systemctl reload sshd; echo $?
+4.4-services-and-transfer	0	mkdir -p reports; echo 'q3 disk usage' > reports/q3.txt; dd if=/dev/urandom of=reports/backup.img bs=1M count=5 status=none; ls -l reports
+4.4-services-and-transfer	0	scp reports/q3.txt bob@servera.lab.example.com:/home/bob/
+4.4-services-and-transfer	0	ssh bob@servera.lab.example.com 'ls -l /home/bob'
+4.4-services-and-transfer	255	scp -r reports bob@servera:/tmp/
+4.4-services-and-transfer	255	scp bob@servera:/home/bob/q3.txt ./q3-copy.txt && cat q3-copy.txt
+4.4-services-and-transfer	255	printf 'cd /tmp/reports\nls -l\nget backup.img fetched.img\nbye\n' > batch.sftp; sftp -b batch.sftp bob@servera
+4.4-services-and-transfer	2	ls -l fetched.img
+4.4-services-and-transfer	12	rsync -av reports/ bob@servera:/home/bob/reports/
+4.4-services-and-transfer	12	echo 'appended' >> reports/q3.txt; rsync -av reports/ bob@servera:/home/bob/reports/
+4.4-services-and-transfer	12	rsync -av --delete --dry-run reports/ bob@servera:/home/bob/reports/
+6.2-nfs-and-autofs	0	showmount -e servera
+6.2-nfs-and-autofs	0	rpm -q nfs-utils
+6.2-nfs-and-autofs	0	sudo mkdir -p /mnt/projects
+6.2-nfs-and-autofs	0	sudo mount -t nfs servera:/exports/projects /mnt/projects
+6.2-nfs-and-autofs	0	findmnt -t nfs4,nfs /mnt/projects
+6.2-nfs-and-autofs	0	nfsstat -m | head -3
+6.2-nfs-and-autofs	0	ls -l /mnt/projects; cat /mnt/projects/plan.txt
+6.2-nfs-and-autofs	0	sudo umount /mnt/projects
+6.2-nfs-and-autofs	0	echo 'servera:/exports/projects  /mnt/projects  nfs  defaults,_netdev  0 0' | sudo tee -a /etc/fstab
+6.2-nfs-and-autofs	0	sudo systemctl daemon-reload; sudo mount -a; findmnt /mnt/projects
+6.2-nfs-and-autofs	0	rpm -q autofs
+6.2-nfs-and-autofs	0	echo '/shares  /etc/auto.shares' | sudo tee /etc/auto.master.d/shares.autofs
+6.2-nfs-and-autofs	0	echo 'projects  -rw,sync  servera:/exports/projects' | sudo tee /etc/auto.shares
+6.2-nfs-and-autofs	0	sudo systemctl enable --now autofs
+6.2-nfs-and-autofs	0	ls /shares
+6.2-nfs-and-autofs	0	ls /shares/projects
+6.2-nfs-and-autofs	1	findmnt -t nfs4,nfs | grep shares
+6.2-nfs-and-autofs	1	mount | grep -E 'autofs.*shares'
+6.2-nfs-and-autofs	0	echo '/home/guests  /etc/auto.guests' | sudo tee /etc/auto.master.d/guests.autofs
+6.2-nfs-and-autofs	0	echo '*  -rw,sync  servera:/exports/guests/&' | sudo tee /etc/auto.guests
+6.2-nfs-and-autofs	0	sudo systemctl reload autofs
+6.2-nfs-and-autofs	0	cat /home/guests/alice/notes.txt
+6.2-nfs-and-autofs	0	ls /home/guests
+6.2-nfs-and-autofs	0	findmnt /home/guests/alice
+6.2-nfs-and-autofs	0	grep -E '^(timeout|browse_mode)' /etc/autofs.conf
+6.2-nfs-and-autofs	0	findmnt /mnt/projects
+6.2-nfs-and-autofs	0	systemctl is-enabled autofs; systemctl is-active autofs
+6.2-nfs-and-autofs	0	ls /shares/projects; cat /home/guests/alice/notes.txt
+7.1-scheduling	0	systemctl is-active atd
+7.1-scheduling	0	echo 'date >> /tmp/at-demo.txt' | at now + 1 minute
+7.1-scheduling	0	echo 'tar czf /tmp/etc-backup.tgz /etc 2>/dev/null' | at 23:30
+7.1-scheduling	0	atq
+7.1-scheduling	0	at -c $(atq | sort -n | tail -1 | cut -f1) | tail -3
+7.1-scheduling	0	atrm $(atq | sort -n | tail -1 | cut -f1); atq
+7.1-scheduling	0	sleep 75; cat /tmp/at-demo.txt
+7.1-scheduling	0	systemctl is-active crond
+7.1-scheduling	0	printf '*/5 * * * * df -h / >> /tmp/df.log\n30 2 * * 1-5 /usr/local/bin/backup.sh\n' > mycron; crontab mycron
+7.1-scheduling	0	crontab -l
+7.1-scheduling	0	sudo crontab -u student -l | head -1
+7.1-scheduling	0	sudo ls -l /var/spool/cron/
+7.1-scheduling	0	echo '0 1 * * 0 root /usr/bin/dnf -y -q makecache' | sudo tee /etc/cron.d/weekly-cache
+7.1-scheduling	0	ls /etc/cron.daily /etc/cron.hourly
+7.1-scheduling	0	grep -v '^#' /etc/anacrontab | grep -v '^$'
+7.1-scheduling	1	crontab -r; crontab -l
+7.1-scheduling	0	printf '[Unit]\nDescription=Record disk usage\n\n[Service]\nType=oneshot\nExecStart=/usr/bin/sh -c "df -h / >> /var/log/disk-usage.log"\n' | sudo tee /etc/systemd/system/disk-usage.service
+7.1-scheduling	0	printf '[Unit]\nDescription=Record disk usage every minute\n\n[Timer]\nOnCalendar=*-*-* *:*:00\nPersistent=true\n\n[Install]\nWantedBy=timers.target\n' | sudo tee /etc/systemd/system/disk-usage.timer
+7.1-scheduling	0	sudo systemctl daemon-reload
+7.1-scheduling	0	sudo systemctl enable --now disk-usage.timer
+7.1-scheduling	0	systemctl list-timers disk-usage.timer --no-pager
+7.1-scheduling	0	sleep 65; sudo tail -2 /var/log/disk-usage.log
+7.1-scheduling	0	journalctl -u disk-usage.service -n 3 --no-pager
+7.1-scheduling	0	systemd-analyze calendar 'Mon..Fri 02:30' 'daily' '*:0/15' --iterations=2
+7.1-scheduling	0	systemctl list-timers --all --no-pager | head -8
+7.2-services-and-targets	3	systemctl is-enabled httpd; systemctl is-active httpd
+7.2-services-and-targets	0	sudo systemctl enable --now httpd
+7.2-services-and-targets	0	systemctl is-enabled httpd; systemctl is-active httpd
+7.2-services-and-targets	0	systemctl list-unit-files --state=enabled --type=service --no-pager | head -8
+7.2-services-and-targets	0	sudo systemctl disable httpd
+7.2-services-and-targets	0	sudo systemctl enable httpd
+7.2-services-and-targets	0	sudo systemctl mask --now cups 2>&1; sudo systemctl mask nfs-server
+7.2-services-and-targets	1	sudo systemctl start nfs-server
+7.2-services-and-targets	1	systemctl is-enabled nfs-server
+7.2-services-and-targets	0	sudo systemctl unmask nfs-server
+7.2-services-and-targets	0	systemctl cat httpd --no-pager | head -12
+7.2-services-and-targets	0	systemctl list-dependencies multi-user.target --no-pager | head -10
+7.2-services-and-targets	0	systemctl show -p WantedBy -p After httpd
+7.2-services-and-targets	0	systemctl get-default
+7.2-services-and-targets	0	sudo systemctl set-default multi-user.target
+7.2-services-and-targets	0	ls -l /etc/systemd/system/default.target
+7.2-services-and-targets	0	systemctl get-default
+7.2-services-and-targets	0	systemctl is-active httpd
+7.2-services-and-targets	0	systemctl status httpd --no-pager | head -4
+7.3-time-sync	0	timedatectl
+7.3-time-sync	0	timedatectl list-timezones | grep -E 'America/(New_York|Chicago)'
+7.3-time-sync	0	sudo timedatectl set-timezone America/New_York
+7.3-time-sync	0	timedatectl | grep 'Time zone'
+7.3-time-sync	0	ls -l /etc/localtime
+7.3-time-sync	0	systemctl is-active chronyd; systemctl is-enabled chronyd
+7.3-time-sync	0	grep -E '^(pool|server)' /etc/chrony.conf
+7.3-time-sync	0	chronyc sources
+7.3-time-sync	0	sudo sed -i 's/^pool /#pool /' /etc/chrony.conf
+7.3-time-sync	0	echo 'server time.cloudflare.com iburst' | sudo tee -a /etc/chrony.conf
+7.3-time-sync	0	grep -E '^(pool|server|#pool)' /etc/chrony.conf
+7.3-time-sync	0	sudo systemctl restart chronyd
+7.3-time-sync	0	sleep 20; chronyc sources -v | tail -4
+7.3-time-sync	0	chronyc tracking | head -6
+7.3-time-sync	0	timedatectl show -p NTPSynchronized
+7.3-time-sync	0	sudo timedatectl set-ntp false; timedatectl | grep NTP
+7.3-time-sync	0	sudo timedatectl set-ntp true; timedatectl | grep NTP
+7.4-software-sources	0	cat /etc/redhat-release
+7.4-software-sources	0	dnf --version | head -2
+7.4-software-sources	0	sudo subscription-manager status 2>&1 | head -6
+7.4-software-sources	0	sudo subscription-manager repos --list-enabled 2>&1 | head -8
+7.4-software-sources	0	dnf repolist
+7.4-software-sources	0	grep -E '^\[|^(baseurl|metalink|mirrorlist|gpgcheck|enabled)' /etc/yum.repos.d/*.repo | head -12
+7.4-software-sources	0	sudo dnf check-update -q | head -5; echo exit=$?
+7.4-software-sources	0	sudo dnf updateinfo summary 2>&1 | head -8
+7.4-software-sources	0	sudo dnf upgrade --assumeno 2>&1 | tail -4
+7.4-software-sources	0	sudo dnf upgrade -y tzdata 2>&1 | tail -3
+7.4-software-sources	0	sudo dnf history list | head -5
+7.4-software-sources	0	cd /tmp && dnf download tree 2>&1 | tail -1; ls /tmp/tree-*.rpm
+7.4-software-sources	0	rpm -qip /tmp/tree-*.rpm | head -6
+7.4-software-sources	0	sudo dnf install -y /tmp/tree-*.rpm 2>&1 | tail -3
+7.4-software-sources	0	rpm -q tree
+7.4-software-sources	0	sudo dnf remove -y tree 2>&1 | tail -2
+7.4-software-sources	0	cd /srv/localrepo && sudo dnf download -q tree wget2 2>&1; ls /srv/localrepo
+7.4-software-sources	0	sudo createrepo_c /srv/localrepo | tail -1
+7.4-software-sources	0	ls /srv/localrepo/repodata | head -3
+7.4-software-sources	0	printf '[localrepo]\nname=Local packages\nbaseurl=file:///srv/localrepo\nenabled=1\ngpgcheck=0\n' | sudo tee /etc/yum.repos.d/localrepo.repo
+7.4-software-sources	0	dnf repolist
+7.4-software-sources	0	sudo dnf --disablerepo='*' --enablerepo=localrepo install -y tree 2>&1 | tail -3
+7.4-software-sources	0	dnf info tree 2>/dev/null | grep -E '^(Name|Version|From repo|Repository)'
+7.4-software-sources	0	sudo dnf config-manager --help 2>&1 | head -3
+7.4-software-sources	0	grep -h '^baseurl\|^mirrorlist\|^metalink' /etc/yum.repos.d/*.repo | head -2
+7.4-software-sources	0	sudo dnf config-manager --add-repo https://repo.almalinux.org/almalinux/10/extras/x86_64/os/ 2>&1 | tail -2
+7.4-software-sources	0	ls /etc/yum.repos.d/
+7.4-software-sources	0	sudo dnf --repo=repo.almalinux.org_almalinux_10_extras_x86_64_os makecache 2>&1 | tail -2
+7.4-software-sources	0	rpm -q gpg-pubkey --qf '%{NAME}-%{VERSION}  %{SUMMARY}\n'
+7.5-bootloader	0	sudo grubby --default-kernel
+7.5-bootloader	0	sudo grubby --default-index
+7.5-bootloader	0	sudo grubby --info=ALL | grep -E '^(index|kernel|args|title)'
+7.5-bootloader	2	ls /boot/loader/entries/
+7.5-bootloader	1	sudo cat /boot/loader/entries/$(ls /boot/loader/entries/ | grep -v rescue | tail -1)
+7.5-bootloader	0	cat /proc/cmdline
+7.5-bootloader	0	sudo grubby --update-kernel=ALL --args='audit=1 audit_backlog_limit=8192'
+7.5-bootloader	0	sudo grubby --info=DEFAULT | grep args
+7.5-bootloader	0	cat /etc/default/grub
+7.5-bootloader	0	sudo sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=10/' /etc/default/grub; grep TIMEOUT /etc/default/grub
+7.5-bootloader	0	sudo grub2-mkconfig -o /boot/grub2/grub.cfg 2>&1 | tail -3
+7.5-bootloader	0	sudo grep -m2 'timeout' /boot/grub2/grub.cfg
+7.5-bootloader	0	sudo grub2-editenv list
+7.5-bootloader	2	ls -l /boot/grub2/grub.cfg /boot/efi/EFI/*/grub.cfg 2>&1
+7.5-bootloader	0	cat /proc/cmdline
+7.5-bootloader	0	sudo grubby --update-kernel=ALL --remove-args='audit=1 audit_backlog_limit=8192'
+7.5-bootloader	0	sudo grubby --info=DEFAULT | grep args
+8.1-ip-configuration	0	nmcli device status
+8.1-ip-configuration	0	nmcli connection show
+8.1-ip-configuration	0	ip -br addr
+8.1-ip-configuration	0	ip route
+8.1-ip-configuration	0	nmcli -f GENERAL.DEVICE,GENERAL.HWADDR,IP4.ADDRESS device show ens18
+8.1-ip-configuration	2	ls /etc/NetworkManager/system-connections/ /etc/sysconfig/network-scripts/ 2>&1
+8.1-ip-configuration	0	sudo nmcli connection add type ethernet con-name lab-static ifname ens19 ipv4.method manual ipv4.addresses 192.0.2.10/24 ipv4.dns 192.0.2.53 ipv6.method manual ipv6.addresses 2001:db8::10/64 connection.autoconnect yes
+8.1-ip-configuration	0	sudo nmcli connection up lab-static
+8.1-ip-configuration	0	ip -br addr show ens19
+8.1-ip-configuration	0	ip -6 addr show ens19 | grep inet6
+8.1-ip-configuration	0	nmcli -g ipv4.method,ipv4.addresses,ipv6.addresses,connection.autoconnect connection show lab-static
+8.1-ip-configuration	0	sudo cat /etc/NetworkManager/system-connections/lab-static.nmconnection
+8.1-ip-configuration	0	ping -c 1 192.0.2.10 | tail -2; ping -6 -c 1 2001:db8::10 | tail -2
+8.1-ip-configuration	0	sudo nmcli connection modify lab-static +ipv4.addresses 192.0.2.11/24
+8.1-ip-configuration	0	sudo nmcli connection up lab-static; ip -br addr show ens19
+8.1-ip-configuration	0	sudo nmcli connection modify lab-static -ipv4.addresses 192.0.2.11/24
+8.1-ip-configuration	0	sudo nmcli connection reload; sudo nmcli connection up lab-static; ip -br addr show ens19
+8.1-ip-configuration	0	systemctl is-enabled NetworkManager
+8.1-ip-configuration	0	nmcli -g connection.autoconnect connection show lab-static
+8.1-ip-configuration	0	nmcli general status
+8.1-ip-configuration	0	nmcli connection show --active
+8.1-ip-configuration	0	ip -br addr show ens19
+8.2-name-resolution	0	hostname; hostname -s; hostname -I
+8.2-name-resolution	0	hostnamectl
+8.2-name-resolution	0	sudo hostnamectl hostname serverx.lab.example.com; hostnamectl --static; cat /etc/hostname
+8.2-name-resolution	0	sudo hostnamectl hostname servera.lab.example.com; cat /etc/hostname
+8.2-name-resolution	0	cat /etc/hosts
+8.2-name-resolution	0	grep '^hosts:' /etc/nsswitch.conf
+8.2-name-resolution	0	echo '192.0.2.20  serverb.lab.example.com serverb' | sudo tee -a /etc/hosts
+8.2-name-resolution	0	getent hosts serverb
+8.2-name-resolution	0	getent ahosts servera.lab.example.com | head -2
+8.2-name-resolution	0	ping -c1 -W1 serverb | head -1
+8.2-name-resolution	0	host serverb 2>&1; dig +short serverb
+8.2-name-resolution	0	cat /etc/resolv.conf
+8.2-name-resolution	0	nmcli -g ipv4.dns,ipv4.dns-search,ipv4.ignore-auto-dns connection show "$(nmcli -g NAME connection show --active | head -1)"
+8.2-name-resolution	0	host www.redhat.com | head -2
+8.2-name-resolution	0	dig +short www.redhat.com | tail -2
+8.2-name-resolution	0	getent hosts www.redhat.com
+8.2-name-resolution	0	nmcli connection show --active
+8.2-name-resolution	0	sudo nmcli connection add type ethernet con-name dns-demo ifname ens19 ipv4.method manual ipv4.addresses 192.0.2.30/24 ipv4.dns 192.0.2.53 ipv4.dns-search lab.example.com ipv4.ignore-auto-dns yes ipv6.method disabled autoconnect no >/dev/null; nmcli -g ipv4.dns,ipv4.dns-search,ipv4.ignore-auto-dns connection show dns-demo
+8.3-firewalld-basics	0	systemctl is-active firewalld; systemctl is-enabled firewalld
+8.3-firewalld-basics	0	sudo firewall-cmd --state
+8.3-firewalld-basics	0	sudo firewall-cmd --get-default-zone
+8.3-firewalld-basics	0	sudo firewall-cmd --get-active-zones
+8.3-firewalld-basics	0	sudo firewall-cmd --list-all
+8.3-firewalld-basics	0	sudo firewall-cmd --get-services | tr ' ' '\n' | grep -E '^(http|https|ssh|nfs|samba|dns)$'
+8.3-firewalld-basics	0	sudo firewall-cmd --info-service=http
+8.3-firewalld-basics	0	sudo systemctl start httpd; curl -s -o /dev/null -w '%{http_code}\n' http://172.18.8.117/
+8.3-firewalld-basics	0	sudo firewall-cmd --add-service=http
+8.3-firewalld-basics	0	sudo firewall-cmd --list-services
+8.3-firewalld-basics	0	sudo firewall-cmd --list-services --permanent
+8.3-firewalld-basics	0	sudo firewall-cmd --reload; sudo firewall-cmd --list-services
+8.3-firewalld-basics	0	sudo firewall-cmd --permanent --add-service=http
+8.3-firewalld-basics	0	sudo firewall-cmd --reload; sudo firewall-cmd --list-services
+8.3-firewalld-basics	0	sudo firewall-cmd --permanent --add-port=8080/tcp
+8.3-firewalld-basics	0	sudo firewall-cmd --reload; sudo firewall-cmd --list-ports
+8.3-firewalld-basics	0	sudo firewall-cmd --query-port=8080/tcp
+8.3-firewalld-basics	0	sudo firewall-cmd --permanent --remove-port=8080/tcp; sudo firewall-cmd --permanent --remove-service=http
+8.3-firewalld-basics	0	sudo firewall-cmd --reload; sudo firewall-cmd --list-all | grep -E 'services|ports'
+8.3-firewalld-basics	0	sudo firewall-cmd --permanent --list-all | grep -E 'services|ports'
+8.3-firewalld-basics	0	ls /etc/firewalld/zones/; sudo cat /etc/firewalld/zones/$(sudo firewall-cmd --get-default-zone).xml
+10.1-firewall-settings	0	sudo firewall-cmd --get-zones
+10.1-firewall-settings	0	sudo firewall-cmd --get-active-zones
+10.1-firewall-settings	0	sudo firewall-cmd --zone=internal --list-all
+10.1-firewall-settings	0	sudo firewall-cmd --get-zone-of-interface=ens18
+10.1-firewall-settings	0	sudo firewall-cmd --permanent --zone=internal --add-source=192.0.2.0/24
+10.1-firewall-settings	0	sudo firewall-cmd --permanent --zone=internal --add-service=http
+10.1-firewall-settings	0	sudo firewall-cmd --reload
+10.1-firewall-settings	0	sudo firewall-cmd --get-active-zones
+10.1-firewall-settings	0	sudo firewall-cmd --zone=internal --list-all
+10.1-firewall-settings	0	sudo firewall-cmd --permanent --add-rich-rule='rule family=ipv4 source address=198.51.100.0/24 service name=ssh reject'
+10.1-firewall-settings	0	sudo firewall-cmd --permanent --add-rich-rule='rule family=ipv4 source address=203.0.113.5 port port=8443 protocol=tcp accept'
+10.1-firewall-settings	0	sudo firewall-cmd --reload; sudo firewall-cmd --list-rich-rules
+10.1-firewall-settings	0	sudo firewall-cmd --permanent --add-forward-port=port=8080:proto=tcp:toport=80
+10.1-firewall-settings	0	sudo firewall-cmd --reload; sudo firewall-cmd --list-forward-ports
+10.1-firewall-settings	0	sudo firewall-cmd --add-port=9090/tcp; sudo firewall-cmd --list-ports; sudo firewall-cmd --permanent --list-ports
+10.1-firewall-settings	0	sudo firewall-cmd --runtime-to-permanent; sudo firewall-cmd --permanent --list-ports
+10.1-firewall-settings	0	sudo firewall-cmd --check-config
+10.1-firewall-settings	0	sudo ls /etc/firewalld/zones/
+10.1-firewall-settings	0	sudo nft list ruleset | grep -c 'tcp dport'
+10.1-firewall-settings	0	sudo firewall-cmd --get-active-zones
+10.1-firewall-settings	0	sudo firewall-cmd --list-rich-rules; sudo firewall-cmd --list-forward-ports; sudo firewall-cmd --list-ports
+10.4-selinux-modes-contexts	0	getenforce
+10.4-selinux-modes-contexts	0	sestatus
+10.4-selinux-modes-contexts	0	grep -E '^SELINUX(TYPE)?=' /etc/selinux/config
+10.4-selinux-modes-contexts	0	sudo setenforce 0; getenforce
+10.4-selinux-modes-contexts	0	sudo setenforce 1; getenforce
+10.4-selinux-modes-contexts	2	setenforce 0
+10.4-selinux-modes-contexts	0	cat /sys/fs/selinux/enforce
+10.4-selinux-modes-contexts	0	ls -Z /etc/passwd /etc/shadow
+10.4-selinux-modes-contexts	0	ls -dZ /var/www/html /home/student /tmp
+10.4-selinux-modes-contexts	0	stat -c '%n %C' /etc/ssh/sshd_config
+10.4-selinux-modes-contexts	0	echo hello > notes.txt; ls -Z notes.txt
+10.4-selinux-modes-contexts	0	sudo cp notes.txt /var/www/html/; sudo mv /home/student/notes.txt /var/www/html/moved.txt; ls -Z /var/www/html/
+10.4-selinux-modes-contexts	0	ps -eZ | grep -E 'httpd|sshd' | head -4
+10.4-selinux-modes-contexts	0	ps -Zp $$
+10.4-selinux-modes-contexts	0	id -Z
+10.4-selinux-modes-contexts	0	sudo semanage login -l | head -6
+10.4-selinux-modes-contexts	0	sudo sed -i 's/^SELINUX=.*/SELINUX=permissive/' /etc/selinux/config; grep ^SELINUX= /etc/selinux/config
+10.4-selinux-modes-contexts	0	getenforce
+10.4-selinux-modes-contexts	0	sudo sed -i 's/^SELINUX=.*/SELINUX=enforcing/' /etc/selinux/config; sudo setenforce 1; getenforce
+10.4-selinux-modes-contexts	0	grep ^SELINUX= /etc/selinux/config
+10.4-selinux-modes-contexts	0	cat /proc/cmdline | tr ' ' '\n' | grep -E 'selinux|enforcing' || echo 'no selinux arguments on the kernel command line'
+5.1-gpt-partitions	0	lsblk
+5.1-gpt-partitions	0	lsblk -o NAME,SIZE,TYPE,FSTYPE,MOUNTPOINTS /dev/vdb
+5.1-gpt-partitions	0	sudo parted /dev/vdb print
+5.1-gpt-partitions	0	sudo fdisk -l /dev/vdb
+5.1-gpt-partitions	0	sudo parted /dev/vdb mklabel gpt
+5.1-gpt-partitions	0	sudo parted /dev/vdb mkpart data xfs 1MiB 1025MiB
+5.1-gpt-partitions	0	sudo parted /dev/vdb mkpart logs ext4 1025MiB 1537MiB
+5.1-gpt-partitions	0	sudo parted /dev/vdb print
+5.1-gpt-partitions	0	sudo udevadm settle; lsblk /dev/vdb
+5.1-gpt-partitions	0	sudo parted -s /dev/vdb unit MiB print free
+5.1-gpt-partitions	0	sudo parted /dev/vdb set 2 lvm on
+5.1-gpt-partitions	0	sudo parted /dev/vdb print | tail -4
+5.1-gpt-partitions	0	sudo fdisk -l /dev/vdb | tail -3
+5.1-gpt-partitions	0	sudo blkid -p -s PART_ENTRY_NAME -s PART_ENTRY_TYPE /dev/vdb1 /dev/vdb2
+5.1-gpt-partitions	0	sudo parted /dev/vdb rm 2
+5.1-gpt-partitions	0	sudo udevadm settle; lsblk /dev/vdb
+5.1-gpt-partitions	0	sudo parted /dev/vdb rm 1
+5.1-gpt-partitions	0	sudo parted /dev/vdb print | tail -3
+5.1-gpt-partitions	0	printf 'g\nn\n1\n\n+512M\nw\n' | sudo fdisk /dev/vdb | tail -6
+5.1-gpt-partitions	0	sudo udevadm settle; lsblk /dev/vdb
+5.1-gpt-partitions	0	sudo partprobe /dev/vdb; echo $?
+5.2-lvm	0	sudo parted -s /dev/vdb mklabel gpt mkpart lvm1 1MiB 100% set 1 lvm on
+5.2-lvm	0	sudo udevadm settle; lsblk /dev/vdb /dev/vdc
+5.2-lvm	0	sudo pvcreate /dev/vdb1 /dev/vdc1
+5.2-lvm	0	sudo pvs
+5.2-lvm	0	sudo pvdisplay /dev/vdb1
+5.2-lvm	0	sudo vgcreate -s 8M vg_data /dev/vdb1
+5.2-lvm	0	sudo vgs
+5.2-lvm	0	sudo vgdisplay vg_data | grep -E 'VG Name|PE Size|Total PE|Free  PE'
+5.2-lvm	0	sudo vgextend vg_data /dev/vdc1
+5.2-lvm	0	sudo vgs vg_data
+5.2-lvm	0	sudo pvs
+5.2-lvm	0	sudo lvcreate -n lv_web -L 500M vg_data
+5.2-lvm	0	sudo lvcreate -n lv_db -l 40 vg_data
+5.2-lvm	0	sudo lvcreate -n lv_rest -l 50%FREE vg_data
+5.2-lvm	0	sudo lvs
+5.2-lvm	0	sudo lvdisplay /dev/vg_data/lv_db | grep -E 'LV Path|LV Size|Current LE'
+5.2-lvm	0	ls -l /dev/vg_data/ /dev/mapper/ | grep vg_data
+5.2-lvm	5	sudo lvcreate -n lv_big -L 20G vg_data
+5.2-lvm	0	sudo lvremove -y vg_data/lv_rest
+5.2-lvm	5	sudo pvmove /dev/vdc1
+5.2-lvm	0	sudo vgreduce vg_data /dev/vdc1
+5.2-lvm	0	sudo pvremove /dev/vdc1
+5.2-lvm	0	sudo lvremove -y vg_data
+5.2-lvm	0	sudo vgremove vg_data
+5.2-lvm	0	sudo pvremove /dev/vdb1
+5.2-lvm	0	sudo pvs; sudo vgs
+5.3-persistent-mounts-and-swap	0	sudo parted -s /dev/vdb mklabel gpt
+5.3-persistent-mounts-and-swap	0	sudo parted -s /dev/vdb mkpart archive xfs 1MiB 513MiB
+5.3-persistent-mounts-and-swap	0	sudo parted -s /dev/vdb mkpart scratch ext4 513MiB 769MiB
+5.3-persistent-mounts-and-swap	0	sudo parted -s /dev/vdb mkpart swap1 linux-swap 769MiB 1281MiB
+5.3-persistent-mounts-and-swap	0	sudo udevadm settle; lsblk /dev/vdb
+5.3-persistent-mounts-and-swap	0	sudo mkfs.xfs -q -L archive /dev/vdb1
+5.3-persistent-mounts-and-swap	0	sudo mkfs.ext4 -q -L scratch /dev/vdb2
+5.3-persistent-mounts-and-swap	0	sudo blkid /dev/vdb1 /dev/vdb2
+5.3-persistent-mounts-and-swap	0	lsblk -f /dev/vdb
+5.3-persistent-mounts-and-swap	0	sudo mkdir -p /archive /scratch
+5.3-persistent-mounts-and-swap	0	echo "UUID=$(sudo blkid -s UUID -o value /dev/vdb1)  /archive  xfs  defaults  0 0" | sudo tee -a /etc/fstab
+5.3-persistent-mounts-and-swap	0	echo 'LABEL=scratch  /scratch  ext4  defaults  0 2' | sudo tee -a /etc/fstab
+5.3-persistent-mounts-and-swap	0	sudo systemctl daemon-reload
+5.3-persistent-mounts-and-swap	0	sudo findmnt --verify
+5.3-persistent-mounts-and-swap	0	sudo mount -a
+5.3-persistent-mounts-and-swap	0	findmnt /archive; findmnt /scratch
+5.3-persistent-mounts-and-swap	0	df -hT /archive /scratch
+5.3-persistent-mounts-and-swap	0	echo 'UUID=0000-bad  /broken  xfs  defaults  0 0' | sudo tee -a /etc/fstab
+5.3-persistent-mounts-and-swap	1	sudo findmnt --verify
+5.3-persistent-mounts-and-swap	0	sudo sed -i '/0000-bad/d' /etc/fstab; sudo systemctl daemon-reload; sudo findmnt --verify
+5.3-persistent-mounts-and-swap	0	swapon --show; free -h | grep -i swap
+5.3-persistent-mounts-and-swap	0	sudo mkswap -L swap1 /dev/vdb3
+5.3-persistent-mounts-and-swap	0	sudo swapon /dev/vdb3
+5.3-persistent-mounts-and-swap	0	echo "UUID=$(sudo blkid -s UUID -o value /dev/vdb3)  none  swap  defaults  0 0" | sudo tee -a /etc/fstab
+5.3-persistent-mounts-and-swap	0	sudo parted -s /dev/vdc mklabel gpt mkpart lvm 1MiB 100% set 1 lvm on; sudo udevadm settle
+5.3-persistent-mounts-and-swap	0	sudo vgcreate vg_swap /dev/vdc1
+5.3-persistent-mounts-and-swap	0	sudo lvcreate -n lv_swap -L 256M vg_swap
+5.3-persistent-mounts-and-swap	0	sudo mkswap /dev/vg_swap/lv_swap
+5.3-persistent-mounts-and-swap	0	echo '/dev/vg_swap/lv_swap  none  swap  defaults  0 0' | sudo tee -a /etc/fstab
+5.3-persistent-mounts-and-swap	0	sudo systemctl daemon-reload; sudo swapon -a
+5.3-persistent-mounts-and-swap	0	swapon --show
+5.3-persistent-mounts-and-swap	0	free -h
+5.3-persistent-mounts-and-swap	0	tail -5 /etc/fstab
+5.3-persistent-mounts-and-swap	0	findmnt /archive; findmnt /scratch
+5.3-persistent-mounts-and-swap	0	swapon --show
+5.3-persistent-mounts-and-swap	0	lsblk -f /dev/vdb /dev/vdc
+6.1-local-file-systems	0	lsblk /dev/vdb
+6.1-local-file-systems	0	sudo mkfs.vfat -n USBKEY /dev/vdb1
+6.1-local-file-systems	0	sudo mkfs.ext4 -L homes /dev/vdb2
+6.1-local-file-systems	0	sudo mkfs.xfs -L data /dev/vdb3
+6.1-local-file-systems	0	lsblk -f /dev/vdb
+6.1-local-file-systems	1	sudo mkfs.xfs /dev/vdb3
+6.1-local-file-systems	0	sudo mkdir -p /mnt/usb /mnt/homes /mnt/data
+6.1-local-file-systems	0	sudo mount /dev/vdb1 /mnt/usb; sudo mount /dev/vdb2 /mnt/homes; sudo mount /dev/vdb3 /mnt/data
+6.1-local-file-systems	0	df -hT /mnt/usb /mnt/homes /mnt/data
+6.1-local-file-systems	0	findmnt -t vfat,ext4,xfs
+6.1-local-file-systems	0	sudo cp /etc/hosts /mnt/usb/; ls -l /mnt/usb
+6.1-local-file-systems	0	sudo chown student /mnt/usb/hosts; ls -l /mnt/usb/hosts
+6.1-local-file-systems	0	sudo umount /mnt/usb; sudo mount -o uid=student,umask=022 /dev/vdb1 /mnt/usb; ls -l /mnt/usb
+6.1-local-file-systems	0	ls /mnt/homes
+6.1-local-file-systems	32	sudo umount /mnt/data
+6.1-local-file-systems	0	sudo fuser -vm /mnt/data 2>&1 | head -3
+6.1-local-file-systems	0	sudo umount /mnt/data; findmnt /mnt/data; echo $?
+6.1-local-file-systems	0	sudo xfs_admin -L archive /dev/vdb3; sudo blkid -s LABEL /dev/vdb3
+6.1-local-file-systems	0	sudo e2label /dev/vdb2 homes2; sudo blkid -s LABEL /dev/vdb2
+6.1-local-file-systems	0	sudo tune2fs -l /dev/vdb2 | grep -E 'volume name|Block count|Filesystem features'
+6.1-local-file-systems	0	sudo xfs_info /dev/vdb3 2>&1 | head -2 || sudo mount /dev/vdb3 /mnt/data
+6.1-local-file-systems	0	sudo fatlabel /dev/vdb1
+6.3-extend-lvs	0	df -h /srv/web /srv/logs
+6.3-extend-lvs	0	sudo lvs vg_app; sudo vgs vg_app
+6.3-extend-lvs	0	sudo lvextend -r -L +200M /dev/vg_app/lv_web
+6.3-extend-lvs	0	df -h /srv/web
+6.3-extend-lvs	5	sudo lvextend -L 450M /dev/vg_app/lv_logs
+6.3-extend-lvs	0	df -h /srv/logs
+6.3-extend-lvs	0	sudo resize2fs /dev/vg_app/lv_logs
+6.3-extend-lvs	0	df -h /srv/logs
+6.3-extend-lvs	0	sudo vgs vg_app
+6.3-extend-lvs	5	sudo lvextend -r -L +500M /dev/vg_app/lv_web
+6.3-extend-lvs	0	sudo pvcreate /dev/vdc1
+6.3-extend-lvs	0	sudo vgextend vg_app /dev/vdc1
+6.3-extend-lvs	0	sudo vgs vg_app
+6.3-extend-lvs	0	sudo lvextend -r -l +100%FREE /dev/vg_app/lv_web
+6.3-extend-lvs	0	df -h /srv/web; sudo lvs vg_app
+6.3-extend-lvs	5	sudo lvreduce -r -L 300M /dev/vg_app/lv_web
+6.3-extend-lvs	0	sudo xfs_growfs /srv/web | tail -1
+10.5-selinux-troubleshooting	0	curl -s -o /dev/null -w '%{http_code}\n' http://localhost/index.html
+10.5-selinux-troubleshooting	0	ls -Zd /web /web/index.html
+10.5-selinux-troubleshooting	0	sudo ausearch -m AVC -ts recent -i | grep -m1 denied
+10.5-selinux-troubleshooting	0	sudo sealert -a /var/log/audit/audit.log 2>/dev/null | grep -m3 -E 'SELinux is preventing|semanage fcontext|restorecon'
+10.5-selinux-troubleshooting	0	sudo restorecon -Rv /web
+10.5-selinux-troubleshooting	0	matchpathcon /web /var/www/html
+10.5-selinux-troubleshooting	0	sudo semanage fcontext -a -t httpd_sys_content_t '/web(/.*)?'
+10.5-selinux-troubleshooting	0	sudo semanage fcontext -l -C
+10.5-selinux-troubleshooting	0	sudo restorecon -Rv /web
+10.5-selinux-troubleshooting	0	curl -s http://localhost/index.html
+10.5-selinux-troubleshooting	0	sudo chcon -t user_home_t /web/index.html; ls -Z /web/index.html; sudo restorecon -v /web/index.html
+10.5-selinux-troubleshooting	0	sudo touch /.autorelabel; ls -l /.autorelabel; sudo rm /.autorelabel
+10.5-selinux-troubleshooting	0	sudo sed -i 's/^Listen 80$/Listen 82/' /etc/httpd/conf/httpd.conf
+10.5-selinux-troubleshooting	1	sudo systemctl restart httpd
+10.5-selinux-troubleshooting	0	sudo journalctl -u httpd -n 3 --no-pager | tail -2
+10.5-selinux-troubleshooting	0	sudo semanage port -l | grep -w http_port_t
+10.5-selinux-troubleshooting	0	sudo semanage port -a -t http_port_t -p tcp 82
+10.5-selinux-troubleshooting	0	sudo semanage port -l -C
+10.5-selinux-troubleshooting	0	sudo systemctl restart httpd; systemctl is-active httpd
+10.5-selinux-troubleshooting	0	sudo firewall-cmd --permanent --add-port=82/tcp; sudo firewall-cmd --reload
+10.5-selinux-troubleshooting	0	curl -s http://servera:82/index.html
+10.5-selinux-troubleshooting	0	getsebool -a | grep -E '^httpd_(enable_homedirs|can_network_connect|read_user_content) '
+10.5-selinux-troubleshooting	0	sudo semanage boolean -l | grep -E '^httpd_enable_homedirs '
+10.5-selinux-troubleshooting	0	sudo setsebool httpd_enable_homedirs on; getsebool httpd_enable_homedirs
+10.5-selinux-troubleshooting	0	sudo semanage boolean -l -C
+10.5-selinux-troubleshooting	0	sudo setsebool -P httpd_enable_homedirs on; sudo semanage boolean -l -C
+10.5-selinux-troubleshooting	0	getsebool httpd_enable_homedirs
+10.5-selinux-troubleshooting	0	sudo semanage port -l -C; sudo semanage fcontext -l -C
+10.5-selinux-troubleshooting	0	systemctl is-active httpd || sudo systemctl start httpd; curl -s http://servera:82/index.html
+6.4-permission-problems	1	cat /srv/devops/releases/notes.txt
+6.4-permission-problems	2	ls -ld /srv /srv/devops /srv/devops/releases
+6.4-permission-problems	1	namei -l /srv/devops/releases/notes.txt
+6.4-permission-problems	0	id
+6.4-permission-problems	0	sudo usermod -aG devops student
+6.4-permission-problems	0	id
+6.4-permission-problems	0	id student
+6.4-permission-problems	0	sg devops -c 'cat /srv/devops/releases/notes.txt'
+6.4-permission-problems	0	sudo chmod 640 /srv/devops; sudo -u alice ls /srv/devops 2>&1; sudo chmod 750 /srv/devops
+6.4-permission-problems	0	sudo chmod 710 /srv/devops; sg devops -c 'ls /srv/devops; cat /srv/devops/releases/notes.txt'
+6.4-permission-problems	0	sudo chmod 750 /srv/devops
+6.4-permission-problems	1	sg devops -c 'echo v2 >> /srv/devops/releases/notes.txt'
+6.4-permission-problems	0	sudo chmod 660 /srv/devops/releases/notes.txt; sg devops -c 'echo v2 >> /srv/devops/releases/notes.txt'; cat /srv/devops/releases/notes.txt 2>&1 || sg devops -c 'cat /srv/devops/releases/notes.txt'
+6.4-permission-problems	0	sudo setfacl -m u:alice:rx /srv/devops /srv/devops/releases; sudo setfacl -m u:alice:r /srv/devops/releases/notes.txt
+6.4-permission-problems	0	getfacl /srv/devops/releases/notes.txt 2>/dev/null || sudo getfacl /srv/devops/releases/notes.txt
+6.4-permission-problems	0	ls -l /srv/devops/releases/
+6.4-permission-problems	0	sudo chmod 600 /srv/devops/releases/notes.txt; sudo getfacl /srv/devops/releases/notes.txt
+6.4-permission-problems	1	sudo -u alice cat /srv/devops/releases/notes.txt
+6.4-permission-problems	0	sudo chmod 666 /srv/devops/releases/notes.txt; sudo chattr +i /srv/devops/releases/notes.txt; sudo lsattr /srv/devops/releases/notes.txt
+6.4-permission-problems	1	echo v3 | sudo tee -a /srv/devops/releases/notes.txt
+6.4-permission-problems	0	sudo chattr -i /srv/devops/releases/notes.txt
+6.4-permission-problems	0	ls -Z /srv/devops/releases/notes.txt

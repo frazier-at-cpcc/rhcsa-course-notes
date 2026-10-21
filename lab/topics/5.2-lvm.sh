@@ -31,7 +31,7 @@ phase1() {
   run "sudo lvdisplay /dev/vg_data/lv_db | grep -E 'LV Path|LV Size|Current LE'"
   run "ls -l /dev/vg_data/ /dev/mapper/ | grep vg_data"
   run "sudo lvcreate -n lv_big -L 20G vg_data"
-  expect 'Insufficient free space'
+  expect '[Ii]nsufficient free space'
 
   section "Removing logical volumes, volume groups, and physical volumes"
   run "sudo lvremove -y vg_data/lv_rest"
