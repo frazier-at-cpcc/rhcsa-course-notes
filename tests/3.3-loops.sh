@@ -7,7 +7,7 @@ set -euo pipefail
 cd "$(dirname "$0")"
 source lib/container.sh
 NOTES=../content/domain-3/3.3-loops.md
-CT=rh23-33
+CT=rh232-33
 trap 'ct_down $CT' EXIT
 ct_up $CT sudo
 
@@ -34,11 +34,11 @@ install_file newhires.txt 644
 
 say "for over lists, ranges, seq, globs"
 run 'for h in web db; do echo "check $h"; done'; hasx 'check web'; hasx 'check db'
-run 'mkdir -p demo && cd demo && for i in {1..3}; do touch app$i.log; done; ls'
-hasx 'app1.log'; hasx 'app3.log'
+run 'mkdir -p demo && cd demo && for i in {1..3}; do touch app$i.log; done; echo *.log'
+hasx 'app1.log app2.log app3.log'
 run 'for i in $(seq 1 2 7); do echo -n "$i "; done'; hasx '1 3 5 7 '
-run 'cd demo && for f in *.log; do cp "$f" "$f.bak"; done; ls'
-hasx 'app1.log.bak'; [ "$(wc -l <<<"$OUT")" = 6 ]
+run 'cd demo && for f in *.log; do cp "$f" "$f.bak"; done; echo *.bak'
+hasx 'app1.log.bak app2.log.bak app3.log.bak'
 run 'cd demo && for f in *.log; do mv "$f" "${f%.log}.txt"; done; ls *.txt'
 hasx 'app1.txt'
 run 'for x in {a..c} {01..03}; do echo -n "$x "; done'; hasx 'a b c 01 02 03 '
@@ -53,6 +53,10 @@ run './filesizes.sh /etc/passwd /etc/group /etc'
 hasx 'skip: /etc'
 p=$(ct 'stat -c %s /etc/passwd'); g=$(ct 'stat -c %s /etc/group')
 has "^ +$p  /etc/passwd$"; has "^ +$g  /etc/group$"; has "^ +$((p + g))  total$"
+# docker exec splits stdout and stderr; merge them inside the shell to check
+# the order a terminal shows: the skip line comes before the total
+run './filesizes.sh /etc/passwd /etc/group /etc 2>&1 | tail -2'
+[ "$(head -1 <<<"$OUT")" = "skip: /etc" ] || { echo "skip line out of order" >&2; exit 1; }
 run 'set -- "a b" c; for f; do echo "[$f]"; done'; hasx '[a b]'; hasx '[c]'
 
 say "while read over a file"
@@ -78,7 +82,7 @@ hasx 'student 1000 /home/student'; hasx 'alice 1001 /home/alice'
 hasx 'bob 1002 /home/bob'; hasx 'carol 1003 /home/carol'
 hasx '4 regular accounts'
 ! grep -q nobody <<<"$OUT"
-run 'n=0; seq 3 | while read l; do n=$l; done; echo "n=$n"'; hasx 'n=0'
+run 'n=0; seq 3 | while read -r l; do n=$l; done; echo "n=$n"'; hasx 'n=0'
 run 'n=0; while read l; do n=$l; done < <(seq 3); echo "n=$n"'; hasx 'n=3'
 
 echo

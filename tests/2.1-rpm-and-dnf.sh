@@ -9,7 +9,7 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 source lib/container.sh
-CT=rh23-21
+CT=rh232-21
 trap 'ct_down $CT' EXIT
 ct_up $CT createrepo_c rpm-build sudo
 ct 'useradd student && echo "student ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/student && chmod 440 /etc/sudoers.d/student'

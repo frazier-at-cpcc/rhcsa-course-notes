@@ -7,7 +7,7 @@ set -euo pipefail
 cd "$(dirname "$0")"
 source lib/container.sh
 NOTES=../content/domain-3/3.1-script-inputs.md
-CT=rh23-31
+CT=rh232-31
 trap 'ct_down $CT' EXIT
 ct_up $CT sudo
 

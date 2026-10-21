@@ -341,8 +341,8 @@
         "10.0"
       ]
     },
-    "preview-rh-23": {
-      "file": "preview-rh-23",
+    "preview-rh-232": {
+      "file": "preview-rh-232",
       "topics": [
         "domain-2/2.1-rpm-and-dnf.md",
         "domain-2/2.2-flatpak.md",
