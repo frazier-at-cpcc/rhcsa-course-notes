@@ -1,0 +1,80 @@
+<svg viewBox="0 0 360 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RHEL 10 boot sequence from firmware to GRUB, kernel and initramfs, switch_root, systemd, and the default target, with the points where e, rd.break, init=/bin/bash, and systemd.unit= change the boot">
+  <defs>
+    <marker id="bs-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1a1209"/></marker>
+    <marker id="bs-pur" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6d28d9"/></marker>
+  </defs>
+  <!-- column headings -->
+  <g font-size="9.5" font-weight="800" fill="#5c4a30">
+    <text x="12" y="14">NORMAL BOOT</text>
+    <text x="212" y="14">YOUR WAY IN (ONE BOOT)</text>
+  </g>
+  <!-- stage boxes: shadow then box -->
+  <g>
+    <rect x="15" y="25" width="180" height="44" rx="7" fill="#1a1209"/>
+    <rect x="12" y="22" width="180" height="44" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+    <rect x="15" y="87" width="180" height="44" rx="7" fill="#1a1209"/>
+    <rect x="12" y="84" width="180" height="44" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+    <rect x="15" y="149" width="180" height="44" rx="7" fill="#1a1209"/>
+    <rect x="12" y="146" width="180" height="44" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+    <rect x="15" y="211" width="180" height="44" rx="7" fill="#1a1209"/>
+    <rect x="12" y="208" width="180" height="44" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+    <rect x="15" y="273" width="180" height="44" rx="7" fill="#1a1209"/>
+    <rect x="12" y="270" width="180" height="44" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+    <rect x="15" y="335" width="180" height="44" rx="7" fill="#1a1209"/>
+    <rect x="12" y="332" width="180" height="44" rx="7" fill="#efe6ff" stroke="#1a1209" stroke-width="2"/>
+  </g>
+  <g font-size="11" font-weight="700" fill="#1a1209">
+    <text x="22" y="40">1. Firmware (UEFI or BIOS)</text>
+    <text x="22" y="102">2. GRUB 2 menu</text>
+    <text x="22" y="164">3. Kernel and initramfs</text>
+    <text x="22" y="226">4. switch_root</text>
+    <text x="22" y="288">5. systemd, PID 1</text>
+    <text x="22" y="350">6. default.target</text>
+  </g>
+  <g font-size="9.5" font-weight="500" fill="#5c4a30">
+    <text x="22" y="56">tests hardware, starts GRUB</text>
+    <text x="22" y="118">BLS entry: kernel + arguments</text>
+    <text x="22" y="180">mounts real root read-only</text>
+    <text x="22" y="242">/sysroot becomes /</text>
+    <text x="22" y="304">starts units in order</text>
+    <text x="22" y="366">multi-user or graphical</text>
+  </g>
+  <!-- normal flow arrows -->
+  <g stroke="#1a1209" stroke-width="2" fill="none" marker-end="url(#bs-ink)">
+    <path d="M100 67V79"/>
+    <path d="M100 129V141"/>
+    <path d="M100 191V203"/>
+    <path d="M100 253V265"/>
+    <path d="M100 315V327"/>
+  </g>
+  <!-- interrupt boxes -->
+  <g>
+    <rect x="215" y="87" width="133" height="44" rx="7" fill="#1a1209"/>
+    <rect x="212" y="84" width="133" height="44" rx="7" fill="#fffae0" stroke="#1a1209" stroke-width="2"/>
+    <rect x="215" y="180" width="133" height="44" rx="7" fill="#1a1209"/>
+    <rect x="212" y="177" width="133" height="44" rx="7" fill="#fffae0" stroke="#1a1209" stroke-width="2"/>
+    <rect x="215" y="273" width="133" height="44" rx="7" fill="#1a1209"/>
+    <rect x="212" y="270" width="133" height="44" rx="7" fill="#fffae0" stroke="#1a1209" stroke-width="2"/>
+    <rect x="215" y="335" width="133" height="44" rx="7" fill="#1a1209"/>
+    <rect x="212" y="332" width="133" height="44" rx="7" fill="#fffae0" stroke="#1a1209" stroke-width="2"/>
+  </g>
+  <g font-size="10.5" font-weight="700" fill="#3a1d70">
+    <text x="220" y="102" class="mono">e, then Ctrl+X</text>
+    <text x="220" y="195" class="mono">rd.break</text>
+    <text x="220" y="288" class="mono">init=/bin/bash</text>
+    <text x="220" y="350" class="mono">systemd.unit=</text>
+  </g>
+  <g font-size="9.5" font-weight="500" fill="#5c4a30">
+    <text x="220" y="118">add arguments below</text>
+    <text x="220" y="211">shell, root at /sysroot</text>
+    <text x="220" y="304">bash runs, no systemd</text>
+    <text x="220" y="366">rescue or emergency</text>
+  </g>
+  <!-- where each one acts -->
+  <g stroke="#6d28d9" stroke-width="2" fill="none" marker-end="url(#bs-pur)">
+    <path d="M211 106H200"/>
+    <path d="M211 199H108"/>
+    <path d="M211 292H200"/>
+    <path d="M211 354H200"/>
+  </g>
+</svg>

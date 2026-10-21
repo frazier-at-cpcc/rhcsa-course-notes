@@ -1,0 +1,58 @@
+<svg viewBox="0 0 360 372" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Log flow: sources send messages to systemd-journald, which writes the binary journal to /run/log/journal or /var/log/journal, and rsyslogd reads the journal and writes text files under /var/log">
+  <defs>
+    <marker id="lf-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1a1209"/></marker>
+    <marker id="lf-pur" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6d28d9"/></marker>
+  </defs>
+  <!-- row 1: sources -->
+  <rect x="15" y="15" width="336" height="40" rx="7" fill="#1a1209"/>
+  <rect x="12" y="12" width="336" height="40" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+  <text x="180" y="29" text-anchor="middle" font-size="11" font-weight="700" fill="#1a1209">Message sources</text>
+  <text x="180" y="44" text-anchor="middle" font-size="9.5" font-weight="500" fill="#5c4a30">kernel, service output, sshd, sudo, logger</text>
+  <!-- row 2: journald -->
+  <rect x="83" y="81" width="200" height="40" rx="7" fill="#1a1209"/>
+  <rect x="80" y="78" width="200" height="40" rx="7" fill="#6d28d9" stroke="#1a1209" stroke-width="2"/>
+  <text x="180" y="95" text-anchor="middle" font-size="11" font-weight="800" fill="#fff" class="mono">systemd-journald</text>
+  <text x="180" y="110" text-anchor="middle" font-size="9.5" font-weight="600" fill="#efe6ff">collects and indexes everything</text>
+  <!-- row 3: two journal locations -->
+  <rect x="15" y="157" width="156" height="58" rx="7" fill="#1a1209"/>
+  <rect x="12" y="154" width="156" height="58" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+  <rect x="195" y="157" width="156" height="58" rx="7" fill="#1a1209"/>
+  <rect x="192" y="154" width="156" height="58" rx="7" fill="#efe6ff" stroke="#1a1209" stroke-width="2"/>
+  <g font-size="10.5" font-weight="700" fill="#1a1209" text-anchor="middle">
+    <text x="90" y="171" class="mono">/run/log/journal</text>
+    <text x="270" y="171" class="mono">/var/log/journal</text>
+  </g>
+  <g font-size="9.5" font-weight="500" fill="#5c4a30" text-anchor="middle">
+    <text x="90" y="186">in RAM, gone at reboot</text>
+    <text x="90" y="201">volatile, or auto, no dir</text>
+    <text x="270" y="186">on disk, kept</text>
+    <text x="270" y="201">persistent, or auto + dir</text>
+  </g>
+  <!-- row 4: rsyslogd -->
+  <rect x="83" y="245" width="200" height="40" rx="7" fill="#1a1209"/>
+  <rect x="80" y="242" width="200" height="40" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+  <text x="180" y="259" text-anchor="middle" font-size="11" font-weight="800" fill="#1a1209" class="mono">rsyslogd</text>
+  <text x="180" y="274" text-anchor="middle" font-size="9.5" font-weight="500" fill="#5c4a30">reads the journal (imjournal)</text>
+  <!-- row 5: text files -->
+  <rect x="15" y="311" width="336" height="48" rx="7" fill="#1a1209"/>
+  <rect x="12" y="308" width="336" height="48" rx="7" fill="#fffae0" stroke="#1a1209" stroke-width="2"/>
+  <text x="180" y="327" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1a1209" class="mono">/var/log/messages  secure  cron</text>
+  <text x="180" y="344" text-anchor="middle" font-size="9.5" font-weight="500" fill="#5c4a30">plain text, chosen by rules in /etc/rsyslog.conf</text>
+  <!-- arrows -->
+  <g stroke="#1a1209" stroke-width="2" fill="none" marker-end="url(#lf-ink)">
+    <path d="M180 53V70"/>
+    <path d="M120 119L95 146"/>
+    <path d="M240 119L265 146"/>
+    <path d="M180 119V234"/>
+    <path d="M180 283V300"/>
+  </g>
+  <!-- labels on the read paths -->
+  <g font-size="9" font-weight="700" fill="#6d28d9">
+    <text x="12" y="232">journalctl reads these</text>
+    <text x="272" y="232">grep, tail, less</text>
+  </g>
+  <g stroke="#6d28d9" stroke-width="1.5" fill="none" marker-end="url(#lf-pur)">
+    <path d="M60 224V217"/>
+    <path d="M300 236V302"/>
+  </g>
+</svg>
