@@ -1,0 +1,35 @@
+<svg viewBox="0 0 360 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The primary group comes from the GID field in /etc/passwd; supplementary groups come from member lists in /etc/group; id shows both">
+<defs><marker id="ps" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#1a1209"/></marker></defs>
+<rect x="10.5" y="12.5" width="160" height="78" rx="7" fill="#1a1209"/>
+<rect x="8" y="10" width="160" height="78" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+<text x="88" y="28" text-anchor="middle" font-size="11" font-weight="800" fill="#1a1209" class="mono">/etc/passwd</text>
+<text x="18" y="50" font-size="9.5" font-weight="600" fill="#1a1209" class="mono">alice:x:2001:<tspan fill="#6d28d9" font-weight="800">2001</tspan>:...</text>
+<text x="88" y="68" text-anchor="middle" font-size="9" font-weight="700" fill="#5c4a30">4th field: one GID</text>
+<text x="88" y="80" text-anchor="middle" font-size="9" font-weight="700" fill="#5c4a30"><tspan class="mono">usermod -g</tspan></text>
+<rect x="194.5" y="12.5" width="160" height="78" rx="7" fill="#1a1209"/>
+<rect x="192" y="10" width="160" height="78" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+<text x="272" y="28" text-anchor="middle" font-size="11" font-weight="800" fill="#1a1209" class="mono">/etc/group</text>
+<text x="202" y="46" font-size="9.5" font-weight="600" fill="#1a1209" class="mono">wheel:x:10:<tspan fill="#9a3412" font-weight="800">alice</tspan></text>
+<text x="202" y="58" font-size="9.5" font-weight="600" fill="#1a1209" class="mono">devops:x:3000:<tspan fill="#9a3412" font-weight="800">alice</tspan></text>
+<text x="272" y="80" text-anchor="middle" font-size="9" font-weight="700" fill="#5c4a30"><tspan class="mono">usermod -aG</tspan>, <tspan class="mono">gpasswd</tspan></text>
+<g stroke="#1a1209" stroke-width="2" fill="none" marker-end="url(#ps)">
+<path d="M88 90V112"/>
+<path d="M272 90V112"/>
+</g>
+<rect x="10.5" y="116.5" width="160" height="44" rx="7" fill="#1a1209"/>
+<rect x="8" y="114" width="160" height="44" rx="7" fill="#efe6ff" stroke="#1a1209" stroke-width="2"/>
+<text x="88" y="132" text-anchor="middle" font-size="11" font-weight="800" fill="#3a1d70">Primary group</text>
+<text x="88" y="148" text-anchor="middle" font-size="9" font-weight="600" fill="#3a1d70">owns the files alice creates</text>
+<rect x="194.5" y="116.5" width="160" height="44" rx="7" fill="#1a1209"/>
+<rect x="192" y="114" width="160" height="44" rx="7" fill="#fffae0" stroke="#1a1209" stroke-width="2"/>
+<text x="272" y="132" text-anchor="middle" font-size="11" font-weight="800" fill="#9a3412">Supplementary</text>
+<text x="272" y="148" text-anchor="middle" font-size="9" font-weight="600" fill="#5c4a30">extra access, zero or many</text>
+<g stroke="#1a1209" stroke-width="2" fill="none" marker-end="url(#ps)">
+<path d="M88 158V172H170V186"/>
+<path d="M272 158V172H190V186"/>
+</g>
+<rect x="10.5" y="192.5" width="344" height="48" rx="7" fill="#1a1209"/>
+<rect x="8" y="190" width="344" height="48" rx="7" fill="#6d28d9" stroke="#1a1209" stroke-width="2"/>
+<text x="180" y="208" text-anchor="middle" font-size="10.5" font-weight="800" fill="#fff" class="mono">$ id alice</text>
+<text x="180" y="226" text-anchor="middle" font-size="9.5" font-weight="600" fill="#efe6ff" class="mono"><tspan fill="#ffd60a">gid=2001(alice)</tspan> groups=2001(alice),10(wheel),3000(devops)</text>
+</svg>
