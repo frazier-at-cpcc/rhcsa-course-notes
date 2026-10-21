@@ -340,6 +340,15 @@
         "9.0",
         "10.0"
       ]
+    },
+    "preview-rh-5": {
+      "file": "preview-rh-5",
+      "topics": [
+        "domain-5/5.1-gpt-partitions.md",
+        "domain-5/5.2-lvm.md",
+        "domain-5/5.3-persistent-mounts-and-swap.md",
+        "domain-6/6.3-extend-lvs.md"
+      ]
     }
   }
 }
