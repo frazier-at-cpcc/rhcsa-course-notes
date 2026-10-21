@@ -1,0 +1,30 @@
+<svg viewBox="0 0 760 184" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The ssh client receives the server host key and looks the host up in known_hosts. Not found: it asks and saves the key. Same key: login continues. Different key: the connection is refused until the old entry is removed with ssh-keygen -R.">
+<defs><marker id="hk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#1a1209"/></marker></defs>
+<g text-anchor="middle">
+<rect x="10.5" y="70.5" width="132" height="48" rx="7" fill="#1a1209"/><rect x="8" y="68" width="132" height="48" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+<text x="74" y="89" font-size="11" font-weight="700" fill="#1a1209" class="mono">ssh alice@serverb</text>
+<text x="74" y="105" font-size="9" font-weight="600" fill="#5c4a30">on servera</text>
+<rect x="172.5" y="70.5" width="138" height="48" rx="7" fill="#1a1209"/><rect x="170" y="68" width="138" height="48" rx="7" fill="#6d28d9" stroke="#1a1209" stroke-width="2"/>
+<text x="239" y="89" font-size="11.5" font-weight="800" fill="#fff">serverb sends</text>
+<text x="239" y="104" font-size="11.5" font-weight="800" fill="#fff">its host key</text>
+<rect x="340.5" y="64.5" width="152" height="60" rx="7" fill="#1a1209"/><rect x="338" y="62" width="152" height="60" rx="7" fill="#ffd60a" stroke="#1a1209" stroke-width="2"/>
+<text x="414" y="84" font-size="11.5" font-weight="800" fill="#1a1209">Look up serverb in</text>
+<text x="414" y="102" font-size="11" font-weight="700" fill="#1a1209" class="mono">~/.ssh/known_hosts</text>
+</g>
+<rect x="542.5" y="10.5" width="212" height="48" rx="7" fill="#1a1209"/><rect x="540" y="8" width="212" height="48" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+<text x="552" y="27" font-size="11.5" font-weight="800" fill="#1a1209">Not found: first visit</text>
+<text x="552" y="44" font-size="9.5" font-weight="600" fill="#5c4a30">Asks yes/no; <tspan class="mono" fill="#1a1209">yes</tspan> saves the key</text>
+<rect x="542.5" y="70.5" width="212" height="48" rx="7" fill="#1a1209"/><rect x="540" y="68" width="212" height="48" rx="7" fill="#efe6ff" stroke="#1a1209" stroke-width="2"/>
+<text x="552" y="87" font-size="11.5" font-weight="800" fill="#3a1d70">Same key</text>
+<text x="552" y="104" font-size="9.5" font-weight="600" fill="#5c4a30">No prompt; on to key or password</text>
+<rect x="542.5" y="130.5" width="212" height="48" rx="7" fill="#1a1209"/><rect x="540" y="128" width="212" height="48" rx="7" fill="#fffae0" stroke="#9a3412" stroke-width="2"/>
+<text x="552" y="146" font-size="11.5" font-weight="800" fill="#9a3412">Different key: refused</text>
+<text x="552" y="164" font-size="9.5" font-weight="600" fill="#5c4a30">Fix: <tspan class="mono" fill="#1a1209">ssh-keygen -R serverb</tspan></text>
+<g stroke="#1a1209" stroke-width="2" fill="none" marker-end="url(#hk)">
+<path d="M140 92H167"/>
+<path d="M308 92H335"/>
+<path d="M490 82C512 82 512 32 537 32"/>
+<path d="M490 92H537"/>
+<path d="M490 102C512 102 512 152 537 152"/>
+</g>
+</svg>

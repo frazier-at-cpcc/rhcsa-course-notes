@@ -340,6 +340,15 @@
         "9.0",
         "10.0"
       ]
+    },
+    "preview-rh-1a2": {
+      "file": "preview-rh-1a2",
+      "topics": [
+        "domain-1/1.1-shell-and-editing.md",
+        "domain-1/1.2-redirection.md",
+        "domain-1/1.3-grep-regex.md",
+        "domain-1/1.4-ssh-and-su.md"
+      ]
     }
   }
 }
