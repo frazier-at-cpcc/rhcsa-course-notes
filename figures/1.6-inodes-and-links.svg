@@ -1,0 +1,62 @@
+<svg viewBox="0 0 760 244" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two hard-link names point at the same inode and data; a symbolic link has its own inode that stores a path name">
+  <defs>
+    <marker id="il-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1a1209"/></marker>
+    <marker id="il-pur" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6d28d9"/></marker>
+  </defs>
+  <g font-size="10" font-weight="800" letter-spacing="1.6" fill="#5c4a30" text-anchor="middle">
+    <text x="108" y="16">DIRECTORY ENTRIES</text>
+    <text x="370" y="16">INODES</text>
+    <text x="650" y="16">DATA BLOCKS</text>
+  </g>
+  <!-- names -->
+  <g>
+    <rect x="33" y="33" width="150" height="34" rx="7" fill="#1a1209"/>
+    <rect x="30" y="30" width="150" height="34" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+    <rect x="33" y="89" width="150" height="34" rx="7" fill="#1a1209"/>
+    <rect x="30" y="86" width="150" height="34" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+    <rect x="33" y="163" width="150" height="34" rx="7" fill="#1a1209"/>
+    <rect x="30" y="160" width="150" height="34" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+  </g>
+  <g class="mono" font-size="12" font-weight="600" fill="#1a1209" text-anchor="middle">
+    <text x="105" y="51">httpd.conf</text>
+    <text x="105" y="107">backup.conf</text>
+    <text x="105" y="181">current.conf</text>
+  </g>
+  <g font-size="10" font-weight="700" fill="#9a3412" text-anchor="middle">
+    <text x="105" y="80">hard link</text>
+    <text x="105" y="210">symbolic link</text>
+  </g>
+  <!-- inodes -->
+  <rect x="263" y="41" width="214" height="76" rx="7" fill="#1a1209"/>
+  <rect x="260" y="38" width="214" height="76" rx="7" fill="#efe6ff" stroke="#1a1209" stroke-width="2"/>
+  <text x="367" y="60" text-anchor="middle" font-size="13" font-weight="800" fill="#1a1209">inode 1738341</text>
+  <g text-anchor="middle" font-size="10.5" font-weight="600" fill="#5c4a30">
+    <text x="367" y="80">regular file, mode, owner, size</text>
+    <text x="367" y="98">link count 2</text>
+  </g>
+  <rect x="263" y="149" width="214" height="62" rx="7" fill="#1a1209"/>
+  <rect x="260" y="146" width="214" height="62" rx="7" fill="#fffae0" stroke="#1a1209" stroke-width="2"/>
+  <text x="367" y="167" text-anchor="middle" font-size="13" font-weight="800" fill="#1a1209">inode 1738722</text>
+  <text x="367" y="186" text-anchor="middle" font-size="10.5" font-weight="600" fill="#5c4a30">type l, its content is the text</text>
+  <text x="367" y="201" text-anchor="middle" class="mono" font-size="11" font-weight="700" fill="#1a1209">httpd.conf</text>
+  <!-- data -->
+  <rect x="563" y="46" width="176" height="62" rx="7" fill="#1a1209"/>
+  <rect x="560" y="43" width="176" height="62" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+  <g class="mono" font-size="12" fill="#1a1209">
+    <text x="578" y="69">Listen 80</text>
+    <text x="578" y="89">Listen 8080</text>
+  </g>
+  <!-- arrows -->
+  <g stroke="#1a1209" stroke-width="2" fill="none" marker-end="url(#il-ink)">
+    <path d="M182 47C220 47 222 64 254 64"/>
+    <path d="M182 103C220 103 222 88 254 88"/>
+    <path d="M182 177H254"/>
+    <path d="M476 76H554"/>
+  </g>
+  <!-- symlink lookup -->
+  <path d="M367 210V230H14V47H24" stroke="#6d28d9" stroke-width="2" stroke-dasharray="5 4" fill="none" marker-end="url(#il-pur)"/>
+  <text x="560" y="168" font-size="10.5" font-weight="700" fill="#6d28d9">Opening current.conf makes</text>
+  <text x="560" y="184" font-size="10.5" font-weight="700" fill="#6d28d9">the kernel look up the name</text>
+  <text x="560" y="200" font-size="10.5" font-weight="700" fill="#6d28d9">httpd.conf again. Remove that</text>
+  <text x="560" y="216" font-size="10.5" font-weight="700" fill="#6d28d9">name and the link dangles.</text>
+</svg>

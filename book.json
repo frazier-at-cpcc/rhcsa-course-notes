@@ -340,6 +340,15 @@
         "9.0",
         "10.0"
       ]
+    },
+    "preview-rh-1b": {
+      "file": "preview-rh-1b",
+      "topics": [
+        "domain-1/1.5-archives.md",
+        "domain-1/1.6-files-and-links.md",
+        "domain-1/1.7-permissions.md",
+        "domain-1/1.8-documentation.md"
+      ]
     }
   }
 }
