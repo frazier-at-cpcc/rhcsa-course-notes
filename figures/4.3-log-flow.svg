@@ -46,13 +46,13 @@
     <path d="M180 119V234"/>
     <path d="M180 283V300"/>
   </g>
-  <!-- labels on the read paths -->
+  <!-- read paths: arrows run from the store to the reader -->
   <g font-size="9" font-weight="700" fill="#6d28d9">
-    <text x="12" y="232">journalctl reads these</text>
-    <text x="272" y="232">grep, tail, less</text>
+    <text x="12" y="237">journalctl reads these</text>
+    <text x="270" y="237">grep, tail, less read</text>
   </g>
   <g stroke="#6d28d9" stroke-width="1.5" fill="none" marker-end="url(#lf-pur)">
-    <path d="M60 224V217"/>
-    <path d="M300 236V302"/>
+    <path d="M40 214V227"/>
+    <path d="M310 306V242"/>
   </g>
 </svg>

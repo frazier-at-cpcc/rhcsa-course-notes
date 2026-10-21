@@ -335,6 +335,35 @@ async function render(browser, htmlText, htmlPath, pdfPath) {
   const page = await browser.newPage();
   await page.goto(pathToFileURL(htmlPath).href, { waitUntil: 'networkidle' });
   await page.evaluate(() => document.fonts.ready);
+  // Chromium breaks lines after any hyphen, so `--permanent` could end one
+  // line with "--" and start the next with "permanent". Keep each short
+  // hyphenated token in code on one line; long ones (URLs, paths) can still
+  // wrap anywhere so they never overflow the column.
+  await page.evaluate(() => {
+    const roots = document.querySelectorAll('pre, code');
+    for (const root of roots) {
+      if (root.tagName === 'CODE' && root.closest('pre')) continue;
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+      const nodes = [];
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+      for (const node of nodes) {
+        const text = node.nodeValue;
+        if (!/-/.test(text)) continue;
+        const parts = text.split(/(\s+)/);
+        if (!parts.some(t => t.includes('-') && t.length <= 32)) continue;
+        const frag = document.createDocumentFragment();
+        for (const t of parts) {
+          if (t.includes('-') && t.length <= 32 && !/\s/.test(t)) {
+            const span = document.createElement('span');
+            span.className = 'nw';
+            span.textContent = t;
+            frag.append(span);
+          } else if (t) frag.append(t);
+        }
+        node.replaceWith(frag);
+      }
+    }
+  });
   // Chrome silently shrinks every page to fit if anything is wider than the page.
   // Lay out at Letter width in print mode and fail on any overflow instead.
   await page.setViewportSize({ width: 816, height: 1056 });

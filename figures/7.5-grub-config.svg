@@ -73,7 +73,7 @@
   </g>
   <g stroke="#6d28d9" stroke-width="2" fill="none" marker-end="url(#gc-pur)">
     <path d="M504 63H544"/>
-    <path d="M504 143H544"/>
+    <path d="M504 143H514V126H544"/>
     <path d="M504 223H524V150H544"/>
     <path d="M650 168V189"/>
   </g>

@@ -357,6 +357,10 @@ pre {
   font-family: var(--font-mono); font-size: 7.6pt; line-height: 1.42;
   white-space: pre-wrap; overflow-wrap: anywhere; break-inside: avoid;
 }
+/* Set by the build around short hyphenated tokens: do not break inside. */
+.nw { white-space: nowrap; }
+/* Code inside a highlighted phrase drops its chip so the highlight shows. */
+mark code { background: none; padding: 0; color: inherit; }
 pre code { background: none; color: var(--ink); padding: 0; font-weight: 400; white-space: inherit; font-size: inherit; }
 /* Tags are cut into a corner of the box: code tags top-right, callout tags
    top-left. They sit flush against the borders and round only the inner corner. */

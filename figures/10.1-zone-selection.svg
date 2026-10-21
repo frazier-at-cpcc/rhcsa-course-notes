@@ -21,7 +21,7 @@
     <text x="110" y="122">a zone's source list?</text>
     <text x="110" y="180">Is the interface bound</text>
     <text x="110" y="196">to a zone?</text>
-    <text x="110" y="258">Use the default zone</text>
+    <text x="110" y="251">Use the default zone</text>
   </g>
   <!-- first arrow -->
   <path d="M110 60V80" stroke="#1a1209" stroke-width="2" fill="none" marker-end="url(#zs-ink)"/>
@@ -39,7 +39,7 @@
   <g font-size="9.5" font-weight="600" fill="#5c4a30" text-anchor="middle">
     <text x="291" y="121" class="mono">internal</text>
     <text x="291" y="195" class="mono">public</text>
-    <text x="110" y="268">(--get-default-zone)</text>
+    <text x="110" y="265" class="mono">firewall-cmd --get-default-zone</text>
   </g>
   <!-- yes arrows -->
   <g stroke="#1a1209" stroke-width="2" fill="none" marker-end="url(#zs-ink)">
