@@ -340,6 +340,15 @@
         "9.0",
         "10.0"
       ]
+    },
+    "preview-rh-8": {
+      "file": "preview-rh-8",
+      "topics": [
+        "domain-8/8.1-ip-configuration.md",
+        "domain-8/8.2-name-resolution.md",
+        "domain-8/8.3-firewalld-basics.md",
+        "domain-10/10.1-firewall-settings.md"
+      ]
     }
   }
 }
