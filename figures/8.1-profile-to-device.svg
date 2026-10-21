@@ -1,0 +1,38 @@
+<svg viewBox="0 0 360 292" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="nmcli writes the profile to a keyfile; nmcli connection up or autoconnect at boot applies it to the device; ip addr add changes only the device and is lost at reboot">
+  <defs>
+    <marker id="pd-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1a1209"/></marker>
+    <marker id="pd-pur" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6d28d9"/></marker>
+    <marker id="pd-rust" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#9a3412"/></marker>
+  </defs>
+  <!-- A: nmcli -->
+  <rect x="15" y="15" width="333" height="44" rx="7" fill="#1a1209"/>
+  <rect x="12" y="12" width="333" height="44" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+  <text x="178" y="30" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1a1209" class="mono">nmcli connection add | modify</text>
+  <text x="178" y="47" text-anchor="middle" font-size="9.5" font-weight="600" fill="#5c4a30">or a hand edit, then nmcli connection reload</text>
+  <!-- A to B -->
+  <path d="M178 57V78" stroke="#1a1209" stroke-width="2" fill="none" marker-end="url(#pd-ink)"/>
+  <text x="188" y="72" font-size="9.5" font-weight="800" fill="#1a1209">saves</text>
+  <!-- B: profile -->
+  <rect x="15" y="87" width="333" height="52" rx="7" fill="#1a1209"/>
+  <rect x="12" y="84" width="333" height="52" rx="7" fill="#efe6ff" stroke="#1a1209" stroke-width="2"/>
+  <text x="178" y="102" text-anchor="middle" font-size="11.5" font-weight="800" fill="#1a1209">Profile (keyfile on disk)</text>
+  <text x="178" y="117" text-anchor="middle" font-size="9.5" font-weight="600" fill="#3a1d70" class="mono">/etc/NetworkManager/system-connections/</text>
+  <text x="178" y="130" text-anchor="middle" font-size="9.5" font-weight="600" fill="#5c4a30">survives reboots</text>
+  <!-- B to C: two paths -->
+  <path d="M60 137V184" stroke="#1a1209" stroke-width="2" fill="none" marker-end="url(#pd-ink)"/>
+  <text x="70" y="158" font-size="10" font-weight="700" fill="#1a1209" class="mono">nmcli connection</text>
+  <text x="70" y="171" font-size="10" font-weight="700" fill="#1a1209" class="mono">up NAME</text>
+  <path d="M300 137V184" stroke="#6d28d9" stroke-width="2" fill="none" marker-end="url(#pd-pur)"/>
+  <text x="290" y="158" text-anchor="end" font-size="10" font-weight="700" fill="#6d28d9">at boot, if</text>
+  <text x="290" y="171" text-anchor="end" font-size="10" font-weight="700" fill="#6d28d9" class="mono">autoconnect=yes</text>
+  <!-- C: device -->
+  <rect x="15" y="195" width="333" height="44" rx="7" fill="#1a1209"/>
+  <rect x="12" y="192" width="333" height="44" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+  <text x="178" y="209" text-anchor="middle" font-size="11.5" font-weight="800" fill="#1a1209">Device ens19: running settings</text>
+  <text x="178" y="226" text-anchor="middle" font-size="9.5" font-weight="600" fill="#5c4a30">what ip -br addr and ip route show</text>
+  <!-- D: ip addr add -->
+  <path d="M178 255V241" stroke="#9a3412" stroke-width="2" stroke-dasharray="4 3" fill="none" marker-end="url(#pd-rust)"/>
+  <rect x="15" y="259" width="333" height="30" rx="7" fill="#1a1209"/>
+  <rect x="12" y="256" width="333" height="30" rx="7" fill="#fffae0" stroke="#1a1209" stroke-width="2"/>
+  <text x="178" y="275" text-anchor="middle" font-size="10" font-weight="700" fill="#9a3412"><tspan class="mono">ip addr add</tspan>: device only, nothing saved</text>
+</svg>

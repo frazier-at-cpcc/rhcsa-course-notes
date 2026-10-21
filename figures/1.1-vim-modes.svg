@@ -1,0 +1,37 @@
+<svg viewBox="0 0 360 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="vim modes: normal mode in the middle, insert mode and command-line mode below it, and the keys that move between them">
+<defs><marker id="vm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#1a1209"/></marker></defs>
+<g text-anchor="middle">
+<rect x="122.5" y="10.5" width="116" height="28" rx="7" fill="#1a1209"/><rect x="120" y="8" width="116" height="28" rx="7" fill="#fffae0" stroke="#1a1209" stroke-width="2"/>
+<text x="178" y="26.5" font-size="11" font-weight="700" fill="#1a1209" class="mono">vim web.conf</text>
+<rect x="107.5" y="66.5" width="146" height="52" rx="7" fill="#1a1209"/><rect x="105" y="64" width="146" height="52" rx="7" fill="#6d28d9" stroke="#1a1209" stroke-width="2"/>
+<text x="178" y="86" font-size="13" font-weight="800" fill="#fff">Normal mode</text>
+<text x="178" y="102" font-size="9.5" font-weight="600" fill="#efe6ff">move, delete, copy, paste</text>
+<rect x="14.5" y="172.5" width="130" height="52" rx="7" fill="#1a1209"/><rect x="12" y="170" width="130" height="52" rx="7" fill="#ffd60a" stroke="#1a1209" stroke-width="2"/>
+<text x="77" y="192" font-size="13" font-weight="800" fill="#1a1209">Insert mode</text>
+<text x="77" y="208" font-size="9.5" font-weight="600" fill="#1a1209">keys type text</text>
+<rect x="220.5" y="172.5" width="130" height="52" rx="7" fill="#1a1209"/><rect x="218" y="170" width="130" height="52" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+<text x="283" y="192" font-size="13" font-weight="800" fill="#1a1209">Command-line</text>
+<text x="283" y="208" font-size="9.5" font-weight="600" fill="#5c4a30" class="mono">:w  :q  :%s  :12</text>
+<rect x="220.5" y="264.5" width="130" height="28" rx="7" fill="#1a1209"/><rect x="218" y="262" width="130" height="28" rx="7" fill="#efe6ff" stroke="#1a1209" stroke-width="2"/>
+<text x="283" y="280.5" font-size="11" font-weight="700" fill="#3a1d70">back to the shell</text>
+</g>
+<g stroke="#1a1209" stroke-width="2" fill="none" marker-end="url(#vm)">
+<path d="M178 37V61"/>
+<path d="M126 118L64 167"/>
+<path d="M102 168L156 119"/>
+<path d="M204 118L260 167"/>
+<path d="M298 168L232 119"/>
+<path d="M283 223V259"/>
+</g>
+<g font-size="10.5" font-weight="700">
+<text x="84" y="134" text-anchor="end" fill="#1a1209" class="mono">i a o</text>
+<text x="74" y="147" text-anchor="end" fill="#1a1209" class="mono">O I A</text>
+<text x="138" y="158" fill="#9a3412" class="mono">Esc</text>
+<text x="222" y="158" text-anchor="end" fill="#1a1209" class="mono">:</text>
+<text x="276" y="136" fill="#9a3412">Enter</text>
+<text x="284" y="149" fill="#9a3412">or <tspan class="mono">Esc</tspan></text>
+<text x="276" y="246" text-anchor="end" fill="#1a1209" class="mono">:wq :x :q!</text>
+</g>
+<text x="12" y="252" font-size="9.5" font-weight="600" fill="#5c4a30">Lost? Press <tspan class="mono" fill="#9a3412">Esc</tspan> twice: you</text>
+<text x="12" y="265" font-size="9.5" font-weight="600" fill="#5c4a30">are back in normal mode.</text>
+</svg>

@@ -1,0 +1,346 @@
+{
+  "title": "Red Hat RHCSA EX200 Course Notes",
+  "shortTitle": "RHCSA EX200 Course Notes",
+  "author": "Frazier A. Smith, Ed.D.",
+  "affiliation": "Central Piedmont Community College",
+  "site": "vfrazier.app",
+  "version": "1.0.0",
+  "date": "October 2026",
+  "license": "CC BY-NC-SA 4.0",
+  "exam": {
+    "name": "RHCSA",
+    "code": "EX200",
+    "version": "RHEL 10",
+    "vendor": "Red Hat",
+    "series": "Red Hat Certified System Administrator",
+    "groupLabel": "Objective Group",
+    "repo": "https://github.com/frazier-at-cpcc/rhcsa-course-notes",
+    "coverLine": "Shell skills, software, storage, services, networking, users, and SELinux on Red Hat Enterprise Linux 10, one exam objective at a time.",
+    "trademarks": "Red Hat, Red Hat Enterprise Linux, RHEL, and RHCSA are trademarks or registered trademarks of Red Hat, Inc. AlmaLinux is a trademark of the AlmaLinux OS Foundation. Rocky Linux is a trademark of the Rocky Enterprise Software Foundation.",
+    "objectivesNote": "The objective groups and wording referenced throughout follow the published Red Hat EX200 exam objectives for RHEL 10. Red Hat does not number the objectives; the group and topic numbers in these notes are the author's, added for cross-reference. Check the official objectives page before your exam; it is the final word on what the exam covers.",
+    "introText": "EX200 is a hands-on exam: you get live systems and a list of tasks, and the grader checks the end state of those systems, including after a reboot. There are no multiple-choice questions. These notes follow Red Hat's ten objective groups in order, and every topic carries a group and topic number so you can line it up against the official objectives, your course modules, and your lab work.",
+    "tryLine": "Do them on a RHEL 10, AlmaLinux 10, or Rocky Linux 10 lab machine. The exam grades what you can configure from memory under a clock, and reading about a command is not the same as running it.",
+    "facts": [
+      {
+        "value": "3 hrs",
+        "label": "Exam length"
+      },
+      {
+        "value": "210",
+        "label": "Passing (of 300)"
+      },
+      {
+        "value": "0",
+        "label": "Multiple-choice items"
+      },
+      {
+        "value": "10",
+        "label": "RHEL version"
+      }
+    ],
+    "provenance": "The source repository keeps the scripts that produced them: container tests for the shell, scripting, software, and user topics, and a lab kit that runs the storage, boot, networking, and SELinux topics on a full RHEL 10 rebuild, rebooting to prove each change persists. Both can be run again whenever a new RHEL release changes a command."
+  },
+  "domains": [
+    {
+      "num": "1.0",
+      "title": "Understand and Use Essential Tools",
+      "objectives": [
+        {
+          "num": "1.1",
+          "title": "Access a shell prompt and issue commands with correct syntax; create and edit text files"
+        },
+        {
+          "num": "1.2",
+          "title": "Use input-output redirection (>, >>, |, 2>, etc.)"
+        },
+        {
+          "num": "1.3",
+          "title": "Use grep and regular expressions to analyze text"
+        },
+        {
+          "num": "1.4",
+          "title": "Access remote systems using SSH; log in and switch users in multi-user targets"
+        },
+        {
+          "num": "1.5",
+          "title": "Archive, compress, unpack, and uncompress files using tar, gzip, and bzip2"
+        },
+        {
+          "num": "1.6",
+          "title": "Create, delete, copy, and move files and directories; create hard and soft links"
+        },
+        {
+          "num": "1.7",
+          "title": "List, set, and change standard ugo/rwx permissions"
+        },
+        {
+          "num": "1.8",
+          "title": "Locate, read, and use system documentation including man, info, and files in /usr/share/doc"
+        }
+      ]
+    },
+    {
+      "num": "2.0",
+      "title": "Manage Software",
+      "objectives": [
+        {
+          "num": "2.1",
+          "title": "Configure access to RPM repositories; install and remove RPM software packages"
+        },
+        {
+          "num": "2.2",
+          "title": "Configure access to Flatpak repositories; install and remove Flatpak software packages"
+        }
+      ]
+    },
+    {
+      "num": "3.0",
+      "title": "Create Simple Shell Scripts",
+      "objectives": [
+        {
+          "num": "3.1",
+          "title": "Process script inputs ($1, $2, etc.); process output of shell commands within a script"
+        },
+        {
+          "num": "3.2",
+          "title": "Conditionally execute code (use of: if, test, [], etc.)"
+        },
+        {
+          "num": "3.3",
+          "title": "Use looping constructs (for, etc.) to process file and command line input"
+        }
+      ]
+    },
+    {
+      "num": "4.0",
+      "title": "Operate Running Systems",
+      "objectives": [
+        {
+          "num": "4.1",
+          "title": "Boot, reboot, and shut down a system normally; boot systems into different targets manually; interrupt the boot process in order to gain access to a system"
+        },
+        {
+          "num": "4.2",
+          "title": "Identify CPU/memory intensive processes and kill processes; adjust process scheduling; manage tuning profiles"
+        },
+        {
+          "num": "4.3",
+          "title": "Locate and interpret system log files and journals; preserve system journals"
+        },
+        {
+          "num": "4.4",
+          "title": "Start, stop, and check the status of network services; securely transfer files between systems"
+        }
+      ]
+    },
+    {
+      "num": "5.0",
+      "title": "Configure Local Storage",
+      "objectives": [
+        {
+          "num": "5.1",
+          "title": "List, create, and delete partitions on GPT disks"
+        },
+        {
+          "num": "5.2",
+          "title": "Create and remove physical volumes; assign physical volumes to volume groups; create and delete logical volumes"
+        },
+        {
+          "num": "5.3",
+          "title": "Configure systems to mount file systems at boot by UUID or label; add new partitions, logical volumes, and swap to a system non-destructively"
+        }
+      ]
+    },
+    {
+      "num": "6.0",
+      "title": "Create and Configure File Systems",
+      "objectives": [
+        {
+          "num": "6.1",
+          "title": "Create, mount, unmount, and use VFAT, ext4, and XFS file systems"
+        },
+        {
+          "num": "6.2",
+          "title": "Mount and unmount network file systems using NFS; configure autofs"
+        },
+        {
+          "num": "6.3",
+          "title": "Extend existing logical volumes"
+        },
+        {
+          "num": "6.4",
+          "title": "Diagnose and correct file permission problems"
+        }
+      ]
+    },
+    {
+      "num": "7.0",
+      "title": "Deploy, Configure, and Maintain Systems",
+      "objectives": [
+        {
+          "num": "7.1",
+          "title": "Schedule tasks using at, cron, and systemd timer units"
+        },
+        {
+          "num": "7.2",
+          "title": "Start and stop services and configure services to start automatically at boot; configure systems to boot into a specific target automatically"
+        },
+        {
+          "num": "7.3",
+          "title": "Configure time service clients"
+        },
+        {
+          "num": "7.4",
+          "title": "Install and update software packages from Red Hat Content Delivery Network, a remote repository, or from the local file system"
+        },
+        {
+          "num": "7.5",
+          "title": "Modify the system bootloader"
+        }
+      ]
+    },
+    {
+      "num": "8.0",
+      "title": "Manage Basic Networking",
+      "objectives": [
+        {
+          "num": "8.1",
+          "title": "Configure IPv4 and IPv6 addresses; configure network services to start automatically at boot"
+        },
+        {
+          "num": "8.2",
+          "title": "Configure hostname resolution"
+        },
+        {
+          "num": "8.3",
+          "title": "Restrict network access using firewalld and firewall-cmd"
+        }
+      ]
+    },
+    {
+      "num": "9.0",
+      "title": "Manage Users and Groups",
+      "objectives": [
+        {
+          "num": "9.1",
+          "title": "Create, delete, and modify local user accounts; change passwords and adjust password aging for local user accounts"
+        },
+        {
+          "num": "9.2",
+          "title": "Create, delete, and modify local groups and group memberships"
+        },
+        {
+          "num": "9.3",
+          "title": "Configure privileged access"
+        }
+      ]
+    },
+    {
+      "num": "10.0",
+      "title": "Manage Security",
+      "objectives": [
+        {
+          "num": "10.1",
+          "title": "Configure firewall settings using firewall-cmd/firewalld"
+        },
+        {
+          "num": "10.2",
+          "title": "Manage default file permissions"
+        },
+        {
+          "num": "10.3",
+          "title": "Configure key-based authentication for SSH"
+        },
+        {
+          "num": "10.4",
+          "title": "Set enforcing and permissive modes for SELinux; list and identify SELinux file and process context"
+        },
+        {
+          "num": "10.5",
+          "title": "Restore default file contexts; manage SELinux port labels; use Boolean settings to modify system SELinux settings"
+        }
+      ]
+    }
+  ],
+  "volumes": {
+    "master": {
+      "file": "rhcsa-course-notes",
+      "topics": [
+        "domain-1/1.1-shell-and-editing.md",
+        "domain-1/1.2-redirection.md",
+        "domain-1/1.3-grep-regex.md",
+        "domain-1/1.4-ssh-and-su.md",
+        "domain-1/1.5-archives.md",
+        "domain-1/1.6-files-and-links.md",
+        "domain-1/1.7-permissions.md",
+        "domain-1/1.8-documentation.md",
+        "domain-2/2.1-rpm-and-dnf.md",
+        "domain-2/2.2-flatpak.md",
+        "domain-3/3.1-script-inputs.md",
+        "domain-3/3.2-conditionals.md",
+        "domain-3/3.3-loops.md",
+        "domain-4/4.1-boot-and-targets.md",
+        "domain-4/4.2-processes-and-tuning.md",
+        "domain-4/4.3-logs-and-journal.md",
+        "domain-4/4.4-services-and-transfer.md",
+        "domain-5/5.1-gpt-partitions.md",
+        "domain-5/5.2-lvm.md",
+        "domain-5/5.3-persistent-mounts-and-swap.md",
+        "domain-6/6.1-local-file-systems.md",
+        "domain-6/6.2-nfs-and-autofs.md",
+        "domain-6/6.3-extend-lvs.md",
+        "domain-6/6.4-permission-problems.md",
+        "domain-7/7.1-scheduling.md",
+        "domain-7/7.2-services-and-targets.md",
+        "domain-7/7.3-time-sync.md",
+        "domain-7/7.4-software-sources.md",
+        "domain-7/7.5-bootloader.md",
+        "domain-8/8.1-ip-configuration.md",
+        "domain-8/8.2-name-resolution.md",
+        "domain-8/8.3-firewalld-basics.md",
+        "domain-9/9.1-users-and-aging.md",
+        "domain-9/9.2-groups.md",
+        "domain-9/9.3-sudo.md",
+        "domain-10/10.1-firewall-settings.md",
+        "domain-10/10.2-umask-and-special.md",
+        "domain-10/10.3-ssh-keys.md",
+        "domain-10/10.4-selinux-modes-contexts.md",
+        "domain-10/10.5-selinux-troubleshooting.md"
+      ]
+    },
+    "part-1": {
+      "file": "rhcsa-course-notes-part-1",
+      "label": "Part 1: Essential Tools, Software, and Scripts",
+      "domains": [
+        "1.0",
+        "2.0",
+        "3.0"
+      ]
+    },
+    "part-2": {
+      "file": "rhcsa-course-notes-part-2",
+      "label": "Part 2: Operating and Maintaining Systems",
+      "domains": [
+        "4.0",
+        "7.0"
+      ]
+    },
+    "part-3": {
+      "file": "rhcsa-course-notes-part-3",
+      "label": "Part 3: Storage and File Systems",
+      "domains": [
+        "5.0",
+        "6.0"
+      ]
+    },
+    "part-4": {
+      "file": "rhcsa-course-notes-part-4",
+      "label": "Part 4: Networking, Users, and Security",
+      "domains": [
+        "8.0",
+        "9.0",
+        "10.0"
+      ]
+    }
+  }
+}

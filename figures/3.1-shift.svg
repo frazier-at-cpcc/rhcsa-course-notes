@@ -1,0 +1,32 @@
+<svg viewBox="0 0 360 168" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="shift drops the first positional parameter and renumbers the rest, lowering $# by one">
+<defs><marker id="sh" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#1a1209"/></marker></defs>
+<g font-size="10" font-weight="800" fill="#5c4a30">
+<text x="6" y="56">BEFORE</text>
+<text x="6" y="136">AFTER</text>
+<text x="6" y="148" class="mono" font-weight="700" fill="#6d28d9">shift</text>
+</g>
+<g text-anchor="middle">
+<rect x="68.5" y="30.5" width="74" height="44" rx="7" fill="#1a1209"/><rect x="66" y="28" width="74" height="44" rx="7" fill="#fff" stroke="#9a3412" stroke-width="2" stroke-dasharray="5 3"/>
+<text x="103" y="45" font-size="10" font-weight="700" fill="#6d28d9" class="mono">$1</text>
+<text x="103" y="62" font-size="10.5" font-weight="700" fill="#1a1209" class="mono">web server</text>
+<text x="103" y="20" font-size="9" font-weight="800" fill="#9a3412">discarded</text>
+<rect x="150.5" y="30.5" width="74" height="44" rx="7" fill="#1a1209"/><rect x="148" y="28" width="74" height="44" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+<text x="185" y="45" font-size="10" font-weight="700" fill="#6d28d9" class="mono">$2</text>
+<text x="185" y="62" font-size="10.5" font-weight="700" fill="#1a1209" class="mono">db</text>
+<rect x="232.5" y="30.5" width="74" height="44" rx="7" fill="#1a1209"/><rect x="230" y="28" width="74" height="44" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+<text x="267" y="45" font-size="10" font-weight="700" fill="#6d28d9" class="mono">$3</text>
+<text x="267" y="62" font-size="10.5" font-weight="700" fill="#1a1209" class="mono">cache</text>
+<rect x="68.5" y="112.5" width="74" height="44" rx="7" fill="#1a1209"/><rect x="66" y="110" width="74" height="44" rx="7" fill="#efe6ff" stroke="#1a1209" stroke-width="2"/>
+<text x="103" y="127" font-size="10" font-weight="700" fill="#6d28d9" class="mono">$1</text>
+<text x="103" y="144" font-size="10.5" font-weight="700" fill="#1a1209" class="mono">db</text>
+<rect x="150.5" y="112.5" width="74" height="44" rx="7" fill="#1a1209"/><rect x="148" y="110" width="74" height="44" rx="7" fill="#efe6ff" stroke="#1a1209" stroke-width="2"/>
+<text x="185" y="127" font-size="10" font-weight="700" fill="#6d28d9" class="mono">$2</text>
+<text x="185" y="144" font-size="10.5" font-weight="700" fill="#1a1209" class="mono">cache</text>
+<text x="333" y="55" font-size="11" font-weight="800" fill="#1a1209" class="mono">$#=3</text>
+<text x="333" y="137" font-size="11" font-weight="800" fill="#1a1209" class="mono">$#=2</text>
+</g>
+<g stroke="#1a1209" stroke-width="2" marker-end="url(#sh)" fill="none">
+<path d="M180 74L110 108"/>
+<path d="M262 74L192 108"/>
+</g>
+</svg>

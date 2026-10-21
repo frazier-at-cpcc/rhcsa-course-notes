@@ -1,0 +1,68 @@
+<svg viewBox="0 0 760 242" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="tar bundles a directory tree into one archive file, a compressor shrinks it, and extraction reverses both steps">
+  <defs>
+    <marker id="tp-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1a1209"/></marker>
+    <marker id="tp-pur" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6d28d9"/></marker>
+  </defs>
+  <!-- step labels -->
+  <g font-size="10" font-weight="800" letter-spacing="1.6" fill="#5c4a30" text-anchor="middle">
+    <text x="105" y="22">MANY FILES</text>
+    <text x="345" y="22">ARCHIVE</text>
+    <text x="640" y="12">COMPRESSED ARCHIVE</text>
+  </g>
+  <!-- directory tree -->
+  <rect x="23" y="43" width="164" height="116" rx="7" fill="#1a1209"/>
+  <rect x="20" y="40" width="164" height="116" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+  <text x="102" y="62" text-anchor="middle" font-size="14" font-weight="800" fill="#1a1209">Directory tree</text>
+  <g class="mono" font-size="11" fill="#1a1209">
+    <text x="38" y="86">/srv/web/</text>
+    <text x="52" y="104">index.html</text>
+    <text x="52" y="122">access.log</text>
+    <text x="52" y="140">css/site.css</text>
+  </g>
+  <!-- tar archive -->
+  <rect x="263" y="53" width="164" height="90" rx="7" fill="#1a1209"/>
+  <rect x="260" y="50" width="164" height="90" rx="7" fill="#fffae0" stroke="#1a1209" stroke-width="2"/>
+  <text x="342" y="74" text-anchor="middle" class="mono" font-size="13" font-weight="700" fill="#1a1209">web.tar</text>
+  <g text-anchor="middle" font-size="10" font-weight="600" fill="#5c4a30">
+    <text x="342" y="96">one file that keeps</text>
+    <text x="342" y="111">names, modes, owners,</text>
+    <text x="342" y="126">and timestamps</text>
+  </g>
+  <!-- create arrow -->
+  <path d="M188 95H252" stroke="#1a1209" stroke-width="2" fill="none" marker-end="url(#tp-ink)"/>
+  <text x="221" y="86" text-anchor="middle" class="mono" font-size="12" font-weight="600" fill="#1a1209">tar -c</text>
+  <!-- compressors -->
+  <g stroke="#1a1209" stroke-width="2" fill="none" marker-end="url(#tp-ink)">
+    <path d="M428 82C470 82 480 44 520 44"/>
+    <path d="M428 95H520"/>
+    <path d="M428 108C470 108 480 146 520 146"/>
+  </g>
+  <g>
+    <rect x="533" y="25" width="204" height="40" rx="7" fill="#1a1209"/>
+    <rect x="530" y="22" width="204" height="40" rx="7" fill="#efe6ff" stroke="#1a1209" stroke-width="2"/>
+    <rect x="533" y="76" width="204" height="40" rx="7" fill="#1a1209"/>
+    <rect x="530" y="73" width="204" height="40" rx="7" fill="#efe6ff" stroke="#1a1209" stroke-width="2"/>
+    <rect x="533" y="127" width="204" height="40" rx="7" fill="#1a1209"/>
+    <rect x="530" y="124" width="204" height="40" rx="7" fill="#efe6ff" stroke="#1a1209" stroke-width="2"/>
+  </g>
+  <g class="mono" font-size="12" font-weight="700" fill="#6d28d9">
+    <text x="544" y="47">-z</text>
+    <text x="544" y="98">-j</text>
+    <text x="544" y="149">-J</text>
+  </g>
+  <g font-size="12" font-weight="800" fill="#1a1209">
+    <text x="572" y="47">gzip</text>
+    <text x="572" y="98">bzip2</text>
+    <text x="572" y="149">xz</text>
+  </g>
+  <g class="mono" font-size="11" fill="#1a1209">
+    <text x="626" y="47">web.tar.gz</text>
+    <text x="626" y="98">web.tar.bz2</text>
+    <text x="626" y="149">web.tar.xz</text>
+  </g>
+  <text x="632" y="184" text-anchor="middle" font-size="10" font-weight="600" fill="#5c4a30">smallest at the bottom, fastest at the top</text>
+  <!-- extract arrow -->
+  <path d="M632 194C632 222 600 222 560 222H130C102 222 102 204 102 166" stroke="#6d28d9" stroke-width="2" fill="none" marker-end="url(#tp-pur)"/>
+  <text x="345" y="214" text-anchor="middle" class="mono" font-size="12" font-weight="600" fill="#6d28d9">tar -xf web.tar.gz -C /restore</text>
+  <text x="345" y="234" text-anchor="middle" font-size="10" font-weight="600" fill="#6d28d9">tar reads the header and picks the decompressor itself</text>
+</svg>

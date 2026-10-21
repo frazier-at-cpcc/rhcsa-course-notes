@@ -1,0 +1,43 @@
+[1.4-logins-and-users] useradd -m operator1 2>/dev/null; echo operator1:redhat | chpasswd
+[1.4-logins-and-users] runuser -l student -c 'rm -rf ~/.ssh; ssh-keygen -q -t ed25519 -N "" -f ~/.ssh/id_ed25519'; install -d -o operator1 -g operator1 -m 700 /home/operator1/.ssh; cp /home/student/.ssh/id_ed25519.pub /home/operator1/.ssh/authorized_keys; chown operator1: /home/operator1/.ssh/authorized_keys; chmod 600 /home/operator1/.ssh/authorized_keys
+[4.2-processes-and-tuning] runuser -l student -c 'nohup sha256sum /dev/zero >/dev/null 2>&1 & nohup sha1sum /dev/zero >/dev/null 2>&1 &'
+[4.2-processes-and-tuning] runuser -l student -c "nohup python3 -c 'import time; a = bytearray(400*1024*1024); time.sleep(600)' >/dev/null 2>&1 &"
+[4.2-processes-and-tuning] sleep 8
+[4.4-services-and-transfer] runuser -l student -c 'rm -rf ~/.ssh; ssh-keygen -q -t ed25519 -N "" -f ~/.ssh/id_ed25519; cat ~/.ssh/id_ed25519.pub >> ~/.ssh/authorized_keys; chmod 600 ~/.ssh/authorized_keys; ssh-keyscan -t ed25519 servera.lab.example.com localhost 2>/dev/null >> ~/.ssh/known_hosts'
+[4.4-services-and-transfer] useradd bob 2>/dev/null; install -d -o bob -g bob -m 700 /home/bob/.ssh; cp /home/student/.ssh/id_ed25519.pub /home/bob/.ssh/authorized_keys; chown bob: /home/bob/.ssh/authorized_keys; chmod 600 /home/bob/.ssh/authorized_keys
+[5.2-lvm] parted -s /dev/vdc mklabel gpt mkpart lvm2 1MiB 100% set 1 lvm on && udevadm settle
+[5.3-persistent-mounts-and-swap] cp -a /etc/fstab /var/lib/rhcsa-lab/fstab.orig
+[6.1-local-file-systems] parted -s /dev/vdb mklabel gpt mkpart usb fat32 1MiB 257MiB mkpart home ext4 257MiB 769MiB mkpart data xfs 769MiB 1281MiB && udevadm settle
+[6.2-nfs-and-autofs] mkdir -p /exports/projects /exports/guests/alice /exports/guests/bob && echo 'quarterly plan' > /exports/projects/plan.txt && echo 'alice notes' > /exports/guests/alice/notes.txt && chmod -R a+rX /exports
+[6.2-nfs-and-autofs] printf '/exports/projects  *(rw,sync,no_root_squash)\n/exports/guests  *(rw,sync)\n' > /etc/exports.d/lab.exports && systemctl enable --now nfs-server && exportfs -ra
+Created symlink '/etc/systemd/system/multi-user.target.wants/nfs-server.service' → '/usr/lib/systemd/system/nfs-server.service'.
+[6.2-nfs-and-autofs] firewall-cmd -q --add-service=nfs --add-service=mountd --add-service=rpc-bind
+[6.2-nfs-and-autofs] cp -a /etc/fstab /var/lib/rhcsa-lab/fstab.orig
+[6.3-extend-lvs] parted -s /dev/vdb mklabel gpt mkpart lvm 1MiB 1025MiB set 1 lvm on && parted -s /dev/vdc mklabel gpt mkpart lvm 1MiB 1025MiB set 1 lvm on && udevadm settle
+[6.3-extend-lvs] vgcreate -q vg_app /dev/vdb1 && lvcreate -q -y -n lv_web -L 400M vg_app && lvcreate -q -y -n lv_logs -L 300M vg_app && mkfs.xfs -q /dev/vg_app/lv_web && mkfs.ext4 -q /dev/vg_app/lv_logs && mkdir -p /srv/web /srv/logs && mount /dev/vg_app/lv_web /srv/web && mount /dev/vg_app/lv_logs /srv/logs
+  Physical volume "/dev/vdb1" successfully created.
+  Volume group "vg_app" successfully created
+  Logical volume "lv_web" created.
+  Logical volume "lv_logs" created.
+[6.4-permission-problems] groupadd -f devops; id alice >/dev/null 2>&1 || useradd alice; echo alice:redhat | chpasswd; mkdir -p /srv/devops/releases && echo v1 > /srv/devops/releases/notes.txt && chown -R root:devops /srv/devops && chmod 750 /srv/devops && chmod 640 /srv/devops/releases/notes.txt
+[7.2-services-and-targets] systemctl get-default > /var/lib/rhcsa-lab/default-target
+[7.3-time-sync] cp -a /etc/chrony.conf /var/lib/rhcsa-lab/chrony.conf.orig; timedatectl show -p Timezone --value > /var/lib/rhcsa-lab/timezone
+[7.4-software-sources] rm -rf /srv/localrepo; mkdir -p /srv/localrepo
+[7.5-bootloader] cp -a /etc/default/grub /var/lib/rhcsa-lab/default-grub.orig
+[8.2-name-resolution] cp -a /etc/hosts /var/lib/rhcsa-lab/hosts.orig; hostname > /var/lib/rhcsa-lab/hostname
+[10.1-firewall-settings] systemctl start httpd
+[10.4-selinux-modes-contexts] cp -a /etc/selinux/config /var/lib/rhcsa-lab/selinux-config.orig; systemctl start httpd
+[10.5-selinux-troubleshooting] cp -a /etc/httpd/conf/httpd.conf /var/lib/rhcsa-lab/httpd.conf.orig
+[10.5-selinux-troubleshooting] mkdir -p /web && echo 'lab site' > /web/index.html && sed -i 's#DocumentRoot "/var/www/html"#DocumentRoot "/web"#' /etc/httpd/conf/httpd.conf && printf '<Directory "/web">\n  Require all granted\n</Directory>\n' > /etc/httpd/conf.d/web.conf && systemctl restart httpd
+[5.2-lvm] parted -s /dev/vdc mklabel gpt mkpart lvm2 1MiB 100% set 1 lvm on && udevadm settle
+[5.3-persistent-mounts-and-swap] cp -a /etc/fstab /var/lib/rhcsa-lab/fstab.orig
+[6.1-local-file-systems] parted -s /dev/vdb mklabel gpt mkpart usb fat32 1MiB 257MiB mkpart home ext4 257MiB 769MiB mkpart data xfs 769MiB 1281MiB && udevadm settle
+[6.3-extend-lvs] parted -s /dev/vdb mklabel gpt mkpart lvm 1MiB 1025MiB set 1 lvm on && parted -s /dev/vdc mklabel gpt mkpart lvm 1MiB 1025MiB set 1 lvm on && udevadm settle
+[6.3-extend-lvs] vgcreate -q vg_app /dev/vdb1 && lvcreate -q -y -n lv_web -L 400M vg_app && lvcreate -q -y -n lv_logs -L 300M vg_app && mkfs.xfs -q /dev/vg_app/lv_web && mkfs.ext4 -q /dev/vg_app/lv_logs && mkdir -p /srv/web /srv/logs && mount /dev/vg_app/lv_web /srv/web && mount /dev/vg_app/lv_logs /srv/logs
+  Physical volume "/dev/vdb1" successfully created.
+  Volume group "vg_app" successfully created
+  Logical volume "lv_web" created.
+  Logical volume "lv_logs" created.
+[10.5-selinux-troubleshooting] cp -a /etc/httpd/conf/httpd.conf /var/lib/rhcsa-lab/httpd.conf.orig
+[10.5-selinux-troubleshooting] mkdir -p /web && echo 'lab site' > /web/index.html && sed -i 's#DocumentRoot "/var/www/html"#DocumentRoot "/web"#' /etc/httpd/conf/httpd.conf && printf '<Directory "/web">\n  Require all granted\n</Directory>\n' > /etc/httpd/conf.d/web.conf && systemctl restart httpd
+[6.4-permission-problems] groupadd -f devops; id alice >/dev/null 2>&1 || useradd alice; echo alice:redhat | chpasswd; mkdir -p /srv/devops/releases && echo v1 > /srv/devops/releases/notes.txt && chown -R root:devops /srv/devops && chmod 750 /srv/devops && chmod 640 /srv/devops/releases/notes.txt

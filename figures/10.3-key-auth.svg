@@ -1,0 +1,56 @@
+<svg viewBox="0 0 760 292" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ssh-copy-id places alice's public key in authorized_keys on serverb. At login, serverb challenges the client, the client signs with the private key, and serverb checks the signature against the stored public key.">
+  <defs>
+    <marker id="ka-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1a1209"/></marker>
+    <marker id="ka-pur" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6d28d9"/></marker>
+  </defs>
+  <!-- host labels -->
+  <g font-size="12" font-weight="800" fill="#1a1209" text-anchor="middle">
+    <text x="137" y="18">servera: alice runs ssh</text>
+    <text x="623" y="18">serverb: sshd, account alice</text>
+  </g>
+  <!-- host boxes -->
+  <rect x="14.5" y="30.5" width="250" height="124" rx="7" fill="#1a1209"/>
+  <rect x="12" y="28" width="250" height="124" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+  <rect x="500.5" y="30.5" width="250" height="124" rx="7" fill="#1a1209"/>
+  <rect x="498" y="28" width="250" height="124" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+  <!-- file chips -->
+  <rect x="28" y="40" width="218" height="46" rx="7" fill="#fffae0" stroke="#1a1209" stroke-width="2"/>
+  <rect x="28" y="96" width="218" height="46" rx="7" fill="#efe6ff" stroke="#1a1209" stroke-width="2"/>
+  <rect x="514" y="40" width="218" height="46" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+  <rect x="514" y="96" width="218" height="46" rx="7" fill="#efe6ff" stroke="#1a1209" stroke-width="2"/>
+  <g font-size="11" font-weight="700" fill="#1a1209" text-anchor="middle">
+    <text x="137" y="59" class="mono">~/.ssh/id_ed25519</text>
+    <text x="137" y="115" class="mono">~/.ssh/id_ed25519.pub</text>
+    <text x="623" y="59" class="mono">/etc/ssh/sshd_config.d/</text>
+    <text x="623" y="115" class="mono">~/.ssh/authorized_keys</text>
+  </g>
+  <g font-size="9.5" font-weight="600" fill="#5c4a30" text-anchor="middle">
+    <text x="137" y="76">private key, mode 600, never leaves</text>
+    <text x="137" y="132">public key, mode 644, safe to share</text>
+    <text x="623" y="76">which login methods are allowed</text>
+    <text x="623" y="132">public keys allowed in, mode 600</text>
+  </g>
+  <!-- one-time copy -->
+  <path d="M248 119H508" stroke="#6d28d9" stroke-width="2" fill="none" marker-end="url(#ka-pur)"/>
+  <text x="378" y="109" text-anchor="middle" font-size="10.5" font-weight="700" fill="#6d28d9" class="mono">ssh-copy-id alice@serverb</text>
+  <text x="378" y="135" text-anchor="middle" font-size="9.5" font-weight="600" fill="#5c4a30">once, with alice's password</text>
+  <!-- lifelines -->
+  <g stroke="#d8d2c8" stroke-width="2" stroke-dasharray="4 4">
+    <path d="M137 154V272"/>
+    <path d="M623 154V272"/>
+  </g>
+  <!-- every login -->
+  <g stroke="#1a1209" stroke-width="2" fill="none">
+    <path d="M139 182H613" marker-end="url(#ka-ink)"/>
+    <path d="M621 210H147" marker-end="url(#ka-ink)"/>
+    <path d="M139 238H613" marker-end="url(#ka-ink)"/>
+    <path d="M621 266H147" marker-end="url(#ka-ink)"/>
+  </g>
+  <g font-size="10" font-weight="600" fill="#1a1209" text-anchor="middle">
+    <text x="380" y="176"><tspan font-weight="800" fill="#6d28d9">1</tspan>  ssh alice@serverb offers the public key</text>
+    <text x="380" y="204"><tspan font-weight="800" fill="#6d28d9">2</tspan>  key is in authorized_keys: sign this challenge</text>
+    <text x="380" y="232"><tspan font-weight="800" fill="#6d28d9">3</tspan>  signature from the private key (passphrase or agent)</text>
+    <text x="380" y="260"><tspan font-weight="800" fill="#6d28d9">4</tspan>  signature matches the stored key: shell opens</text>
+  </g>
+  <text x="380" y="287" text-anchor="middle" font-size="9.5" font-weight="600" fill="#5c4a30">No password and no private key ever crosses the network.</text>
+</svg>

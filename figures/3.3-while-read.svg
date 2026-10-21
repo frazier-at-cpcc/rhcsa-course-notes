@@ -1,0 +1,32 @@
+<svg viewBox="0 0 360 232" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A while read loop: read takes the next line of the file, the body runs while read succeeds, and the loop ends when read fails at end of file">
+<defs><marker id="wr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#1a1209"/></marker></defs>
+<rect x="10.5" y="24.5" width="118" height="128" rx="7" fill="#1a1209"/><rect x="8" y="22" width="118" height="128" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+<text x="67" y="42" text-anchor="middle" font-size="10.5" font-weight="800" fill="#1a1209" class="mono">newhires.txt</text>
+<path d="M16 50H118" stroke="#d8d2c8" stroke-width="1.5"/>
+<g font-size="9.5" font-weight="600" fill="#1a1209" class="mono">
+<text x="18" y="68">alice  devops</text>
+<text x="18" y="86">bob    devops</text>
+<text x="18" y="104">carol  web</text>
+</g>
+<text x="18" y="134" font-size="9" font-weight="800" fill="#9a3412">end of file</text>
+<g text-anchor="middle">
+<rect x="174.5" y="24.5" width="176" height="46" rx="7" fill="#1a1209"/><rect x="172" y="22" width="176" height="46" rx="7" fill="#ffd60a" stroke="#1a1209" stroke-width="2"/>
+<text x="260" y="42" font-size="10.5" font-weight="800" fill="#1a1209" class="mono">read -r user group</text>
+<text x="260" y="58" font-size="9" font-weight="700" fill="#1a1209">takes the next line</text>
+<rect x="174.5" y="106.5" width="176" height="46" rx="7" fill="#1a1209"/><rect x="172" y="104" width="176" height="46" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+<text x="260" y="123" font-size="11" font-weight="800" fill="#1a1209">loop body</text>
+<text x="260" y="139" font-size="9" font-weight="600" fill="#5c4a30" class="mono">useradd "$user"</text>
+<rect x="174.5" y="180.5" width="176" height="42" rx="7" fill="#1a1209"/><rect x="172" y="178" width="176" height="42" rx="7" fill="#6d28d9" stroke="#1a1209" stroke-width="2"/>
+<text x="260" y="196" font-size="11" font-weight="800" fill="#fff" class="mono">done</text>
+<text x="260" y="211" font-size="9" font-weight="700" fill="#efe6ff">script carries on</text>
+</g>
+<text x="266" y="91" font-size="9" font-weight="800" fill="#6d28d9">status 0</text>
+<text x="150" y="38" text-anchor="middle" font-size="9" font-weight="700" fill="#5c4a30">line</text>
+<text x="146" y="174" text-anchor="end" font-size="9" font-weight="800" fill="#9a3412">status 1</text>
+<g stroke="#1a1209" stroke-width="2" fill="none" marker-end="url(#wr)">
+<path d="M126 46H170"/>
+<path d="M260 68V102"/>
+<path d="M348 127H355V45H350"/>
+<path d="M172 60H152V199H170"/>
+</g>
+</svg>
