@@ -30,7 +30,7 @@ phase1() {
   run "sudo dnf remove -y tree 2>&1 | tail -2"
 
   section "A repository on the local file system"
-  run "cd /srv/localrepo && sudo dnf download -q tree wget2 2>&1; ls /srv/localrepo"
+  run "cd /srv/localrepo && sudo dnf download -q tree zsh 2>&1; ls /srv/localrepo"
   run "sudo createrepo_c /srv/localrepo | tail -1"
   run "ls /srv/localrepo/repodata | head -3"
   run "printf '[localrepo]\nname=Local packages\nbaseurl=file:///srv/localrepo\nenabled=1\ngpgcheck=0\n' | sudo tee /etc/yum.repos.d/localrepo.repo"
@@ -44,12 +44,12 @@ phase1() {
   run "grep -h '^baseurl\|^mirrorlist\|^metalink' /etc/yum.repos.d/*.repo | head -2"
   run "sudo dnf config-manager --add-repo https://repo.almalinux.org/almalinux/10/extras/x86_64/os/ 2>&1 | tail -2"
   run "ls /etc/yum.repos.d/"
-  run "sudo dnf --repo=repo.almalinux.org_almalinux_10_extras_x86_64_os makecache 2>&1 | tail -2"
+  run "sudo dnf --repo=repo.almalinux.org_almalinux_10_extras_x86_64_os_ makecache 2>&1 | tail -2"
   run "rpm -q gpg-pubkey --qf '%{NAME}-%{VERSION}  %{SUMMARY}\n'"
 }
 
 cleanup() {
   rpm -q tree >/dev/null && dnf -y -q remove tree
-  rm -f /etc/yum.repos.d/localrepo.repo /etc/yum.repos.d/repo.almalinux.org_almalinux_10_extras_x86_64_os.repo /tmp/tree-*.rpm
+  rm -f /etc/yum.repos.d/localrepo.repo /etc/yum.repos.d/repo.almalinux.org_almalinux_10_extras_x86_64_os_.repo /tmp/tree-*.rpm
   rm -rf /srv/localrepo
 }
