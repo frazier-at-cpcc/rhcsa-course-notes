@@ -340,6 +340,15 @@
         "9.0",
         "10.0"
       ]
+    },
+    "preview-rh-6": {
+      "file": "preview-rh-6",
+      "topics": [
+        "domain-6/6.1-local-file-systems.md",
+        "domain-6/6.2-nfs-and-autofs.md",
+        "domain-6/6.4-permission-problems.md",
+        "domain-7/7.1-scheduling.md"
+      ]
     }
   }
 }
