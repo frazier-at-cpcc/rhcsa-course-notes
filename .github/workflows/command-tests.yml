@@ -1,6 +1,8 @@
 name: Command tests
 
 # Runs every test script in tests/ against the commands shown in the notes.
+# The full-system topics are captured separately with lab/run.sh on a RHEL 10
+# VM (see lab/README.md).
 # Manual only: start it from the Actions tab before a release or after a tool
 # update. It does not gate the PDF build.
 on:
@@ -21,24 +23,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-
-      - name: Install QEMU and enable KVM
-        run: |
-          sudo apt-get update -qq
-          sudo apt-get install -yqq qemu-system-x86 qemu-utils
-          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' \
-            | sudo tee /etc/udev/rules.d/99-kvm4all.rules
-          sudo udevadm control --reload-rules
-          sudo udevadm trigger --name-match=kvm
-          ls -l /dev/kvm
-
-      # Only the downloaded cloud image is cached. The base VM and its
-      # snapshot are rebuilt on each run, because a snapshot taken on one
-      # runner's CPU may not restore on another's.
-      - uses: actions/cache@v4
-        with:
-          path: ~/.cache/rhcsa-vm/AlmaLinux-10-*.qcow2
-          key: rhcsa-vm-${{ hashFiles('tests/lib/vm.sh') }}
 
       - name: Run the selected tests
         env:

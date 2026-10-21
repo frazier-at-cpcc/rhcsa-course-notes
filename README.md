@@ -19,28 +19,25 @@ See [AUTHORING.md](AUTHORING.md) for how topics are written and tested.
 
 ## Every command was run
 
-Each command and output shown in the notes comes from a real run on
-AlmaLinux 10.2, a rebuild of RHEL 10, and `tests/` holds a script per topic
-that runs them again and checks the output. Two helpers provide the systems:
+Each command and output shown in the notes comes from a real run on RHEL 10
+or its rebuild AlmaLinux 10. Two kits produce that output:
 
-- `tests/lib/container.sh` starts an AlmaLinux 10 container for shell,
-  text, archive, permission, user, scripting, and dnf topics.
-- `tests/lib/vm.sh` boots a full AlmaLinux 10 VM under QEMU, with SELinux
-  enforcing, two blank disks for partitioning and LVM, a spare NIC, firewalld,
-  and NetworkManager. The first run builds a base image and saves a snapshot
-  of the booted system; each test restores that snapshot, works on a
-  throwaway overlay, and can reboot the VM to prove a change persists.
-
-The tests are not part of the PDF build. Run them locally (Linux with Docker
-and QEMU; KVM makes the VM much faster), or start the **Command tests**
-workflow from the Actions tab (it can run a single topic, for example
-`5.*.sh`).
+- `tests/` holds a script per container-friendly topic (shell, text,
+  archives, permissions, users, scripting, dnf). Each starts an AlmaLinux 10
+  container with `tests/lib/container.sh`, reruns the commands, and checks
+  the output. Run them locally with Docker, or start the **Command tests**
+  workflow from the Actions tab.
+- `lab/` captures the topics that need a whole system: disks and LVM,
+  systemd, the journal, NetworkManager, firewalld, SELinux, and the boot
+  loader. `sudo lab/run.sh` runs on a disposable RHEL 10 VM with two spare
+  disks and a spare NIC, reboots it to prove each change persists, and
+  writes the sessions to `lab/results/`. See [lab/README.md](lab/README.md).
 
 ```sh
 npm install
 npm run build                              # writes all PDFs to dist/
-bash tests/5.2-lvm.sh                      # one topic's commands
-for t in tests/*.sh; do bash "$t"; done    # all of them
+bash tests/1.5-archives.sh                 # one container topic
+sudo lab/run.sh 5.2                        # one full-system topic, on the lab VM
 ```
 
 ## Writing a topic

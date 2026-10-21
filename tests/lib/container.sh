@@ -9,6 +9,10 @@
 #   ct_down <name>               remove it (call from your EXIT trap)
 #
 # The container's hostname is servera.lab.example.com, matching the VM.
+# Shells get umask 022 and dnf installs documentation, as on a real system.
+# Under `set -o pipefail`, avoid `ct ... | grep -q`: grep can exit before ct
+# finishes writing and the pipe fails with status 141. Capture the output in
+# a variable first, then test it.
 #
 # Needs: docker
 
@@ -24,9 +28,13 @@ ct_up() {
   docker rm -f "$CT_NAME" >/dev/null 2>&1 || true
   docker run "${args[@]}" "$CT_IMAGE" sleep infinity >/dev/null
   if [ -f /root/.ccr/ca-bundle.crt ]; then ct update-ca-trust; fi
+  # The container image installs packages without docs; a real system keeps
+  # man pages, info files, and /usr/share/doc, so turn that off.
+  ct "sed -i '/^tsflags=nodocs/d' /etc/dnf/dnf.conf"
   if [ $# -gt 0 ]; then ct "dnf -y -q install $* >/dev/null"; fi
 }
 
-ct() { docker exec -i "$CT_NAME" bash -c "$*"; }
-ct_as() { local u="$1"; shift; docker exec -i -u "$u" -w "/home/$u" "$CT_NAME" bash -lc "$*"; }
+# docker exec starts shells with umask 0000; a RHEL login gets 0022.
+ct() { docker exec -i "$CT_NAME" bash -c "umask 022; $*"; }
+ct_as() { local u="$1"; shift; docker exec -i -u "$u" -w "/home/$u" "$CT_NAME" bash -lc "umask 022; $*"; }
 ct_down() { docker rm -f "${1:-$CT_NAME}" >/dev/null 2>&1 || true; }

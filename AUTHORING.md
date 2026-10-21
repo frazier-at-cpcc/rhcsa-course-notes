@@ -97,18 +97,18 @@ the manual Command tests workflow; they do not gate the PDF build.
   a console-only boot step), do not put it in a code block as if it ran.
   Present it as a numbered list or a table, and say in the test what was
   left out.
-- Two helpers give you a real RHEL 10 system (AlmaLinux 10.2, a rebuild of
-  RHEL 10 that behaves the same for every exam objective):
-  - `tests/lib/container.sh`: an AlmaLinux 10 container. Use it for shell
-    tools, text processing, archives, permissions, users and groups,
-    scripting, and dnf. Fast.
-  - `tests/lib/vm.sh`: a full AlmaLinux 10 VM with systemd, SELinux
-    enforcing, two blank 2 GiB disks (vdb, vdc), a spare NIC (eth1),
-    firewalld, NetworkManager, chronyd, tuned, autofs, NFS, and httpd. Use it
-    for storage, file systems, services, targets, the journal, networking,
-    firewalld, SELinux, and the boot loader. It boots from a saved snapshot,
-    every write is discarded at the end, and `vm_reboot` proves persistence.
-  Read the header of each helper for its functions.
+- Two sources of real output:
+  - `tests/lib/container.sh`: an AlmaLinux 10 container (a RHEL 10
+    rebuild). Use it for shell tools, text processing, archives,
+    permissions, users and groups, scripting, and dnf. Each topic gets a test
+    script in `tests/` that reruns its commands.
+  - `lab/`: capture scripts for everything that needs a full system
+    (storage, LVM, services, targets, the journal, networking, firewalld,
+    SELinux, the boot loader). `lab/run.sh` runs them on a disposable RHEL 10
+    VM, reboots it to prove persistence, and writes each session to
+    `lab/results/<topic>.md`. Write those topics from the captured results;
+    to change what a topic shows, change its script in `lab/topics/` and
+    rerun it (see `lab/README.md`).
 - Show commands the way a student types them on the exam: a regular user
   with `sudo`, or a root shell when the task needs one. The prompt in console
   blocks is always `$ `; write `sudo` explicitly.
