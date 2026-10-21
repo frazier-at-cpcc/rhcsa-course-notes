@@ -343,9 +343,15 @@ code {
 
 /* ---------- Code blocks ---------- */
 
+/* A block, not an inline-block: a line box cannot split, so a code block
+   taller than the space left in a column painted its overflow over the
+   next page. As a block it still avoids breaking, but splits when it must,
+   and each piece keeps its border and shadow. */
 pre {
-  display: inline-block; width: calc(100% - 4px); vertical-align: top;
+  display: block; vertical-align: top;
   margin: 4pt 4px 7pt 0; padding: 6pt 8pt;
+  box-decoration-break: clone; -webkit-box-decoration-break: clone;
+  tab-size: 4;
   background: var(--card); border: var(--rule); border-radius: var(--radius-sm);
   box-shadow: 3px 3px 0 var(--accent);
   font-family: var(--font-mono); font-size: 7.6pt; line-height: 1.42;
