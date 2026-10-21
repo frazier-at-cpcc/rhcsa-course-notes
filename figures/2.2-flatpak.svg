@@ -1,0 +1,71 @@
+<svg viewBox="0 0 760 236" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flatpak sources feed the remotes of a system installation or a user installation; each installation holds its own remotes, apps, and runtimes; flatpak run starts an app on its runtime in a sandbox">
+<defs><marker id="fp-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#1a1209"/></marker></defs>
+<g font-size="9.5" font-weight="800" letter-spacing="1.2" fill="#5c4a30" text-anchor="middle">
+<text x="91" y="12">SOURCES</text>
+<text x="420" y="12">INSTALLATIONS</text>
+<text x="684" y="12">RUN</text>
+</g>
+<!-- sources -->
+<g text-anchor="middle">
+<rect x="8.5" y="26.5" width="168" height="60" rx="7" fill="#1a1209"/><rect x="6" y="24" width="168" height="60" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+<text x="90" y="45" font-size="12" font-weight="800" fill="#1a1209">Red Hat (rhel)</text>
+<text x="90" y="61" font-size="9" font-weight="600" fill="#5c4a30" class="mono">flatpaks.redhat.io</text>
+<text x="90" y="76" font-size="9" font-weight="700" fill="#9a3412">login needed to install</text>
+<rect x="8.5" y="122.5" width="168" height="60" rx="7" fill="#1a1209"/><rect x="6" y="120" width="168" height="60" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+<text x="90" y="141" font-size="12" font-weight="800" fill="#1a1209">Flathub</text>
+<text x="90" y="157" font-size="9" font-weight="600" fill="#5c4a30" class="mono">dl.flathub.org</text>
+<text x="90" y="172" font-size="9" font-weight="600" fill="#5c4a30">open to everyone</text>
+</g>
+<!-- system installation -->
+<rect x="272.5" y="24.5" width="300" height="96" rx="7" fill="#1a1209"/><rect x="270" y="22" width="300" height="96" rx="7" fill="#efe6ff" stroke="#1a1209" stroke-width="2"/>
+<text x="282" y="40" font-size="12" font-weight="800" fill="#1a1209">System installation</text>
+<text x="558" y="40" font-size="9" font-weight="600" fill="#3a1d70" text-anchor="end" class="mono">/var/lib/flatpak</text>
+<rect x="282" y="50" width="116" height="58" rx="5" fill="#fff" stroke="#1a1209" stroke-width="1.5"/>
+<rect x="432" y="50" width="126" height="58" rx="5" fill="#fffae0" stroke="#1a1209" stroke-width="1.5"/>
+<g text-anchor="middle">
+<text x="340" y="67" font-size="10" font-weight="800" fill="#1a1209">remotes</text>
+<text x="340" y="84" font-size="9" font-weight="600" fill="#3a1d70" class="mono">flathub</text>
+<text x="340" y="99" font-size="9" font-weight="600" fill="#3a1d70" class="mono">rhel</text>
+<text x="495" y="67" font-size="10" font-weight="800" fill="#1a1209">apps + runtimes</text>
+<text x="495" y="84" font-size="9" font-weight="600" fill="#3a1d70" class="mono">org.gnome.Calculator</text>
+<text x="495" y="99" font-size="9" font-weight="600" fill="#3a1d70" class="mono">org.gnome.Platform</text>
+</g>
+<!-- user installation -->
+<rect x="272.5" y="134.5" width="300" height="96" rx="7" fill="#1a1209"/><rect x="270" y="132" width="300" height="96" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+<text x="282" y="150" font-size="12" font-weight="800" fill="#1a1209">User installation</text>
+<text x="558" y="150" font-size="9" font-weight="600" fill="#5c4a30" text-anchor="end" class="mono">~/.local/share/flatpak</text>
+<rect x="282" y="160" width="116" height="58" rx="5" fill="#fff" stroke="#1a1209" stroke-width="1.5"/>
+<rect x="432" y="160" width="126" height="58" rx="5" fill="#fffae0" stroke="#1a1209" stroke-width="1.5"/>
+<g text-anchor="middle">
+<text x="340" y="177" font-size="10" font-weight="800" fill="#1a1209">remotes</text>
+<text x="340" y="194" font-size="9" font-weight="600" fill="#3a1d70" class="mono">flathub</text>
+<text x="340" y="209" font-size="9" font-weight="600" fill="#5c4a30">added with --user</text>
+<text x="495" y="177" font-size="10" font-weight="800" fill="#1a1209">apps + runtimes</text>
+<text x="495" y="194" font-size="9" font-weight="600" fill="#5c4a30">seen by this</text>
+<text x="495" y="209" font-size="9" font-weight="600" fill="#5c4a30">account only</text>
+</g>
+<!-- run -->
+<g text-anchor="middle">
+<rect x="618.5" y="62.5" width="136" height="128" rx="7" fill="#1a1209"/><rect x="616" y="60" width="136" height="128" rx="7" fill="#6d28d9" stroke="#1a1209" stroke-width="2"/>
+<text x="684" y="84" font-size="12" font-weight="800" fill="#fff" class="mono">flatpak run</text>
+<rect x="630" y="98" width="108" height="24" rx="5" fill="#fffae0" stroke="#1a1209" stroke-width="1.5"/>
+<text x="684" y="114" font-size="10" font-weight="700" fill="#1a1209">app</text>
+<rect x="630" y="128" width="108" height="24" rx="5" fill="#efe6ff" stroke="#1a1209" stroke-width="1.5"/>
+<text x="684" y="144" font-size="10" font-weight="700" fill="#1a1209">runtime</text>
+<text x="684" y="174" font-size="9.5" font-weight="700" fill="#efe6ff">inside a sandbox</text>
+</g>
+<!-- arrows -->
+<g stroke="#1a1209" stroke-width="2" fill="none" marker-end="url(#fp-ink)">
+<path d="M176 54C222 54 236 72 278 72"/>
+<path d="M176 140C226 140 232 92 278 92"/>
+<path d="M176 162C226 162 232 189 278 189"/>
+<path d="M400 79H428"/>
+<path d="M400 189H428"/>
+<path d="M560 79C590 79 596 100 612 104"/>
+<path d="M560 189C590 189 596 160 612 156"/>
+</g>
+<g font-size="9" font-weight="700" fill="#1a1209" class="mono" text-anchor="middle">
+<text x="223" y="112">sudo</text>
+<text x="223" y="194">--user</text>
+</g>
+</svg>
