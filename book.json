@@ -340,6 +340,15 @@
         "9.0",
         "10.0"
       ]
+    },
+    "preview-rh-7": {
+      "file": "preview-rh-7",
+      "topics": [
+        "domain-7/7.2-services-and-targets.md",
+        "domain-7/7.3-time-sync.md",
+        "domain-7/7.4-software-sources.md",
+        "domain-7/7.5-bootloader.md"
+      ]
     }
   }
 }
