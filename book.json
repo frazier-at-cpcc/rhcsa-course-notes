@@ -340,6 +340,13 @@
         "9.0",
         "10.0"
       ]
+    },
+    "preview-rh-10": {
+      "file": "preview-rh-10",
+      "topics": [
+        "domain-10/10.4-selinux-modes-contexts.md",
+        "domain-10/10.5-selinux-troubleshooting.md"
+      ]
     }
   }
 }
