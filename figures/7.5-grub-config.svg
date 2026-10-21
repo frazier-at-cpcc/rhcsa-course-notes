@@ -1,0 +1,80 @@
+<svg viewBox="0 0 760 268" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three tools write three files; GRUB reads all three at boot and hands the chosen entry's options to the kernel">
+  <defs>
+    <marker id="gc-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1a1209"/></marker>
+    <marker id="gc-pur" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6d28d9"/></marker>
+  </defs>
+  <g font-size="11" font-weight="800" fill="#5c4a30">
+    <text x="14" y="20">YOU RUN</text>
+    <text x="264" y="20">FILE IT WRITES</text>
+    <text x="554" y="20">AT BOOT</text>
+  </g>
+  <!-- shadows -->
+  <g fill="#1a1209">
+    <rect x="15" y="35" width="210" height="62" rx="7"/>
+    <rect x="265" y="35" width="240" height="62" rx="7"/>
+    <rect x="15" y="115" width="210" height="62" rx="7"/>
+    <rect x="265" y="115" width="240" height="62" rx="7"/>
+    <rect x="15" y="195" width="210" height="62" rx="7"/>
+    <rect x="265" y="195" width="240" height="62" rx="7"/>
+    <rect x="555" y="35" width="196" height="132" rx="7"/>
+    <rect x="555" y="195" width="196" height="62" rx="7"/>
+  </g>
+  <g stroke="#1a1209" stroke-width="2">
+    <rect x="12" y="32" width="210" height="62" rx="7" fill="#6d28d9"/>
+    <rect x="262" y="32" width="240" height="62" rx="7" fill="#fff"/>
+    <rect x="12" y="112" width="210" height="62" rx="7" fill="#6d28d9"/>
+    <rect x="262" y="112" width="240" height="62" rx="7" fill="#fff"/>
+    <rect x="12" y="192" width="210" height="62" rx="7" fill="#6d28d9"/>
+    <rect x="262" y="192" width="240" height="62" rx="7" fill="#fff"/>
+    <rect x="552" y="32" width="196" height="132" rx="7" fill="#efe6ff"/>
+    <rect x="552" y="192" width="196" height="62" rx="7" fill="#fffae0"/>
+  </g>
+  <!-- tools -->
+  <g class="mono" font-size="10.5" font-weight="700" fill="#fff">
+    <text x="22" y="53">vim /etc/default/grub</text>
+    <text x="22" y="69">grub2-mkconfig -o</text>
+    <text x="22" y="85">  /boot/grub2/grub.cfg</text>
+    <text x="22" y="137">grubby --update-kernel</text>
+    <text x="22" y="153">  --args / --remove-args</text>
+    <text x="22" y="217">grubby --set-default</text>
+    <text x="22" y="233">  /boot/vmlinuz-VERSION</text>
+  </g>
+  <!-- files -->
+  <g class="mono" font-size="10.5" font-weight="700" fill="#1a1209">
+    <text x="272" y="53">/boot/grub2/grub.cfg</text>
+    <text x="272" y="133">/boot/loader/entries/</text>
+    <text x="272" y="213">/boot/grub2/grubenv</text>
+  </g>
+  <g font-size="9.5" font-weight="600" fill="#5c4a30">
+    <text x="272" y="70">the menu script: timeout, terminal,</text>
+    <text x="272" y="84">and the command that loads BLS entries</text>
+    <text x="272" y="150">one .conf per kernel: title, linux,</text>
+    <text x="272" y="164">initrd, and the options line</text>
+    <text x="272" y="230">saved_entry names the default,</text>
+    <text x="272" y="244">used because GRUB_DEFAULT=saved</text>
+  </g>
+  <!-- GRUB box -->
+  <text x="650" y="56" text-anchor="middle" font-size="12" font-weight="800" fill="#1a1209">GRUB 2 menu</text>
+  <g font-size="9.5" font-weight="600" fill="#3a1d70" text-anchor="middle">
+    <text x="650" y="77">runs grub.cfg,</text>
+    <text x="650" y="91">lists one item per BLS entry,</text>
+    <text x="650" y="105">highlights saved_entry,</text>
+    <text x="650" y="119">waits GRUB_TIMEOUT seconds,</text>
+    <text x="650" y="133">then boots that entry's</text>
+    <text x="650" y="147">kernel with its options</text>
+  </g>
+  <text x="650" y="218" text-anchor="middle" class="mono" font-size="11" font-weight="700" fill="#1a1209">/proc/cmdline</text>
+  <text x="650" y="236" text-anchor="middle" font-size="9.5" font-weight="600" fill="#5c4a30">what the running kernel got</text>
+  <!-- arrows -->
+  <g stroke="#1a1209" stroke-width="2" fill="none" marker-end="url(#gc-ink)">
+    <path d="M224 63H254"/>
+    <path d="M224 143H254"/>
+    <path d="M224 223H254"/>
+  </g>
+  <g stroke="#6d28d9" stroke-width="2" fill="none" marker-end="url(#gc-pur)">
+    <path d="M504 63H544"/>
+    <path d="M504 143H544"/>
+    <path d="M504 223H524V150H544"/>
+    <path d="M650 168V189"/>
+  </g>
+</svg>

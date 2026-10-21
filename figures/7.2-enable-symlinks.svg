@@ -1,0 +1,77 @@
+<svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="enable, mask, and set-default each write one symlink under /etc/systemd/system; systemd reads those links at boot">
+  <defs>
+    <marker id="es-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1a1209"/></marker>
+  </defs>
+  <!-- column headings -->
+  <g font-size="11" font-weight="800" fill="#5c4a30">
+    <text x="14" y="20">YOU RUN</text>
+    <text x="264" y="20">SYMLINK WRITTEN IN /etc/systemd/system</text>
+    <text x="554" y="20">IT POINTS TO</text>
+  </g>
+  <!-- row boxes: shadows then faces -->
+  <g fill="#1a1209">
+    <rect x="15" y="35" width="210" height="58" rx="7"/>
+    <rect x="265" y="35" width="250" height="58" rx="7"/>
+    <rect x="555" y="35" width="196" height="58" rx="7"/>
+    <rect x="15" y="111" width="210" height="58" rx="7"/>
+    <rect x="265" y="111" width="250" height="58" rx="7"/>
+    <rect x="555" y="111" width="196" height="58" rx="7"/>
+    <rect x="15" y="187" width="210" height="58" rx="7"/>
+    <rect x="265" y="187" width="250" height="58" rx="7"/>
+    <rect x="555" y="187" width="196" height="58" rx="7"/>
+  </g>
+  <g stroke="#1a1209" stroke-width="2">
+    <rect x="12" y="32" width="210" height="58" rx="7" fill="#6d28d9"/>
+    <rect x="262" y="32" width="250" height="58" rx="7" fill="#fff"/>
+    <rect x="552" y="32" width="196" height="58" rx="7" fill="#efe6ff"/>
+    <rect x="12" y="108" width="210" height="58" rx="7" fill="#6d28d9"/>
+    <rect x="262" y="108" width="250" height="58" rx="7" fill="#fff"/>
+    <rect x="552" y="108" width="196" height="58" rx="7" fill="#fffae0"/>
+    <rect x="12" y="184" width="210" height="58" rx="7" fill="#6d28d9"/>
+    <rect x="262" y="184" width="250" height="58" rx="7" fill="#fff"/>
+    <rect x="552" y="184" width="196" height="58" rx="7" fill="#efe6ff"/>
+  </g>
+  <!-- commands -->
+  <g class="mono" font-size="11" font-weight="700" fill="#fff">
+    <text x="24" y="56">systemctl enable httpd</text>
+    <text x="24" y="132">systemctl mask nfs-server</text>
+    <text x="24" y="208">systemctl set-default</text>
+    <text x="24" y="224">  multi-user.target</text>
+  </g>
+  <g font-size="9.5" font-weight="600" fill="#efe6ff">
+    <text x="24" y="74">start at every boot</text>
+    <text x="24" y="150">block every start, even by hand</text>
+  </g>
+  <!-- links -->
+  <g class="mono" font-size="10" font-weight="600" fill="#1a1209">
+    <text x="274" y="55">multi-user.target.wants/</text>
+    <text x="274" y="71">  httpd.service</text>
+    <text x="274" y="131">nfs-server.service</text>
+    <text x="274" y="207">default.target</text>
+  </g>
+  <g font-size="9.5" font-weight="600" fill="#5c4a30">
+    <text x="274" y="149">same name as the real unit, so it wins</text>
+    <text x="274" y="225">the target systemd starts at boot</text>
+  </g>
+  <!-- targets -->
+  <g class="mono" font-size="10" font-weight="600" fill="#1a1209">
+    <text x="562" y="55">/usr/lib/systemd/system/</text>
+    <text x="562" y="71">  httpd.service</text>
+    <text x="562" y="140">/dev/null</text>
+    <text x="562" y="207">/usr/lib/systemd/system/</text>
+    <text x="562" y="223">  multi-user.target</text>
+  </g>
+  <!-- arrows -->
+  <g stroke="#1a1209" stroke-width="2" fill="none" marker-end="url(#es-ink)">
+    <path d="M224 61H254"/>
+    <path d="M224 137H254"/>
+    <path d="M224 213H254"/>
+    <path d="M514 61H544"/>
+    <path d="M514 137H544"/>
+    <path d="M514 213H544"/>
+  </g>
+  <!-- footer band -->
+  <rect x="15" y="263" width="736" height="32" rx="7" fill="#1a1209"/>
+  <rect x="12" y="260" width="736" height="32" rx="7" fill="#fffae0" stroke="#1a1209" stroke-width="2"/>
+  <text x="380" y="280" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1a1209">Links live on disk, so they survive a reboot. The package's unit file in /usr/lib is never edited.</text>
+</svg>
