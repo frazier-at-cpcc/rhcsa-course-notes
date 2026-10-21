@@ -1,0 +1,39 @@
+<svg viewBox="0 0 360 286" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Extending a logical volume: lvextend grows the LV into free extents of the volume group, leaving the file system at its old size; resize2fs or xfs_growfs then grows the file system to fill the LV">
+<text x="18" y="18" font-size="11" font-weight="800" fill="#1a1209">Before<tspan class="mono" font-weight="700" fill="#6d28d9"></tspan></text>
+<rect x="20.5" y="28.5" width="146.66666666666666" height="24" rx="6" fill="#1a1209"/>
+<rect x="18" y="26" width="146.66666666666666" height="24" rx="6" fill="#efe6ff" stroke="#1a1209" stroke-width="2"/>
+<text x="28" y="42" font-size="10.5" font-weight="700" fill="#1a1209">LV lv_web, 400 MiB</text>
+<rect x="20.5" y="58.5" width="146.66666666666666" height="24" rx="6" fill="#1a1209"/>
+<rect x="18" y="56" width="146.66666666666666" height="24" rx="6" fill="#fffae0" stroke="#1a1209" stroke-width="2"/>
+<text x="28" y="72" font-size="10.5" font-weight="700" fill="#1a1209">file system, 400 MiB</text>
+<rect x="264.5" y="28.5" width="80" height="54" rx="6" fill="#1a1209"/>
+<rect x="262" y="26" width="80" height="54" rx="6" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+<text x="302" y="46" text-anchor="middle" font-size="9.5" font-weight="800" letter-spacing="1" fill="#5c4a30">VG FREE</text>
+<text x="302" y="66" text-anchor="middle" font-size="12" font-weight="800" fill="#1a1209">320 MiB</text>
+<text x="18" y="102" font-size="11" font-weight="800" fill="#1a1209">Step 1: <tspan class="mono" font-weight="700" fill="#6d28d9">lvextend -L +200M</tspan></text>
+<rect x="20.5" y="112.5" width="219.99999999999997" height="24" rx="6" fill="#1a1209"/>
+<rect x="18" y="110" width="219.99999999999997" height="24" rx="6" fill="#efe6ff" stroke="#1a1209" stroke-width="2"/>
+<text x="28" y="126" font-size="10.5" font-weight="700" fill="#1a1209">LV lv_web, 600 MiB</text>
+<rect x="20.5" y="142.5" width="146.66666666666666" height="24" rx="6" fill="#1a1209"/>
+<rect x="18" y="140" width="146.66666666666666" height="24" rx="6" fill="#fffae0" stroke="#1a1209" stroke-width="2"/>
+<text x="28" y="156" font-size="10.5" font-weight="700" fill="#1a1209">file system, 400 MiB</text>
+<rect x="168.66666666666666" y="140" width="69.33333333333331" height="24" rx="6" fill="none" stroke="#9a3412" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="203.33333333333331" y="156" text-anchor="middle" font-size="9.5" font-weight="700" fill="#9a3412">unused</text>
+<rect x="264.5" y="112.5" width="80" height="54" rx="6" fill="#1a1209"/>
+<rect x="262" y="110" width="80" height="54" rx="6" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+<text x="302" y="130" text-anchor="middle" font-size="9.5" font-weight="800" letter-spacing="1" fill="#5c4a30">VG FREE</text>
+<text x="302" y="150" text-anchor="middle" font-size="12" font-weight="800" fill="#1a1209">120 MiB</text>
+<text x="18" y="186" font-size="11" font-weight="800" fill="#1a1209">Step 2: <tspan class="mono" font-weight="700" fill="#6d28d9">xfs_growfs or resize2fs</tspan></text>
+<rect x="20.5" y="196.5" width="219.99999999999997" height="24" rx="6" fill="#1a1209"/>
+<rect x="18" y="194" width="219.99999999999997" height="24" rx="6" fill="#efe6ff" stroke="#1a1209" stroke-width="2"/>
+<text x="28" y="210" font-size="10.5" font-weight="700" fill="#1a1209">LV lv_web, 600 MiB</text>
+<rect x="20.5" y="226.5" width="219.99999999999997" height="24" rx="6" fill="#1a1209"/>
+<rect x="18" y="224" width="219.99999999999997" height="24" rx="6" fill="#fffae0" stroke="#1a1209" stroke-width="2"/>
+<text x="28" y="240" font-size="10.5" font-weight="700" fill="#1a1209">file system, 600 MiB</text>
+<rect x="264.5" y="196.5" width="80" height="54" rx="6" fill="#1a1209"/>
+<rect x="262" y="194" width="80" height="54" rx="6" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+<text x="302" y="214" text-anchor="middle" font-size="9.5" font-weight="800" letter-spacing="1" fill="#5c4a30">VG FREE</text>
+<text x="302" y="234" text-anchor="middle" font-size="12" font-weight="800" fill="#1a1209">120 MiB</text>
+<rect x="18" y="258" width="324" height="22" rx="6" fill="#ffd60a" stroke="#1a1209" stroke-width="2"/>
+<text x="180" y="273" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1a1209"><tspan class="mono">lvextend -r</tspan> runs both steps in one command</text>
+</svg>

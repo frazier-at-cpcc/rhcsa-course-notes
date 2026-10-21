@@ -1,0 +1,92 @@
+<svg viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="LVM layers: two disks each hold one partition; pvcreate makes each partition a physical volume; the volume group pools their 8 MiB extents; logical volumes take extents from the pool, even across disks; file systems go on the logical volumes">
+<defs><marker id="lv-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1a1209"/></marker><marker id="lv-pur" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6d28d9"/></marker></defs>
+<g font-size="9.5" font-weight="800" letter-spacing="1.2" fill="#5c4a30">
+<text x="8" y="32">DISKS</text>
+<text x="8" y="79">PARTITIONS</text>
+<text x="8" y="132">VOLUME GROUP</text>
+<text x="8" y="260">LOGICAL VOLUMES</text>
+<text x="8" y="318">FILE SYSTEMS</text>
+</g>
+<text x="8" y="149" class="mono" font-size="11" font-weight="700" fill="#1a1209">vg_data</text>
+<text x="8" y="166" font-size="10" font-weight="600" fill="#5c4a30">pool of 8 MiB</text>
+<text x="8" y="180" font-size="10" font-weight="600" fill="#5c4a30">physical extents</text>
+<rect x="162.5" y="14.5" width="280" height="32" rx="7" fill="#1a1209"/>
+<rect x="160" y="12" width="280" height="32" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+
+<rect x="472.5" y="14.5" width="270" height="32" rx="7" fill="#1a1209"/>
+<rect x="470" y="12" width="270" height="32" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+
+<g class="mono" font-size="11.5" font-weight="700" fill="#1a1209" text-anchor="middle"><text x="300" y="32">/dev/vdb  (5 GiB)</text><text x="605" y="32">/dev/vdc  (5 GiB)</text></g>
+<rect x="162.5" y="62.5" width="280" height="30" rx="7" fill="#1a1209"/>
+<rect x="160" y="60" width="280" height="30" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+
+<rect x="472.5" y="62.5" width="270" height="30" rx="7" fill="#1a1209"/>
+<rect x="470" y="60" width="270" height="30" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+
+<g font-size="11" font-weight="600" fill="#1a1209" text-anchor="middle"><text x="300" y="79"><tspan class="mono" font-weight="700">vdb1</tspan>, type Linux LVM</text><text x="605" y="79"><tspan class="mono" font-weight="700">vdc1</tspan>, type Linux LVM</text></g>
+<g stroke="#1a1209" stroke-width="2" fill="none" marker-end="url(#lv-ink)"><path d="M300 45V57"/><path d="M605 45V57"/></g>
+<rect x="148.5" y="102.5" width="604" height="96" rx="7" fill="#1a1209"/>
+<rect x="146" y="100" width="604" height="96" rx="7" fill="#efe6ff" stroke="#1a1209" stroke-width="2"/>
+<g stroke="#6d28d9" stroke-width="2" fill="none" marker-end="url(#lv-pur)"><path d="M300 92V116"/><path d="M605 92V116"/></g>
+<g class="mono" font-size="10" font-weight="700" fill="#6d28d9"><text x="308" y="110">pvcreate</text><text x="613" y="110">pvcreate</text></g>
+<rect x="162.5" y="122.5" width="280" height="64" rx="7" fill="#1a1209"/>
+<rect x="160" y="120" width="280" height="64" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+
+<rect x="472.5" y="122.5" width="270" height="64" rx="7" fill="#1a1209"/>
+<rect x="470" y="120" width="270" height="64" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+
+<g class="mono" font-size="11" font-weight="700" fill="#1a1209"><text x="172" y="138">PV /dev/vdb1</text><text x="482" y="138">PV /dev/vdc1</text></g>
+<g font-size="10" font-weight="600" fill="#5c4a30" text-anchor="end"><text x="428" y="138">639 extents</text><text x="728" y="138">639 extents</text></g>
+<rect x="172" y="148" width="14" height="18" rx="2" fill="#6d28d9" stroke="#1a1209" stroke-width="1"/>
+<rect x="188" y="148" width="14" height="18" rx="2" fill="#6d28d9" stroke="#1a1209" stroke-width="1"/>
+<rect x="204" y="148" width="14" height="18" rx="2" fill="#6d28d9" stroke="#1a1209" stroke-width="1"/>
+<rect x="220" y="148" width="14" height="18" rx="2" fill="#6d28d9" stroke="#1a1209" stroke-width="1"/>
+<rect x="236" y="148" width="14" height="18" rx="2" fill="#6d28d9" stroke="#1a1209" stroke-width="1"/>
+<rect x="252" y="148" width="14" height="18" rx="2" fill="#6d28d9" stroke="#1a1209" stroke-width="1"/>
+<rect x="268" y="148" width="14" height="18" rx="2" fill="#6d28d9" stroke="#1a1209" stroke-width="1"/>
+<rect x="284" y="148" width="14" height="18" rx="2" fill="#6d28d9" stroke="#1a1209" stroke-width="1"/>
+<rect x="300" y="148" width="14" height="18" rx="2" fill="#ffd60a" stroke="#1a1209" stroke-width="1"/>
+<rect x="316" y="148" width="14" height="18" rx="2" fill="#ffd60a" stroke="#1a1209" stroke-width="1"/>
+<rect x="332" y="148" width="14" height="18" rx="2" fill="#ffd60a" stroke="#1a1209" stroke-width="1"/>
+<rect x="348" y="148" width="14" height="18" rx="2" fill="#ffd60a" stroke="#1a1209" stroke-width="1"/>
+<rect x="364" y="148" width="14" height="18" rx="2" fill="#ffd60a" stroke="#1a1209" stroke-width="1"/>
+<rect x="380" y="148" width="14" height="18" rx="2" fill="#ffd60a" stroke="#1a1209" stroke-width="1"/>
+<rect x="396" y="148" width="14" height="18" rx="2" fill="#ffd60a" stroke="#1a1209" stroke-width="1"/>
+<rect x="412" y="148" width="14" height="18" rx="2" fill="#ffd60a" stroke="#1a1209" stroke-width="1"/>
+<rect x="482" y="148" width="14" height="18" rx="2" fill="#ffd60a" stroke="#1a1209" stroke-width="1"/>
+<rect x="498" y="148" width="14" height="18" rx="2" fill="#ffd60a" stroke="#1a1209" stroke-width="1"/>
+<rect x="514" y="148" width="14" height="18" rx="2" fill="#ffd60a" stroke="#1a1209" stroke-width="1"/>
+<rect x="530" y="148" width="14" height="18" rx="2" fill="#fff" stroke="#5c4a30" stroke-width="1"/>
+<rect x="546" y="148" width="14" height="18" rx="2" fill="#fff" stroke="#5c4a30" stroke-width="1"/>
+<rect x="562" y="148" width="14" height="18" rx="2" fill="#fff" stroke="#5c4a30" stroke-width="1"/>
+<rect x="578" y="148" width="14" height="18" rx="2" fill="#fff" stroke="#5c4a30" stroke-width="1"/>
+<rect x="594" y="148" width="14" height="18" rx="2" fill="#fff" stroke="#5c4a30" stroke-width="1"/>
+<rect x="610" y="148" width="14" height="18" rx="2" fill="#fff" stroke="#5c4a30" stroke-width="1"/>
+<rect x="626" y="148" width="14" height="18" rx="2" fill="#fff" stroke="#5c4a30" stroke-width="1"/>
+<rect x="642" y="148" width="14" height="18" rx="2" fill="#fff" stroke="#5c4a30" stroke-width="1"/>
+<rect x="658" y="148" width="14" height="18" rx="2" fill="#fff" stroke="#5c4a30" stroke-width="1"/>
+<rect x="674" y="148" width="14" height="18" rx="2" fill="#fff" stroke="#5c4a30" stroke-width="1"/>
+<rect x="690" y="148" width="14" height="18" rx="2" fill="#fff" stroke="#5c4a30" stroke-width="1"/>
+<rect x="706" y="148" width="14" height="18" rx="2" fill="#fff" stroke="#5c4a30" stroke-width="1"/>
+<rect x="722" y="148" width="14" height="18" rx="2" fill="#fff" stroke="#5c4a30" stroke-width="1"/>
+<g stroke="#1a1209" stroke-width="2" fill="none" marker-end="url(#lv-ink)"><path d="M235 168V232"/><path d="M363 168C363 214 560 196 560 232"/><path d="M505 168C505 210 600 200 600 232"/></g>
+<text x="243" y="214" class="mono" font-size="10" font-weight="700" fill="#6d28d9">lvcreate</text>
+<rect x="162.5" y="238.5" width="250" height="40" rx="7" fill="#1a1209"/>
+<rect x="160" y="236" width="250" height="40" rx="7" fill="#efe6ff" stroke="#1a1209" stroke-width="2"/>
+
+<rect x="472.5" y="238.5" width="270" height="40" rx="7" fill="#1a1209"/>
+<rect x="470" y="236" width="270" height="40" rx="7" fill="#fffae0" stroke="#1a1209" stroke-width="2"/>
+
+<rect x="172" y="248" width="10" height="16" rx="2" fill="#6d28d9" stroke="#1a1209" stroke-width="1"/>
+<rect x="482" y="248" width="10" height="16" rx="2" fill="#ffd60a" stroke="#1a1209" stroke-width="1"/>
+<g class="mono" fill="#1a1209"><text x="190" y="253" font-size="12" font-weight="700">lv_web</text><text x="190" y="268" font-size="10" fill="#5c4a30">/dev/vg_data/lv_web</text><text x="500" y="253" font-size="12" font-weight="700">lv_db</text><text x="500" y="268" font-size="10" fill="#5c4a30">/dev/vg_data/lv_db</text></g>
+<text x="728" y="262" text-anchor="end" font-size="10" font-weight="700" fill="#9a3412">spans both PVs</text>
+<g stroke="#1a1209" stroke-width="2" fill="none" marker-end="url(#lv-ink)"><path d="M285 278V294"/><path d="M605 278V294"/></g>
+<rect x="162.5" y="300.5" width="250" height="30" rx="7" fill="#1a1209"/>
+<rect x="160" y="298" width="250" height="30" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+
+<rect x="472.5" y="300.5" width="270" height="30" rx="7" fill="#1a1209"/>
+<rect x="470" y="298" width="270" height="30" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+
+<g font-size="11" font-weight="600" fill="#1a1209" text-anchor="middle"><text x="285" y="317">XFS, mounted on <tspan class="mono" font-weight="700">/srv/web</tspan></text><text x="605" y="317">ext4, mounted on <tspan class="mono" font-weight="700">/srv/db</tspan></text></g>
+</svg>
