@@ -1,0 +1,56 @@
+name: Command tests
+
+# Runs every test script in tests/ against the commands shown in the notes.
+# Manual only: start it from the Actions tab before a release or after a tool
+# update. It does not gate the PDF build.
+on:
+  workflow_dispatch:
+    inputs:
+      pattern:
+        description: 'Tests to run (glob under tests/)'
+        default: '*.sh'
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Install QEMU and enable KVM
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -yqq qemu-system-x86 qemu-utils
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' \
+            | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+          ls -l /dev/kvm
+
+      # Only the downloaded cloud image is cached. The base VM and its
+      # snapshot are rebuilt on each run, because a snapshot taken on one
+      # runner's CPU may not restore on another's.
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/rhcsa-vm/AlmaLinux-10-*.qcow2
+          key: rhcsa-vm-${{ hashFiles('tests/lib/vm.sh') }}
+
+      - name: Run the selected tests
+        env:
+          PATTERN: ${{ inputs.pattern }}
+        run: |
+          fail=0
+          for t in tests/${PATTERN:-*.sh}; do
+            echo "::group::$t"
+            start=$(date +%s)
+            # Tests reproduce what a student sees in a terminal; hide the CI
+            # markers that make tools switch output format.
+            if env -u CI -u GITHUB_ACTIONS -u GITHUB_WORKFLOW bash "$t"; then echo "PASS $t ($(( $(date +%s) - start ))s)"; else echo "::error::$t failed"; fail=1; fi
+            echo "::endgroup::"
+          done
+          exit $fail
