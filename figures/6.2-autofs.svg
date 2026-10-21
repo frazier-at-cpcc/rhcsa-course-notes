@@ -1,0 +1,83 @@
+<svg viewBox="0 0 760 262" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="autofs reads the master map, which names a map file for /shares; accessing /shares/projects looks up the key and mounts the NFS export, and an idle share is unmounted after the timeout">
+  <defs>
+    <marker id="af-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1a1209"/></marker>
+    <marker id="af-pur" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6d28d9"/></marker>
+  </defs>
+  <!-- section labels -->
+  <g font-size="10" font-weight="800" letter-spacing="1.6" fill="#5c4a30" text-anchor="middle">
+    <text x="125" y="14">MASTER MAP</text>
+    <text x="380" y="14">MAP FILE</text>
+    <text x="635" y="14">ON ACCESS</text>
+  </g>
+  <!-- box A: master map -->
+  <rect x="22.5" y="26.5" width="205" height="104" rx="7" fill="#1a1209"/>
+  <rect x="20" y="24" width="205" height="104" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+  <text x="122" y="46" text-anchor="middle" font-size="9.5" font-weight="600" fill="#5c4a30" class="mono">/etc/auto.master.d/</text>
+  <text x="122" y="60" text-anchor="middle" font-size="9.5" font-weight="600" fill="#5c4a30" class="mono">shares.autofs</text>
+  <rect x="32" y="72" width="181" height="26" rx="5" fill="#fffae0" stroke="#d8d2c8" stroke-width="1"/>
+  <text x="122" y="89" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1209" class="mono">/shares  /etc/auto.shares</text>
+  <text x="122" y="118" text-anchor="middle" font-size="10" font-weight="600" fill="#5c4a30">directory, then its map</text>
+  <!-- box B: map file -->
+  <rect x="277.5" y="26.5" width="205" height="104" rx="7" fill="#1a1209"/>
+  <rect x="275" y="24" width="205" height="104" rx="7" fill="#efe6ff" stroke="#1a1209" stroke-width="2"/>
+  <text x="377" y="46" text-anchor="middle" font-size="9.5" font-weight="600" fill="#5c4a30" class="mono">/etc/auto.shares</text>
+  <rect x="287" y="56" width="181" height="42" rx="5" fill="#fffae0" stroke="#d8d2c8" stroke-width="1"/>
+  <text x="377" y="73" text-anchor="middle" font-size="10.5" font-weight="600" fill="#1a1209" class="mono">projects  -rw,sync</text>
+  <text x="377" y="89" text-anchor="middle" font-size="10.5" font-weight="600" fill="#1a1209" class="mono">servera:/exports/projects</text>
+  <text x="377" y="118" text-anchor="middle" font-size="10" font-weight="600" fill="#5c4a30">key, options, share</text>
+  <!-- box C: mounted -->
+  <rect x="532.5" y="26.5" width="205" height="104" rx="7" fill="#1a1209"/>
+  <rect x="530" y="24" width="205" height="104" rx="7" fill="#6d28d9" stroke="#1a1209" stroke-width="2"/>
+  <text x="632" y="50" text-anchor="middle" font-size="13" font-weight="800" fill="#fff" class="mono">/shares/projects</text>
+  <text x="632" y="72" text-anchor="middle" font-size="10" font-weight="600" fill="#efe6ff">an nfs4 mount of</text>
+  <text x="632" y="88" text-anchor="middle" font-size="10.5" font-weight="600" fill="#fff" class="mono">servera:/exports/projects</text>
+  <text x="632" y="114" text-anchor="middle" font-size="10" font-weight="600" fill="#efe6ff">made by automount, not fstab</text>
+  <!-- arrows between boxes -->
+  <g stroke="#1a1209" stroke-width="2" fill="none" marker-end="url(#af-ink)">
+    <path d="M228 76H268"/>
+    <path d="M483 76H523"/>
+  </g>
+  <!-- step strip -->
+  <g>
+    <rect x="22.5" y="172.5" width="165" height="62" rx="7" fill="#1a1209"/>
+    <rect x="20" y="170" width="165" height="62" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+    <rect x="207.5" y="172.5" width="165" height="62" rx="7" fill="#1a1209"/>
+    <rect x="205" y="170" width="165" height="62" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+    <rect x="392.5" y="172.5" width="165" height="62" rx="7" fill="#1a1209"/>
+    <rect x="390" y="170" width="165" height="62" rx="7" fill="#fffae0" stroke="#1a1209" stroke-width="2"/>
+    <rect x="577.5" y="172.5" width="160" height="62" rx="7" fill="#1a1209"/>
+    <rect x="575" y="170" width="160" height="62" rx="7" fill="#fff" stroke="#1a1209" stroke-width="2"/>
+  </g>
+  <g fill="#6d28d9">
+    <circle cx="20" cy="170" r="10"/>
+    <circle cx="205" cy="170" r="10"/>
+    <circle cx="390" cy="170" r="10"/>
+    <circle cx="575" cy="170" r="10"/>
+  </g>
+  <g font-size="11" font-weight="800" fill="#fff" text-anchor="middle">
+    <text x="20" y="174">1</text>
+    <text x="205" y="174">2</text>
+    <text x="390" y="174">3</text>
+    <text x="575" y="174">4</text>
+  </g>
+  <g font-size="11" font-weight="700" fill="#1a1209" text-anchor="middle">
+    <text x="102" y="196">autofs.service starts</text>
+    <text x="287" y="196">/shares exists, empty</text>
+    <text x="472" y="196" class="mono" font-size="10.5">ls /shares/projects</text>
+    <text x="655" y="196">Idle for 300 s</text>
+  </g>
+  <g font-size="10" font-weight="600" fill="#5c4a30" text-anchor="middle">
+    <text x="102" y="216">reads the master map</text>
+    <text x="287" y="216">browse_mode = no</text>
+    <text x="472" y="216">key found, share mounted</text>
+    <text x="655" y="216">unmounted again</text>
+  </g>
+  <g stroke="#6d28d9" stroke-width="2" fill="none" marker-end="url(#af-pur)">
+    <path d="M187 201H197"/>
+    <path d="M372 201H382"/>
+    <path d="M557 201H567"/>
+  </g>
+  <!-- link from step 3 to box C -->
+  <path d="M520 168C560 150 600 150 615 136" stroke="#6d28d9" stroke-width="2" fill="none" stroke-dasharray="4 3" marker-end="url(#af-pur)"/>
+  <text x="380" y="256" text-anchor="middle" font-size="10" font-weight="600" fill="#5c4a30">Wildcard map: the key * matches any name, and &amp; in the share is replaced by it</text>
+</svg>
